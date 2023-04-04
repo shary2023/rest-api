@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Date;
+import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * RenterSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T15:06:30.759412500+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:00:24.750186600+06:00[Asia/Almaty]")
 public class RenterSchema {
 
   @JsonProperty("id")
@@ -39,7 +39,7 @@ public class RenterSchema {
 
   @JsonProperty("birthday")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  private Date birthday;
+  private LocalDate birthday;
 
   @JsonProperty("passportNumber")
   private String passportNumber;
@@ -151,7 +151,7 @@ public class RenterSchema {
     this.inn = inn;
   }
 
-  public RenterSchema birthday(Date birthday) {
+  public RenterSchema birthday(LocalDate birthday) {
     this.birthday = birthday;
     return this;
   }
@@ -162,11 +162,11 @@ public class RenterSchema {
   */
   @NotNull @Valid 
   @Schema(name = "birthday", requiredMode = Schema.RequiredMode.REQUIRED)
-  public Date getBirthday() {
+  public LocalDate getBirthday() {
     return birthday;
   }
 
-  public void setBirthday(Date birthday) {
+  public void setBirthday(LocalDate birthday) {
     this.birthday = birthday;
   }
 

@@ -1,8 +1,12 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'java-library'
     id "org.openapi.generator" version "6.3.0"
 }
+
+sourceCompatibility = 8
+targetCompatibility = 17
 
 apply plugin: 'maven-publish'
 apply plugin: 'org.openapi.generator'
@@ -60,7 +64,7 @@ openApiGenerate {
     skipOverwrite = true
     groupId = "com.github.shary2023"
     configOptions = [
-            dateLibrary               : "java17",
+            dateLibrary               : "java8",
             interfaceOnly             : "true",
             skipDefaultInterface      : "true",
             openApiNullable           : "false",
@@ -76,7 +80,7 @@ task clearGeneratedClasses(group: 'com.github.shary2023') {
 }
 
 private static void clear() {
-    String path = "src/main/java/com.github.shary2023.docs"
+    String path = "src/main/java/com"
     File dir = new File(path)
     recursiveDelete(dir)
 }
