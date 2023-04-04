@@ -101,7 +101,7 @@ project.tasks.openApiGenerate.dependsOn('openApiValidate')
 compileJava.dependsOn tasks.openApiGenerate
 
 wrapper {
-    gradleVersion = "8.0"
+    gradleVersion = "7.5"
     distributionType = Wrapper.DistributionType.ALL
 }
 
