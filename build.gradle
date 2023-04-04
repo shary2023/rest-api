@@ -6,7 +6,7 @@ plugins {
 }
 
 sourceCompatibility = 8
-targetCompatibility = 17
+targetCompatibility = 8
 
 apply plugin: 'maven-publish'
 apply plugin: 'org.openapi.generator'
