@@ -22,7 +22,7 @@ SHARY
 2. В зависимости build.gradle добавьте:
 
 >          dependencies {
->              implementation 'com.github.shary2023:shary-core-rest-api:Tag'
+>              implementation 'com.github.shary2023:rest-api:Tag'
 >          }
 
     где Tag - буква v + последняя версия релиза (например, v0.0.1)
