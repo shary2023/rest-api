@@ -1,0 +1,761 @@
+openapi: 3.0.3
+info:
+  title: 'SHARY-CORE REST API'
+  description: SHARY REST API applications are a convenient service for exchanging things.
+  version: 1.0.0
+  contact:
+    email: aleksandrmon3@gmail.com
+    name: Alexander
+servers:
+  - description: Shary Developer Server
+    url: http://localhost:8082
+tags:
+  - name: Public API
+    description: Methods available to everyone
+  - name: System API
+    description: Methods available only to the administrator
+  - name: User API
+    description: Methods available only to a specific user.
+security:
+  - ApiKeyAuth: [ ]
+
+paths:
+  /categories:
+    post:
+      tags:
+        - System API
+      operationId: create
+      summary: Create a new item category.
+      description: Create a new category of things (for example, electronics).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySchema'
+      responses:
+        '200':
+          description: Successful response to the creation of a new category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponseSchema'
+        '400':
+          description: User input error
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    put:
+      tags:
+        - System API
+      operationId: update
+      summary: Update category.
+      description: Change category name.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySchema'
+      responses:
+        '200':
+          description: Successful response to a new category change.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items:
+    post:
+      tags:
+        - System API
+      operationId: createItem
+      summary: To rent.
+      description: Create the entity of the rented item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemSchema'
+      responses:
+        '200':
+          description: A successful response to the creation of a new item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    put:
+      tags:
+        - System API
+      operationId: updateItem
+      summary: Update item.
+      description: Update data about the item (for example, whether it is rented).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemSchema'
+      responses:
+        '200':
+          description: Successful response to update items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Item entity ID (item).
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - Public API
+      operationId: getItemById
+      summary: Get an item.
+      description: Get an item by its id.
+      responses:
+        '200':
+          description: Successful response to finding a item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    post:
+      tags:
+        - Public API
+      operationId: createRentedItem
+      summary: To rent.
+      description: Create a rented item (attach it to a tenant).
+      parameters:
+        - name: ownerId
+          in: query
+          required: true
+          description: ID of the Owner entity that rented the item.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A successful response to the creation of a rented item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    put:
+      tags:
+        - Public API
+      operationId: returnRentedItem
+      summary: Return item.
+      description: Return the thing rented (untie it from the tenant).
+      parameters:
+        - name: ownerId
+          in: query
+          required: true
+          description: ID of the Owner entity that rented the item.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response to the return of the rented item.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    delete:
+      tags:
+        - System API
+      operationId: delete
+      summary: Delete item.
+      description: Completely delete a thing from the application (including from the database).
+      responses:
+        '200':
+          description: A successful response to deleting a thing.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: User input error
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users:
+    post:
+      tags:
+        - Public API
+      operationId: createGuest
+      summary: Create user
+      description: Create a user - a guest, without items attached to him.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestSchema'
+      responses:
+        '200':
+          description: Successful response to create a guest.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/owner:
+    post:
+      tags:
+        - Public API
+      operationId: createOwner
+      summary: Create tenant user.
+      description: Create a user who has rented at least one item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerSchema'
+      responses:
+        '200':
+          description: Successful response to tenant creation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/renter:
+    post:
+      tags:
+        - Public API
+      operationId: createRenter
+      summary: Create a landlord user.
+      description: Create a user who has rented out at least one item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenterSchema'
+      responses:
+        '200':
+          description: Successful response to the establishment of the landlord.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unecpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: User entity ID.
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - System API
+      operationId: getUserById
+      summary: View the description of the user entity.
+      description: View the description of the user entity by its identifier.
+      responses:
+        '200':
+          description: Successful response to user search.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    patch:
+      tags:
+        - System API
+      operationId: changeUserById
+      summary: Change fields in the user entity.
+      description: Change fields in the user entity by its ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response to user change.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: SimpleToken
+  schemas:
+    # lists:
+
+    UsersList:
+      allOf:
+        - $ref: 'base.yml#/components/schemas/BaseResponse'
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSchema'
+
+    # models:
+
+    UserSchema:
+      type: object
+      required:
+        - id
+        - email
+        - firstName
+        - secondName
+        - inn
+        - birthday
+        - passportNumber
+        - passportSeries
+        - phoneNumber
+        - registrationAddress
+        - residenceAddress
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        secondName:
+          type: string
+        inn:
+          type: string
+        birthday:
+          type: string
+          format: 'data'
+        passportNumber:
+          type: string
+        passportSeries:
+          type: string
+        phoneNumber:
+          type: string
+        registrationAddress:
+          type: string
+        residenceAddress:
+          type: string
+        itemsForRent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemSchema'
+        itemsRented:
+          type: object
+          items:
+            $ref: '#/components/schemas/ItemSchema'
+
+    UserResponseSchema:
+      type: object
+      required:
+        - id
+        - email
+        - firstName
+        - secondName
+        - givenName
+        - isOwner
+        - isRenter
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        secondName:
+          type: string
+        givenName:
+          type: string
+        isOwner:
+          type: boolean
+          default: false
+        isRenter:
+          type: boolean
+          default: false
+
+    GuestSchema:
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+
+    OwnerSchema:
+      type: object
+      required:
+        - id
+        - email
+        - firstName
+        - secondName
+        - givenName
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        secondName:
+          type: string
+        givenName:
+          type: string
+
+    RenterSchema:
+      type: object
+      required:
+        - id
+        - email
+        - firstName
+        - secondName
+        - inn
+        - birthday
+        - passportNumber
+        - passportSeries
+        - phoneNumber
+        - registrationAddress
+        - residenceAddress
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        secondName:
+          type: string
+        inn:
+          type: string
+        birthday:
+          type: string
+          format: 'date'
+        passportNumber:
+          type: string
+        passportSeries:
+          type: string
+        phoneNumber:
+          type: string
+        registrationAddress:
+          type: string
+        residenceAddress:
+          type: string
+
+
+    CategorySchema:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+
+    CategoryResponseSchema:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+
+    ItemSchema:
+      type: object
+      required:
+        - name
+        - serialNumber
+        - photo
+        - video
+        - description
+        - verified
+        - onLease
+        - category
+        - subcategory
+        - price
+        - renter
+        - owner
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        serialNumber:
+          type: string
+        photo:
+          type: string
+          format: url
+        video:
+          type: string
+          format: url
+        description:
+          type: string
+        verified:
+          type: boolean
+          default: true
+        onLease:
+          type: boolean
+          default: false
+        category:
+          type: integer
+          format: int
+        subcategory:
+          type: integer
+          format: int
+        price:
+          type: string
+        renter:
+          type: integer
+          format: int64
+        owner:
+          type: integer
+          format: int64
+
+    ItemResponseSchema:
+      type: object
+      required:
+        - id
+        - name
+        - serialNumber
+        - category
+        - subcategory
+        - price
+        - description
+        - photo
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        serialNumber:
+          type: string
+        category:
+          type: integer
+          format: int64
+        subcategory:
+          type: integer
+          format: int64
+        price:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+
+    SubcategorySchema:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string

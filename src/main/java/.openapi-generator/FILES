@@ -1,0 +1,16 @@
+com/github/shary2023/docs/ApiUtil.java
+com/github/shary2023/docs/CategoriesApi.java
+com/github/shary2023/docs/ItemsApi.java
+com/github/shary2023/docs/UsersApi.java
+com/github/shary2023/docs/model/BaseResponse.java
+com/github/shary2023/docs/model/CategoryResponseSchema.java
+com/github/shary2023/docs/model/CategorySchema.java
+com/github/shary2023/docs/model/GuestSchema.java
+com/github/shary2023/docs/model/ItemResponseSchema.java
+com/github/shary2023/docs/model/ItemSchema.java
+com/github/shary2023/docs/model/OwnerSchema.java
+com/github/shary2023/docs/model/RenterSchema.java
+com/github/shary2023/docs/model/SubcategorySchema.java
+com/github/shary2023/docs/model/UserResponseSchema.java
+com/github/shary2023/docs/model/UserSchema.java
+com/github/shary2023/docs/model/UsersList.java

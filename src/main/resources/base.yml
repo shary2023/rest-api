@@ -1,0 +1,246 @@
+openapi: 3.0.3
+info:
+  title: 'SHARY - Base'
+  description: Базовые объекты системы
+  version: 2.0.0
+paths: {}
+
+components:
+  schemas:
+    ListSetting:
+      type: object
+      description: Параметры получения списка объектов.
+      properties:
+        page:
+          type: integer
+          format: int32
+          default: 1
+          description: Текущая страница
+        limit:
+          type: integer
+          format: int32
+          default: 25
+          description: Кол-во элементов на странице
+        search:
+          type: string
+          description: Параметры поиска в таблице
+        entityGraphCode:
+          type: string
+          description: Код EntityGraph
+        selectLob:
+          type: boolean
+          description: Доставать lob или нет
+          default: false
+        sortData:
+          $ref: '#/components/schemas/ListSortData'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListFilterData'
+
+    ComboBoxListResponse:
+      description: Response со списком
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkObject'
+
+    ListFilterData:
+      type: object
+      description: Фильтр
+      required:
+        - field
+        - value
+      properties:
+        field:
+          type: string
+        value:
+          type: object
+        value2:
+          type: object
+        operation:
+          $ref: '#/components/schemas/FilterOperation'
+        innerFilters:
+          type: array
+          description: Список фильтров, связанных логически OR или AND
+          items:
+            $ref: '#/components/schemas/ListFilterData'
+
+    FilterOperation:
+      type: string
+      enum:
+        - EQ
+        - NE
+        - LT
+        - GT
+        - LTE
+        - GTE
+        - BETWEEN
+        - LIKE
+        - LIKE_IGNORE_CASE
+        - IN
+        - NOT_IN
+        - LIKE_END
+        - LIKE_END_IGNORE_CASE
+        - LIKE_START
+        - LIKE_START_IGNORE_CASE
+        - NOT_NULL
+        - IS_NULL
+        - OR
+        - AND
+
+    ListSortData:
+      type: object
+      description: Данные для сортировки
+      required:
+        - sortField
+        - sortOrder
+      properties:
+        sortField:
+          type: string
+        sortOrder:
+          type: string
+
+    AffectedRecordResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      required:
+        - affectedRecords
+      properties:
+        affectedRecords:
+          type: integer
+          format: int64
+          description: Количество затронутых записей
+
+    BaseResponse:
+      type: object
+      description: Базовый класс для всех ответов
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: Код операции от сервера
+          default: SHARY-0000
+          example: SHARY-0000
+        errorUserMessage:
+          type: string
+          description: Сообщение об ошибки, для отображения пользователю.
+        stackTrace:
+          type: string
+          description: StackTrace ошибки от сервера.
+        totalCount:
+          type: integer
+          format: int64
+          description: Кол-во элементов, используется в списковых запросах.
+        success:
+          type: boolean
+          default: true
+          description: true - запрос успешно обработан сервером
+
+    LinkObject:
+      type: object
+      required:
+        - ouid
+        - title
+      properties:
+        ouid:
+          type: object
+        title:
+          type: string
+        code:
+          type: string
+
+    SimpleIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      properties:
+        id:
+          type: object
+
+    BooleanResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      properties:
+        data:
+          type: boolean
+
+    SimpleStringId:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+
+    SimpleLongId:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    OrganizationStructureType:
+      type: string
+      enum:
+        - CENTER
+        - BRANCH
+        - GROUP
+        - POSITION
+
+    EssenceCode:
+      type: string
+      enum:
+        - COMPANY
+        - CUSTOMER
+        - OFFICE_LICENSE
+        - GROUP_ACTIVE_DIRECTORY
+        - EMPLOYEE_STATUS
+        - EMPLOYEE_TYPE
+        - EMPLOYEE_RELATIONSHIP
+        - OFFICE
+        - ORGANIZATION_STRUCTURETYPE
+        - POSITION
+        - PROJECT_ROLE
+        - PROJECT_STATUS
+        - TYPE_ACCOUNTING
+        - ORGANIZATION_STRUCTURE
+        - PROJECT
+        - PROJECT_LIST_VIEW
+        - PROJECT_TEAM
+        - TASK
+        - GROUP
+        - ROLE
+        - EMPLOYEE
+        - EMPLOYEE_REMARK
+        - EMPLOYEE_OFFER
+        - EMPLOYEE_OFFERVIEW
+        - EMPLOYEE_OFFER_STATUS
+        - EMPLOYEE_SALARY_HISTORY
+        - USER
+        - USER_VIEW
+        - SETTING_CATEGORY
+        - SETTING_VALUE
+        - REPORT
+        - IMPORT_LOG
+        - APPLICANT
+        - ESSENCE
+        - INVENTORY_CATEGORY
+        - INVENTORY_ITEM
+        - INVENTORY_ITEM_BARCODE_HISTORY
+        - MAIN_MENU
+        - CALENDAR
+        - FILE
+        - ROLE_WP
+        - OAUTH_CLIENT

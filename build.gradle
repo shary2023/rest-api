@@ -1,0 +1,107 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "org.openapi.generator" version "6.3.0"
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'org.openapi.generator'
+apply from: 'versions.gradle'
+
+group 'com.github.shary2023'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdoc}"
+    implementation "io.swagger.codegen.v3:swagger-codegen-generators:${versions.codegen}"
+    compileOnly "javax.servlet:servlet-api:${versions.servletApi}"
+    implementation "javax.annotation:javax.annotation-api:${versions.annotationApi}"
+    implementation "javax.validation:validation-api:${versions.validationApi}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+openApiValidate {
+    inputSpec = "$rootDir/src/main/resources/docs-eng.yml".toString()
+    recommend = true
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/resources/docs-eng.yml".toString()
+    outputDir = "$rootDir/src/main/java/".toString()
+
+
+    globalProperties = [
+            apis           : "",
+            models         : "",
+            supportingFiles: 'ApiUtil.java'
+    ]
+
+    apiPackage = "com.github.shary2023.docs"
+    modelPackage = "com.github.shary2023.docs.model"
+    skipOverwrite = true
+    groupId = "com.github.shary2023"
+    configOptions = [
+            dateLibrary               : "java17",
+            interfaceOnly             : "true",
+            skipDefaultInterface      : "true",
+            openApiNullable           : "false",
+            generateSupportingFiles   : "true",
+            library                   : "spring-boot",
+            controllerThrowsExceptions: "org.springframework.web.bind.MethodArgumentNotValidException",
+            sourceFolder              : ""
+    ]
+}
+
+task clearGeneratedClasses(group: 'com.github.shary2023') {
+    clear()
+}
+
+private static void clear() {
+    String path = "src/main/java/com.github.shary2023.docs"
+    File dir = new File(path)
+    recursiveDelete(dir)
+}
+
+private static void recursiveDelete(File file) {
+    if(!file.exists()) return
+    if (file.isDirectory()) {
+        File[] files = file.listFiles()
+        if (files.length == 0) {
+            throw new IllegalArgumentException("No such package")
+        }
+        for (File f : files) {
+            recursiveDelete(f);
+        }
+    }
+    file.delete()
+}
+
+project.tasks.openApiValidate.dependsOn('clearGeneratedClasses')
+project.tasks.openApiGenerate.dependsOn('openApiValidate')
+compileJava.dependsOn tasks.openApiGenerate
+
+wrapper {
+    gradleVersion = "7.5.1"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+task install(dependsOn: publishToMavenLocal)
