@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.github.shary2023.docs.model.CharacteristicsSchema;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,7 +20,7 @@ import javax.annotation.Generated;
  * ItemSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class ItemSchema {
 
   @JsonProperty("id")
@@ -59,6 +62,10 @@ public class ItemSchema {
   @JsonProperty("owner")
   private Long owner;
 
+  @JsonProperty("characteristics")
+  @Valid
+  private List<CharacteristicsSchema> characteristics = null;
+
   public ItemSchema id(Long id) {
     this.id = id;
     return this;
@@ -68,8 +75,8 @@ public class ItemSchema {
    * Get id
    * @return id
   */
-  
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
   public Long getId() {
     return id;
   }
@@ -277,8 +284,8 @@ public class ItemSchema {
    * Get renter
    * @return renter
   */
-  @NotNull 
-  @Schema(name = "renter", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "renter", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public Long getRenter() {
     return renter;
   }
@@ -306,6 +313,33 @@ public class ItemSchema {
     this.owner = owner;
   }
 
+  public ItemSchema characteristics(List<CharacteristicsSchema> characteristics) {
+    this.characteristics = characteristics;
+    return this;
+  }
+
+  public ItemSchema addCharacteristicsItem(CharacteristicsSchema characteristicsItem) {
+    if (this.characteristics == null) {
+      this.characteristics = new ArrayList<>();
+    }
+    this.characteristics.add(characteristicsItem);
+    return this;
+  }
+
+  /**
+   * Get characteristics
+   * @return characteristics
+  */
+  @Valid 
+  @Schema(name = "characteristics", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<CharacteristicsSchema> getCharacteristics() {
+    return characteristics;
+  }
+
+  public void setCharacteristics(List<CharacteristicsSchema> characteristics) {
+    this.characteristics = characteristics;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -327,12 +361,13 @@ public class ItemSchema {
         Objects.equals(this.subcategory, itemSchema.subcategory) &&
         Objects.equals(this.price, itemSchema.price) &&
         Objects.equals(this.renter, itemSchema.renter) &&
-        Objects.equals(this.owner, itemSchema.owner);
+        Objects.equals(this.owner, itemSchema.owner) &&
+        Objects.equals(this.characteristics, itemSchema.characteristics);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, category, subcategory, price, renter, owner);
+    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, category, subcategory, price, renter, owner, characteristics);
   }
 
   @Override
@@ -352,6 +387,7 @@ public class ItemSchema {
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    characteristics: ").append(toIndentedString(characteristics)).append("\n");
     sb.append("}");
     return sb.toString();
   }

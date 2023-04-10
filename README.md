@@ -14,6 +14,7 @@ SHARY
 >       allprojects {
 >		   repositories {
 >			  ...
+>             gradlePluginPortal()
 >			  maven { url 'https://jitpack.io' }
 >		   }
 >	    }
@@ -117,7 +118,7 @@ SHARY
 - Описывать подобным образом можно rest-запросы любых типов (post, get, put, patch, delete) 
 - В запросах можно описывать любые http-коды ответов к ним.
 - Полный туториал по описанию rest-api через yaml-файл: https://starkovden.github.io/openapi-tutorial-overview.html
-
+- Ещё полезная ссылка: https://swagger.io/docs/specification/data-models/data-types
 
 #### После описания новой модели данных, или эндпоинта контроллера, нужно убедиться в отсутствии ошибок,
 #### выполнить билд проекта и запушить изменения в этот репозиторий.

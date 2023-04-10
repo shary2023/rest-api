@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.shary2023.docs.model.UserSchema;
+import com.github.shary2023.docs.model.CategoryResponseSchema;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.OffsetDateTime;
@@ -17,15 +17,15 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * UsersList
+ * CategoriesListSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
-public class UsersList {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
+public class CategoriesListSchema {
 
-  @JsonProperty("users")
+  @JsonProperty("categories")
   @Valid
-  private List<UserSchema> users = new ArrayList<>();
+  private List<CategoryResponseSchema> categories = new ArrayList<>();
 
   @JsonProperty("code")
   private String code = "SHARY-0000";
@@ -42,34 +42,34 @@ public class UsersList {
   @JsonProperty("success")
   private Boolean success = true;
 
-  public UsersList users(List<UserSchema> users) {
-    this.users = users;
+  public CategoriesListSchema categories(List<CategoryResponseSchema> categories) {
+    this.categories = categories;
     return this;
   }
 
-  public UsersList addUsersItem(UserSchema usersItem) {
-    if (this.users == null) {
-      this.users = new ArrayList<>();
+  public CategoriesListSchema addCategoriesItem(CategoryResponseSchema categoriesItem) {
+    if (this.categories == null) {
+      this.categories = new ArrayList<>();
     }
-    this.users.add(usersItem);
+    this.categories.add(categoriesItem);
     return this;
   }
 
   /**
-   * Get users
-   * @return users
+   * Get categories
+   * @return categories
   */
   @NotNull @Valid 
-  @Schema(name = "users", requiredMode = Schema.RequiredMode.REQUIRED)
-  public List<UserSchema> getUsers() {
-    return users;
+  @Schema(name = "categories", requiredMode = Schema.RequiredMode.REQUIRED)
+  public List<CategoryResponseSchema> getCategories() {
+    return categories;
   }
 
-  public void setUsers(List<UserSchema> users) {
-    this.users = users;
+  public void setCategories(List<CategoryResponseSchema> categories) {
+    this.categories = categories;
   }
 
-  public UsersList code(String code) {
+  public CategoriesListSchema code(String code) {
     this.code = code;
     return this;
   }
@@ -88,7 +88,7 @@ public class UsersList {
     this.code = code;
   }
 
-  public UsersList errorUserMessage(String errorUserMessage) {
+  public CategoriesListSchema errorUserMessage(String errorUserMessage) {
     this.errorUserMessage = errorUserMessage;
     return this;
   }
@@ -107,7 +107,7 @@ public class UsersList {
     this.errorUserMessage = errorUserMessage;
   }
 
-  public UsersList stackTrace(String stackTrace) {
+  public CategoriesListSchema stackTrace(String stackTrace) {
     this.stackTrace = stackTrace;
     return this;
   }
@@ -126,7 +126,7 @@ public class UsersList {
     this.stackTrace = stackTrace;
   }
 
-  public UsersList totalCount(Long totalCount) {
+  public CategoriesListSchema totalCount(Long totalCount) {
     this.totalCount = totalCount;
     return this;
   }
@@ -145,7 +145,7 @@ public class UsersList {
     this.totalCount = totalCount;
   }
 
-  public UsersList success(Boolean success) {
+  public CategoriesListSchema success(Boolean success) {
     this.success = success;
     return this;
   }
@@ -172,25 +172,25 @@ public class UsersList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UsersList usersList = (UsersList) o;
-    return Objects.equals(this.users, usersList.users) &&
-        Objects.equals(this.code, usersList.code) &&
-        Objects.equals(this.errorUserMessage, usersList.errorUserMessage) &&
-        Objects.equals(this.stackTrace, usersList.stackTrace) &&
-        Objects.equals(this.totalCount, usersList.totalCount) &&
-        Objects.equals(this.success, usersList.success);
+    CategoriesListSchema categoriesListSchema = (CategoriesListSchema) o;
+    return Objects.equals(this.categories, categoriesListSchema.categories) &&
+        Objects.equals(this.code, categoriesListSchema.code) &&
+        Objects.equals(this.errorUserMessage, categoriesListSchema.errorUserMessage) &&
+        Objects.equals(this.stackTrace, categoriesListSchema.stackTrace) &&
+        Objects.equals(this.totalCount, categoriesListSchema.totalCount) &&
+        Objects.equals(this.success, categoriesListSchema.success);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(users, code, errorUserMessage, stackTrace, totalCount, success);
+    return Objects.hash(categories, code, errorUserMessage, stackTrace, totalCount, success);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UsersList {\n");
-    sb.append("    users: ").append(toIndentedString(users)).append("\n");
+    sb.append("class CategoriesListSchema {\n");
+    sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    errorUserMessage: ").append(toIndentedString(errorUserMessage)).append("\n");
     sb.append("    stackTrace: ").append(toIndentedString(stackTrace)).append("\n");

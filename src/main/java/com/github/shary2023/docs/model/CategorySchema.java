@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,7 +18,7 @@ import javax.annotation.Generated;
  * CategorySchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class CategorySchema {
 
   @JsonProperty("id")
@@ -25,6 +26,9 @@ public class CategorySchema {
 
   @JsonProperty("name")
   private String name;
+
+  @JsonProperty("image")
+  private URI image;
 
   public CategorySchema id(Long id) {
     this.id = id;
@@ -64,6 +68,25 @@ public class CategorySchema {
     this.name = name;
   }
 
+  public CategorySchema image(URI image) {
+    this.image = image;
+    return this;
+  }
+
+  /**
+   * Get image
+   * @return image
+  */
+  @Valid 
+  @Schema(name = "image", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public URI getImage() {
+    return image;
+  }
+
+  public void setImage(URI image) {
+    this.image = image;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,12 +97,13 @@ public class CategorySchema {
     }
     CategorySchema categorySchema = (CategorySchema) o;
     return Objects.equals(this.id, categorySchema.id) &&
-        Objects.equals(this.name, categorySchema.name);
+        Objects.equals(this.name, categorySchema.name) &&
+        Objects.equals(this.image, categorySchema.image);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, image);
   }
 
   @Override
@@ -88,6 +112,7 @@ public class CategorySchema {
     sb.append("class CategorySchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("}");
     return sb.toString();
   }

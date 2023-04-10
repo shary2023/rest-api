@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -19,7 +17,7 @@ import javax.annotation.Generated;
  * RenterSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class RenterSchema {
 
   @JsonProperty("id")
@@ -34,27 +32,14 @@ public class RenterSchema {
   @JsonProperty("secondName")
   private String secondName;
 
-  @JsonProperty("inn")
-  private String inn;
+  @JsonProperty("givenName")
+  private String givenName;
 
-  @JsonProperty("birthday")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  private LocalDate birthday;
+  @JsonProperty("telegramId")
+  private Long telegramId;
 
-  @JsonProperty("passportNumber")
-  private String passportNumber;
-
-  @JsonProperty("passportSeries")
-  private String passportSeries;
-
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
-
-  @JsonProperty("registrationAddress")
-  private String registrationAddress;
-
-  @JsonProperty("residenceAddress")
-  private String residenceAddress;
+  @JsonProperty("chatId")
+  private Long chatId;
 
   public RenterSchema id(Long id) {
     this.id = id;
@@ -132,137 +117,61 @@ public class RenterSchema {
     this.secondName = secondName;
   }
 
-  public RenterSchema inn(String inn) {
-    this.inn = inn;
+  public RenterSchema givenName(String givenName) {
+    this.givenName = givenName;
     return this;
   }
 
   /**
-   * Get inn
-   * @return inn
+   * Get givenName
+   * @return givenName
   */
   @NotNull 
-  @Schema(name = "inn", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getInn() {
-    return inn;
+  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getGivenName() {
+    return givenName;
   }
 
-  public void setInn(String inn) {
-    this.inn = inn;
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
   }
 
-  public RenterSchema birthday(LocalDate birthday) {
-    this.birthday = birthday;
+  public RenterSchema telegramId(Long telegramId) {
+    this.telegramId = telegramId;
     return this;
   }
 
   /**
-   * Get birthday
-   * @return birthday
+   * Get telegramId
+   * @return telegramId
   */
-  @NotNull @Valid 
-  @Schema(name = "birthday", requiredMode = Schema.RequiredMode.REQUIRED)
-  public LocalDate getBirthday() {
-    return birthday;
+  
+  @Schema(name = "telegramId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Long getTelegramId() {
+    return telegramId;
   }
 
-  public void setBirthday(LocalDate birthday) {
-    this.birthday = birthday;
+  public void setTelegramId(Long telegramId) {
+    this.telegramId = telegramId;
   }
 
-  public RenterSchema passportNumber(String passportNumber) {
-    this.passportNumber = passportNumber;
+  public RenterSchema chatId(Long chatId) {
+    this.chatId = chatId;
     return this;
   }
 
   /**
-   * Get passportNumber
-   * @return passportNumber
+   * Get chatId
+   * @return chatId
   */
-  @NotNull 
-  @Schema(name = "passportNumber", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPassportNumber() {
-    return passportNumber;
+  
+  @Schema(name = "chatId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Long getChatId() {
+    return chatId;
   }
 
-  public void setPassportNumber(String passportNumber) {
-    this.passportNumber = passportNumber;
-  }
-
-  public RenterSchema passportSeries(String passportSeries) {
-    this.passportSeries = passportSeries;
-    return this;
-  }
-
-  /**
-   * Get passportSeries
-   * @return passportSeries
-  */
-  @NotNull 
-  @Schema(name = "passportSeries", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPassportSeries() {
-    return passportSeries;
-  }
-
-  public void setPassportSeries(String passportSeries) {
-    this.passportSeries = passportSeries;
-  }
-
-  public RenterSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @NotNull 
-  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public RenterSchema registrationAddress(String registrationAddress) {
-    this.registrationAddress = registrationAddress;
-    return this;
-  }
-
-  /**
-   * Get registrationAddress
-   * @return registrationAddress
-  */
-  @NotNull 
-  @Schema(name = "registrationAddress", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getRegistrationAddress() {
-    return registrationAddress;
-  }
-
-  public void setRegistrationAddress(String registrationAddress) {
-    this.registrationAddress = registrationAddress;
-  }
-
-  public RenterSchema residenceAddress(String residenceAddress) {
-    this.residenceAddress = residenceAddress;
-    return this;
-  }
-
-  /**
-   * Get residenceAddress
-   * @return residenceAddress
-  */
-  @NotNull 
-  @Schema(name = "residenceAddress", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getResidenceAddress() {
-    return residenceAddress;
-  }
-
-  public void setResidenceAddress(String residenceAddress) {
-    this.residenceAddress = residenceAddress;
+  public void setChatId(Long chatId) {
+    this.chatId = chatId;
   }
 
   @Override
@@ -278,18 +187,14 @@ public class RenterSchema {
         Objects.equals(this.email, renterSchema.email) &&
         Objects.equals(this.firstName, renterSchema.firstName) &&
         Objects.equals(this.secondName, renterSchema.secondName) &&
-        Objects.equals(this.inn, renterSchema.inn) &&
-        Objects.equals(this.birthday, renterSchema.birthday) &&
-        Objects.equals(this.passportNumber, renterSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, renterSchema.passportSeries) &&
-        Objects.equals(this.phoneNumber, renterSchema.phoneNumber) &&
-        Objects.equals(this.registrationAddress, renterSchema.registrationAddress) &&
-        Objects.equals(this.residenceAddress, renterSchema.residenceAddress);
+        Objects.equals(this.givenName, renterSchema.givenName) &&
+        Objects.equals(this.telegramId, renterSchema.telegramId) &&
+        Objects.equals(this.chatId, renterSchema.chatId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, firstName, secondName, inn, birthday, passportNumber, passportSeries, phoneNumber, registrationAddress, residenceAddress);
+    return Objects.hash(id, email, firstName, secondName, givenName, telegramId, chatId);
   }
 
   @Override
@@ -300,13 +205,9 @@ public class RenterSchema {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
-    sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
-    sb.append("    birthday: ").append(toIndentedString(birthday)).append("\n");
-    sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
-    sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
-    sb.append("    registrationAddress: ").append(toIndentedString(registrationAddress)).append("\n");
-    sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
+    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
+    sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
+    sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

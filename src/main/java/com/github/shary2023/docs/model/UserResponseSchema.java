@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class UserResponseSchema {
 
   @JsonProperty("id")
@@ -40,6 +40,12 @@ public class UserResponseSchema {
 
   @JsonProperty("isRenter")
   private Boolean isRenter = false;
+
+  @JsonProperty("telegramId")
+  private Long telegramId;
+
+  @JsonProperty("chatId")
+  private Long chatId;
 
   public UserResponseSchema id(Long id) {
     this.id = id;
@@ -174,6 +180,44 @@ public class UserResponseSchema {
     this.isRenter = isRenter;
   }
 
+  public UserResponseSchema telegramId(Long telegramId) {
+    this.telegramId = telegramId;
+    return this;
+  }
+
+  /**
+   * Get telegramId
+   * @return telegramId
+  */
+  @NotNull 
+  @Schema(name = "telegramId", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Long getTelegramId() {
+    return telegramId;
+  }
+
+  public void setTelegramId(Long telegramId) {
+    this.telegramId = telegramId;
+  }
+
+  public UserResponseSchema chatId(Long chatId) {
+    this.chatId = chatId;
+    return this;
+  }
+
+  /**
+   * Get chatId
+   * @return chatId
+  */
+  @NotNull 
+  @Schema(name = "chatId", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Long getChatId() {
+    return chatId;
+  }
+
+  public void setChatId(Long chatId) {
+    this.chatId = chatId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -189,12 +233,14 @@ public class UserResponseSchema {
         Objects.equals(this.secondName, userResponseSchema.secondName) &&
         Objects.equals(this.givenName, userResponseSchema.givenName) &&
         Objects.equals(this.isOwner, userResponseSchema.isOwner) &&
-        Objects.equals(this.isRenter, userResponseSchema.isRenter);
+        Objects.equals(this.isRenter, userResponseSchema.isRenter) &&
+        Objects.equals(this.telegramId, userResponseSchema.telegramId) &&
+        Objects.equals(this.chatId, userResponseSchema.chatId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, firstName, secondName, givenName, isOwner, isRenter);
+    return Objects.hash(id, email, firstName, secondName, givenName, isOwner, isRenter, telegramId, chatId);
   }
 
   @Override
@@ -208,6 +254,8 @@ public class UserResponseSchema {
     sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("    isOwner: ").append(toIndentedString(isOwner)).append("\n");
     sb.append("    isRenter: ").append(toIndentedString(isRenter)).append("\n");
+    sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
+    sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

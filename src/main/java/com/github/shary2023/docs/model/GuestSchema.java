@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * GuestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class GuestSchema {
 
   @JsonProperty("id")
@@ -35,8 +35,8 @@ public class GuestSchema {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public Long getId() {
     return id;
   }

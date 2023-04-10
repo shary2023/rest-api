@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,7 +18,7 @@ import javax.annotation.Generated;
  * SubcategorySchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class SubcategorySchema {
 
   @JsonProperty("id")
@@ -25,6 +26,12 @@ public class SubcategorySchema {
 
   @JsonProperty("name")
   private String name;
+
+  @JsonProperty("category")
+  private Long category;
+
+  @JsonProperty("image")
+  private URI image;
 
   public SubcategorySchema id(Long id) {
     this.id = id;
@@ -64,6 +71,44 @@ public class SubcategorySchema {
     this.name = name;
   }
 
+  public SubcategorySchema category(Long category) {
+    this.category = category;
+    return this;
+  }
+
+  /**
+   * Get category
+   * @return category
+  */
+  @NotNull 
+  @Schema(name = "category", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Long getCategory() {
+    return category;
+  }
+
+  public void setCategory(Long category) {
+    this.category = category;
+  }
+
+  public SubcategorySchema image(URI image) {
+    this.image = image;
+    return this;
+  }
+
+  /**
+   * Get image
+   * @return image
+  */
+  @Valid 
+  @Schema(name = "image", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public URI getImage() {
+    return image;
+  }
+
+  public void setImage(URI image) {
+    this.image = image;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,12 +119,14 @@ public class SubcategorySchema {
     }
     SubcategorySchema subcategorySchema = (SubcategorySchema) o;
     return Objects.equals(this.id, subcategorySchema.id) &&
-        Objects.equals(this.name, subcategorySchema.name);
+        Objects.equals(this.name, subcategorySchema.name) &&
+        Objects.equals(this.category, subcategorySchema.category) &&
+        Objects.equals(this.image, subcategorySchema.image);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, category, image);
   }
 
   @Override
@@ -88,6 +135,8 @@ public class SubcategorySchema {
     sb.append("class SubcategorySchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("}");
     return sb.toString();
   }

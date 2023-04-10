@@ -8,6 +8,7 @@ package com.github.shary2023.docs;
 import com.github.shary2023.docs.model.BaseResponse;
 import com.github.shary2023.docs.model.ItemResponseSchema;
 import com.github.shary2023.docs.model.ItemSchema;
+import com.github.shary2023.docs.model.ItemsListSchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -80,13 +81,14 @@ public interface ItemsApi {
 
 
     /**
-     * POST /items/{id} : To rent.
+     * POST /items/{itemId} : To rent.
      * Create a rented item (attach it to a tenant).
      *
-     * @param id Item entity ID (item). (required)
+     * @param itemId Item entity ID (item). (required)
      * @param ownerId ID of the Owner entity that rented the item. (required)
      * @return A successful response to the creation of a rented item. (status code 200)
      *         or User input error. (status code 400)
+     *         or The item or owner with the specified ID was not found. (status code 404)
      *         or Unexpected error. (status code 500)
      */
     @Operation(
@@ -101,6 +103,9 @@ public interface ItemsApi {
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
             }),
+            @ApiResponse(responseCode = "404", description = "The item or owner with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
             })
@@ -111,32 +116,32 @@ public interface ItemsApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/items/{id}",
+        value = "/items/{itemId}",
         produces = { "application/json" }
     )
     ResponseEntity<ItemResponseSchema> createRentedItem(
-        @Parameter(name = "id", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId,
         @NotNull @Parameter(name = "ownerId", description = "ID of the Owner entity that rented the item.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerId", required = true) Long ownerId
     );
 
 
     /**
-     * DELETE /items/{id} : Delete item.
-     * Completely delete a thing from the application (including from the database).
+     * DELETE /items/{itemId} : Delete item.
+     * Completely delete a item from the application (including from the database).
      *
-     * @param id Item entity ID (item). (required)
-     * @return A successful response to deleting a thing. (status code 200)
+     * @param itemId Item entity ID (item). (required)
+     * @return A successful response to deleting a item by id. (status code 200)
      *         or User input error (status code 400)
      *         or The item with the specified ID was not found. (status code 404)
      *         or Unexpected error. (status code 500)
      */
     @Operation(
-        operationId = "delete",
+        operationId = "deleteItem",
         summary = "Delete item.",
-        description = "Completely delete a thing from the application (including from the database).",
+        description = "Completely delete a item from the application (including from the database).",
         tags = { "System API" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "A successful response to deleting a thing.", content = {
+            @ApiResponse(responseCode = "200", description = "A successful response to deleting a item by id.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error", content = {
@@ -155,19 +160,147 @@ public interface ItemsApi {
     )
     @RequestMapping(
         method = RequestMethod.DELETE,
-        value = "/items/{id}",
+        value = "/items/{itemId}",
         produces = { "application/json" }
     )
-    ResponseEntity<Boolean> delete(
-        @Parameter(name = "id", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+    ResponseEntity<Boolean> deleteItem(
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId
     );
 
 
     /**
-     * GET /items/{id} : Get an item.
+     * GET /items : Get all items.
+     * Get all items in our service.
+     *
+     * @return Successful response to get all items request. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The item with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getAllItems",
+        summary = "Get all items.",
+        description = "Get all items in our service.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to get all items request.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ItemsListSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The item with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/items",
+        produces = { "application/json" }
+    )
+    ResponseEntity<ItemsListSchema> getAllItems(
+        
+    );
+
+
+    /**
+     * GET /items/categories/{categoryId} : Get all items for category.
+     * Get all items for category in our service.
+     *
+     * @param categoryId Id of the category for which we get all items. (required)
+     * @return Successful response to a request to get all items for a category. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The category with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getAllItemsForCategory",
+        summary = "Get all items for category.",
+        description = "Get all items for category in our service.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a request to get all items for a category.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ItemsListSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The category with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/items/categories/{categoryId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<ItemsListSchema> getAllItemsForCategory(
+        @Parameter(name = "categoryId", description = "Id of the category for which we get all items.", required = true, in = ParameterIn.PATH) @PathVariable("categoryId") Long categoryId
+    );
+
+
+    /**
+     * GET /items/subcategories/{subcategoryId} : Get all items for subcategory.
+     * Get all items for subcategory in our service.
+     *
+     * @param subcategoryId Id of the subcategory for which we get all items. (required)
+     * @return Successful response to a request to get all items for a subcategory. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The subcategory with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getAllItemsForSubcategory",
+        summary = "Get all items for subcategory.",
+        description = "Get all items for subcategory in our service.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a request to get all items for a subcategory.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ItemsListSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The subcategory with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/items/subcategories/{subcategoryId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<ItemsListSchema> getAllItemsForSubcategory(
+        @Parameter(name = "subcategoryId", description = "Id of the subcategory for which we get all items.", required = true, in = ParameterIn.PATH) @PathVariable("subcategoryId") Long subcategoryId
+    );
+
+
+    /**
+     * GET /items/{itemId} : Get an item.
      * Get an item by its id.
      *
-     * @param id Item entity ID (item). (required)
+     * @param itemId Item entity ID (item). (required)
      * @return Successful response to finding a item. (status code 200)
      *         or User input error. (status code 400)
      *         or The item with the specified ID was not found. (status code 404)
@@ -198,22 +331,23 @@ public interface ItemsApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/items/{id}",
+        value = "/items/{itemId}",
         produces = { "application/json" }
     )
     ResponseEntity<ItemResponseSchema> getItemById(
-        @Parameter(name = "id", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId
     );
 
 
     /**
-     * PUT /items/{id} : Return item.
+     * PUT /items/{itemId} : Return item.
      * Return the thing rented (untie it from the tenant).
      *
-     * @param id Item entity ID (item). (required)
+     * @param itemId Item entity ID (item). (required)
      * @param ownerId ID of the Owner entity that rented the item. (required)
      * @return Successful response to the return of the rented item. (status code 200)
      *         or User input error. (status code 400)
+     *         or The item or owner with the specified ID was not found. (status code 404)
      *         or Unexpected error. (status code 500)
      */
     @Operation(
@@ -228,6 +362,9 @@ public interface ItemsApi {
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
             }),
+            @ApiResponse(responseCode = "404", description = "The item or owner with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
             })
@@ -238,17 +375,17 @@ public interface ItemsApi {
     )
     @RequestMapping(
         method = RequestMethod.PUT,
-        value = "/items/{id}",
+        value = "/items/{itemId}",
         produces = { "application/json" }
     )
     ResponseEntity<Boolean> returnRentedItem(
-        @Parameter(name = "id", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId,
         @NotNull @Parameter(name = "ownerId", description = "ID of the Owner entity that rented the item.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerId", required = true) Long ownerId
     );
 
 
     /**
-     * PUT /items : Update item.
+     * PATCH /items : Update item.
      * Update data about the item (for example, whether it is rented).
      *
      * @param itemSchema  (optional)
@@ -277,7 +414,7 @@ public interface ItemsApi {
         }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
+        method = RequestMethod.PATCH,
         value = "/items",
         produces = { "application/json" },
         consumes = { "application/json" }

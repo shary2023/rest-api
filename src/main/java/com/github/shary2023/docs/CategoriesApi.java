@@ -6,6 +6,7 @@
 package com.github.shary2023.docs;
 
 import com.github.shary2023.docs.model.BaseResponse;
+import com.github.shary2023.docs.model.CategoriesListSchema;
 import com.github.shary2023.docs.model.CategoryResponseSchema;
 import com.github.shary2023.docs.model.CategorySchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -34,14 +35,14 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "categories", description = "Methods available only to the administrator")
 public interface CategoriesApi {
 
     /**
      * POST /categories : Create a new item category.
-     * Create a new category of things (for example, electronics).
+     * Create a new category of items (for example, electronics).
      *
      * @param categorySchema  (optional)
      * @return Successful response to the creation of a new category. (status code 200)
@@ -49,9 +50,9 @@ public interface CategoriesApi {
      *         or Unexpected error. (status code 500)
      */
     @Operation(
-        operationId = "create",
+        operationId = "createCategory",
         summary = "Create a new item category.",
-        description = "Create a new category of things (for example, electronics).",
+        description = "Create a new category of items (for example, electronics).",
         tags = { "System API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to the creation of a new category.", content = {
@@ -74,27 +75,151 @@ public interface CategoriesApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<CategoryResponseSchema> create(
+    ResponseEntity<CategoryResponseSchema> createCategory(
         @Parameter(name = "CategorySchema", description = "") @Valid @RequestBody(required = false) CategorySchema categorySchema
     );
 
 
     /**
-     * PUT /categories : Update category.
-     * Change category name.
+     * DELETE /categories/{categoryId} : Delete category.
+     * Completely delete a category from the application (including from the database).
      *
-     * @param categorySchema  (optional)
-     * @return Successful response to a new category change. (status code 200)
+     * @param categoryId Category entity ID (category). (required)
+     * @return A successful response to deleting a category. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The category with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "deleteCategory",
+        summary = "Delete category.",
+        description = "Completely delete a category from the application (including from the database).",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "A successful response to deleting a category.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The category with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/categories/{categoryId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<Boolean> deleteCategory(
+        @Parameter(name = "categoryId", description = "Category entity ID (category).", required = true, in = ParameterIn.PATH) @PathVariable("categoryId") Long categoryId
+    );
+
+
+    /**
+     * GET /categories : Get categories.
+     * Get all categories in our service.
+     *
+     * @return Successful response to get all categories request. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
      */
     @Operation(
-        operationId = "update",
-        summary = "Update category.",
-        description = "Change category name.",
+        operationId = "getAllCategories",
+        summary = "Get categories.",
+        description = "Get all categories in our service.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to get all categories request.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CategoriesListSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/categories",
+        produces = { "application/json" }
+    )
+    ResponseEntity<CategoriesListSchema> getAllCategories(
+        
+    );
+
+
+    /**
+     * GET /categories/{categoryId} : Get category.
+     * Get category by id.
+     *
+     * @param categoryId Category entity ID (category). (required)
+     * @return Successful response to get category by id. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The category with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getCategoryById",
+        summary = "Get category.",
+        description = "Get category by id.",
         tags = { "System API" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "Successful response to a new category change.", content = {
+            @ApiResponse(responseCode = "200", description = "Successful response to get category by id.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryResponseSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The category with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/categories/{categoryId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<CategoryResponseSchema> getCategoryById(
+        @Parameter(name = "categoryId", description = "Category entity ID (category).", required = true, in = ParameterIn.PATH) @PathVariable("categoryId") Long categoryId
+    );
+
+
+    /**
+     * PATCH /categories : Update category.
+     * Change category name or category image.
+     *
+     * @param categorySchema  (optional)
+     * @return Successful response to a category change. (status code 200)
+     *         or User input error. (status code 400)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "updateCategory",
+        summary = "Update category.",
+        description = "Change category name or category image.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a category change.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryResponseSchema.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
@@ -109,12 +234,12 @@ public interface CategoriesApi {
         }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
+        method = RequestMethod.PATCH,
         value = "/categories",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<CategoryResponseSchema> update(
+    ResponseEntity<CategoryResponseSchema> updateCategory(
         @Parameter(name = "CategorySchema", description = "") @Valid @RequestBody(required = false) CategorySchema categorySchema
     );
 

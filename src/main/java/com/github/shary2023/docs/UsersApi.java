@@ -10,6 +10,7 @@ import com.github.shary2023.docs.model.GuestSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
 import com.github.shary2023.docs.model.UserResponseSchema;
+import com.github.shary2023.docs.model.UsersListSchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,16 +37,16 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
 
     /**
-     * PATCH /users/{id} : Change fields in the user entity.
+     * PATCH /users/{userId} : Change fields in the user entity.
      * Change fields in the user entity by its ID.
      *
-     * @param id User entity ID. (required)
+     * @param userId User entity ID. (required)
      * @param body  (optional)
      * @return Successful response to user change. (status code 200)
      *         or User input error. (status code 400)
@@ -77,12 +78,12 @@ public interface UsersApi {
     )
     @RequestMapping(
         method = RequestMethod.PATCH,
-        value = "/users/{id}",
+        value = "/users/{userId}",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
     ResponseEntity<UserResponseSchema> changeUserById(
-        @Parameter(name = "id", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
+        @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId,
         @Parameter(name = "body", description = "") @Valid @RequestBody(required = false) Object body
     );
 
@@ -128,56 +129,16 @@ public interface UsersApi {
 
 
     /**
-     * POST /users/owner : Create tenant user.
-     * Create a user who has rented at least one item.
-     *
-     * @param ownerSchema  (optional)
-     * @return Successful response to tenant creation. (status code 200)
-     *         or User input error. (status code 400)
-     *         or Unexpected error. (status code 500)
-     */
-    @Operation(
-        operationId = "createOwner",
-        summary = "Create tenant user.",
-        description = "Create a user who has rented at least one item.",
-        tags = { "Public API" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful response to tenant creation.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "User input error.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
-            }),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
-            })
-        },
-        security = {
-            @SecurityRequirement(name = "ApiKeyAuth")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/users/owner",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    ResponseEntity<UserResponseSchema> createOwner(
-        @Parameter(name = "OwnerSchema", description = "") @Valid @RequestBody(required = false) OwnerSchema ownerSchema
-    );
-
-
-    /**
-     * POST /users/renter : Create a landlord user.
+     * POST /users/owner : Create a landlord user.
      * Create a user who has rented out at least one item.
      *
-     * @param renterSchema  (optional)
+     * @param ownerSchema  (optional)
      * @return Successful response to the establishment of the landlord. (status code 200)
      *         or User input error. (status code 400)
      *         or Unecpected error. (status code 500)
      */
     @Operation(
-        operationId = "createRenter",
+        operationId = "createOwner",
         summary = "Create a landlord user.",
         description = "Create a user who has rented out at least one item.",
         tags = { "Public API" },
@@ -198,6 +159,46 @@ public interface UsersApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
+        value = "/users/owner",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<UserResponseSchema> createOwner(
+        @Parameter(name = "OwnerSchema", description = "") @Valid @RequestBody(required = false) OwnerSchema ownerSchema
+    );
+
+
+    /**
+     * POST /users/renter : Create tenant user.
+     * Create a user who has rented at least one item.
+     *
+     * @param renterSchema  (optional)
+     * @return Successful response to tenant creation. (status code 200)
+     *         or User input error. (status code 400)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "createRenter",
+        summary = "Create tenant user.",
+        description = "Create a user who has rented at least one item.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to tenant creation.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
         value = "/users/renter",
         produces = { "application/json" },
         consumes = { "application/json" }
@@ -208,10 +209,95 @@ public interface UsersApi {
 
 
     /**
-     * GET /users/{id} : View the description of the user entity.
+     * DELETE /users/{userId} : Delete user.
+     * Completely delete a user from the application (including from the database).
+     *
+     * @param userId User entity ID. (required)
+     * @return A successful response to deleting a user by id. (status code 200)
+     *         or User input error (status code 400)
+     *         or The user with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "deleteUser",
+        summary = "Delete user.",
+        description = "Completely delete a user from the application (including from the database).",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "A successful response to deleting a user by id.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The user with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/users/{userId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<Boolean> deleteUser(
+        @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId
+    );
+
+
+    /**
+     * GET /users : Get all users.
+     * Get all users in db.
+     *
+     * @return Successful response to a request to get all users. (status code 200)
+     *         or User input error. (status code 400)
+     *         or User with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getAllUsers",
+        summary = "Get all users.",
+        description = "Get all users in db.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a request to get all users.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UsersListSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "User with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/users",
+        produces = { "application/json" }
+    )
+    ResponseEntity<UsersListSchema> getAllUsers(
+        
+    );
+
+
+    /**
+     * GET /users/{userId} : View the description of the user entity.
      * View the description of the user entity by its identifier.
      *
-     * @param id User entity ID. (required)
+     * @param userId User entity ID. (required)
      * @return Successful response to user search. (status code 200)
      *         or User input error. (status code 400)
      *         or The user with the specified ID was not found. (status code 404)
@@ -242,11 +328,11 @@ public interface UsersApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/users/{id}",
+        value = "/users/{userId}",
         produces = { "application/json" }
     )
     ResponseEntity<UserResponseSchema> getUserById(
-        @Parameter(name = "id", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+        @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId
     );
 
 }

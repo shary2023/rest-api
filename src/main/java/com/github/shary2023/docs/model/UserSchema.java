@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.shary2023.docs.model.ItemSchema;
+import com.github.shary2023.docs.model.ItemsListSchema;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.OffsetDateTime;
@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-04T17:35:50.717742100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-10T23:28:51.974252100+06:00[Asia/Almaty]")
 public class UserSchema {
 
   @JsonProperty("id")
@@ -58,11 +58,26 @@ public class UserSchema {
 
   @JsonProperty("itemsForRent")
   @Valid
-  private List<ItemSchema> itemsForRent = null;
+  private List<ItemsListSchema> itemsForRent = null;
 
   @JsonProperty("itemsRented")
   @Valid
-  private List<ItemSchema> itemsRented = null;
+  private List<ItemsListSchema> itemsRented = null;
+
+  @JsonProperty("isValid")
+  private Boolean isValid;
+
+  @JsonProperty("owner")
+  private Boolean owner;
+
+  @JsonProperty("renter")
+  private Boolean renter;
+
+  @JsonProperty("telegramId")
+  private Long telegramId;
+
+  @JsonProperty("chatId")
+  private Long chatId;
 
   public UserSchema id(Long id) {
     this.id = id;
@@ -73,8 +88,8 @@ public class UserSchema {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public Long getId() {
     return id;
   }
@@ -111,8 +126,8 @@ public class UserSchema {
    * Get firstName
    * @return firstName
   */
-  @NotNull 
-  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getFirstName() {
     return firstName;
   }
@@ -130,8 +145,8 @@ public class UserSchema {
    * Get secondName
    * @return secondName
   */
-  @NotNull 
-  @Schema(name = "secondName", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "secondName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getSecondName() {
     return secondName;
   }
@@ -149,8 +164,8 @@ public class UserSchema {
    * Get inn
    * @return inn
   */
-  @NotNull 
-  @Schema(name = "inn", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "inn", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getInn() {
     return inn;
   }
@@ -168,8 +183,8 @@ public class UserSchema {
    * Get birthday
    * @return birthday
   */
-  @NotNull 
-  @Schema(name = "birthday", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "birthday", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getBirthday() {
     return birthday;
   }
@@ -187,8 +202,8 @@ public class UserSchema {
    * Get passportNumber
    * @return passportNumber
   */
-  @NotNull 
-  @Schema(name = "passportNumber", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "passportNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportNumber() {
     return passportNumber;
   }
@@ -206,8 +221,8 @@ public class UserSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @NotNull 
-  @Schema(name = "passportSeries", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "passportSeries", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;
   }
@@ -225,8 +240,8 @@ public class UserSchema {
    * Get phoneNumber
    * @return phoneNumber
   */
-  @NotNull 
-  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPhoneNumber() {
     return phoneNumber;
   }
@@ -244,8 +259,8 @@ public class UserSchema {
    * Get registrationAddress
    * @return registrationAddress
   */
-  @NotNull 
-  @Schema(name = "registrationAddress", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "registrationAddress", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getRegistrationAddress() {
     return registrationAddress;
   }
@@ -263,8 +278,8 @@ public class UserSchema {
    * Get residenceAddress
    * @return residenceAddress
   */
-  @NotNull 
-  @Schema(name = "residenceAddress", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "residenceAddress", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getResidenceAddress() {
     return residenceAddress;
   }
@@ -273,12 +288,12 @@ public class UserSchema {
     this.residenceAddress = residenceAddress;
   }
 
-  public UserSchema itemsForRent(List<ItemSchema> itemsForRent) {
+  public UserSchema itemsForRent(List<ItemsListSchema> itemsForRent) {
     this.itemsForRent = itemsForRent;
     return this;
   }
 
-  public UserSchema addItemsForRentItem(ItemSchema itemsForRentItem) {
+  public UserSchema addItemsForRentItem(ItemsListSchema itemsForRentItem) {
     if (this.itemsForRent == null) {
       this.itemsForRent = new ArrayList<>();
     }
@@ -292,20 +307,20 @@ public class UserSchema {
   */
   @Valid 
   @Schema(name = "itemsForRent", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public List<ItemSchema> getItemsForRent() {
+  public List<ItemsListSchema> getItemsForRent() {
     return itemsForRent;
   }
 
-  public void setItemsForRent(List<ItemSchema> itemsForRent) {
+  public void setItemsForRent(List<ItemsListSchema> itemsForRent) {
     this.itemsForRent = itemsForRent;
   }
 
-  public UserSchema itemsRented(List<ItemSchema> itemsRented) {
+  public UserSchema itemsRented(List<ItemsListSchema> itemsRented) {
     this.itemsRented = itemsRented;
     return this;
   }
 
-  public UserSchema addItemsRentedItem(ItemSchema itemsRentedItem) {
+  public UserSchema addItemsRentedItem(ItemsListSchema itemsRentedItem) {
     if (this.itemsRented == null) {
       this.itemsRented = new ArrayList<>();
     }
@@ -319,12 +334,107 @@ public class UserSchema {
   */
   @Valid 
   @Schema(name = "itemsRented", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public List<ItemSchema> getItemsRented() {
+  public List<ItemsListSchema> getItemsRented() {
     return itemsRented;
   }
 
-  public void setItemsRented(List<ItemSchema> itemsRented) {
+  public void setItemsRented(List<ItemsListSchema> itemsRented) {
     this.itemsRented = itemsRented;
+  }
+
+  public UserSchema isValid(Boolean isValid) {
+    this.isValid = isValid;
+    return this;
+  }
+
+  /**
+   * Get isValid
+   * @return isValid
+  */
+  
+  @Schema(name = "isValid", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsValid() {
+    return isValid;
+  }
+
+  public void setIsValid(Boolean isValid) {
+    this.isValid = isValid;
+  }
+
+  public UserSchema owner(Boolean owner) {
+    this.owner = owner;
+    return this;
+  }
+
+  /**
+   * Get owner
+   * @return owner
+  */
+  
+  @Schema(name = "owner", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getOwner() {
+    return owner;
+  }
+
+  public void setOwner(Boolean owner) {
+    this.owner = owner;
+  }
+
+  public UserSchema renter(Boolean renter) {
+    this.renter = renter;
+    return this;
+  }
+
+  /**
+   * Get renter
+   * @return renter
+  */
+  
+  @Schema(name = "renter", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getRenter() {
+    return renter;
+  }
+
+  public void setRenter(Boolean renter) {
+    this.renter = renter;
+  }
+
+  public UserSchema telegramId(Long telegramId) {
+    this.telegramId = telegramId;
+    return this;
+  }
+
+  /**
+   * Get telegramId
+   * @return telegramId
+  */
+  
+  @Schema(name = "telegramId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Long getTelegramId() {
+    return telegramId;
+  }
+
+  public void setTelegramId(Long telegramId) {
+    this.telegramId = telegramId;
+  }
+
+  public UserSchema chatId(Long chatId) {
+    this.chatId = chatId;
+    return this;
+  }
+
+  /**
+   * Get chatId
+   * @return chatId
+  */
+  
+  @Schema(name = "chatId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Long getChatId() {
+    return chatId;
+  }
+
+  public void setChatId(Long chatId) {
+    this.chatId = chatId;
   }
 
   @Override
@@ -348,12 +458,17 @@ public class UserSchema {
         Objects.equals(this.registrationAddress, userSchema.registrationAddress) &&
         Objects.equals(this.residenceAddress, userSchema.residenceAddress) &&
         Objects.equals(this.itemsForRent, userSchema.itemsForRent) &&
-        Objects.equals(this.itemsRented, userSchema.itemsRented);
+        Objects.equals(this.itemsRented, userSchema.itemsRented) &&
+        Objects.equals(this.isValid, userSchema.isValid) &&
+        Objects.equals(this.owner, userSchema.owner) &&
+        Objects.equals(this.renter, userSchema.renter) &&
+        Objects.equals(this.telegramId, userSchema.telegramId) &&
+        Objects.equals(this.chatId, userSchema.chatId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, firstName, secondName, inn, birthday, passportNumber, passportSeries, phoneNumber, registrationAddress, residenceAddress, itemsForRent, itemsRented);
+    return Objects.hash(id, email, firstName, secondName, inn, birthday, passportNumber, passportSeries, phoneNumber, registrationAddress, residenceAddress, itemsForRent, itemsRented, isValid, owner, renter, telegramId, chatId);
   }
 
   @Override
@@ -373,6 +488,11 @@ public class UserSchema {
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
     sb.append("    itemsForRent: ").append(toIndentedString(itemsForRent)).append("\n");
     sb.append("    itemsRented: ").append(toIndentedString(itemsRented)).append("\n");
+    sb.append("    isValid: ").append(toIndentedString(isValid)).append("\n");
+    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
+    sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
+    sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
