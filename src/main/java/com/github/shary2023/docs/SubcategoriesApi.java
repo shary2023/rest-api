@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "subcategories", description = "Methods available only to the administrator")
 public interface SubcategoriesApi {
@@ -44,7 +44,7 @@ public interface SubcategoriesApi {
      * POST /subcategories : Create a new item subcategory.
      * Create a new subcategory of items (for example, laptops).
      *
-     * @param subcategorySchema  (optional)
+     * @param subcategorySchema  (required)
      * @return Successful response to the creation of a new subcategory. (status code 200)
      *         or User input error (status code 400)
      *         or Unexpected error. (status code 500)
@@ -76,7 +76,7 @@ public interface SubcategoriesApi {
         consumes = { "application/json" }
     )
     ResponseEntity<SubcategoryResponseSchema> createSubcategory(
-        @Parameter(name = "SubcategorySchema", description = "") @Valid @RequestBody(required = false) SubcategorySchema subcategorySchema
+        @Parameter(name = "SubcategorySchema", description = "", required = true) @Valid @RequestBody SubcategorySchema subcategorySchema
     );
 
 
@@ -251,7 +251,7 @@ public interface SubcategoriesApi {
      * PATCH /subcategories : Update subcategory.
      * Change subcategory name or image.
      *
-     * @param subcategorySchema  (optional)
+     * @param subcategorySchema  (required)
      * @return Successful response to a subcategory change. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -283,7 +283,7 @@ public interface SubcategoriesApi {
         consumes = { "application/json" }
     )
     ResponseEntity<SubcategoryResponseSchema> updateSubcategory(
-        @Parameter(name = "SubcategorySchema", description = "") @Valid @RequestBody(required = false) SubcategorySchema subcategorySchema
+        @Parameter(name = "SubcategorySchema", description = "", required = true) @Valid @RequestBody SubcategorySchema subcategorySchema
     );
 
 }

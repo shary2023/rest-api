@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.shary2023.docs.model.CategorySchema;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,7 +18,7 @@ import javax.annotation.Generated;
  * SubcategorySchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 public class SubcategorySchema {
 
   @JsonProperty("id")
@@ -29,7 +28,7 @@ public class SubcategorySchema {
   private String name;
 
   @JsonProperty("category")
-  private CategorySchema category;
+  private SubcategorySchema category;
 
   @JsonProperty("image")
   private URI image;
@@ -72,7 +71,7 @@ public class SubcategorySchema {
     this.name = name;
   }
 
-  public SubcategorySchema category(CategorySchema category) {
+  public SubcategorySchema category(SubcategorySchema category) {
     this.category = category;
     return this;
   }
@@ -83,11 +82,11 @@ public class SubcategorySchema {
   */
   @NotNull @Valid 
   @Schema(name = "category", requiredMode = Schema.RequiredMode.REQUIRED)
-  public CategorySchema getCategory() {
+  public SubcategorySchema getCategory() {
     return category;
   }
 
-  public void setCategory(CategorySchema category) {
+  public void setCategory(SubcategorySchema category) {
     this.category = category;
   }
 

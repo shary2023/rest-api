@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "orders", description = "Methods available only to the administrator")
 public interface OrdersApi {
@@ -296,7 +296,7 @@ public interface OrdersApi {
      * Update order.
      *
      * @param orderId Order entity ID (order). (required)
-     * @param orderSchema  (optional)
+     * @param orderSchema  (required)
      * @return Successful response to a order change. (status code 200)
      *         or User input error. (status code 400)
      *         or The order with the specified ID was not found. (status code 404)
@@ -333,7 +333,7 @@ public interface OrdersApi {
     )
     ResponseEntity<CategoryResponseSchema> updateOrder(
         @Parameter(name = "orderId", description = "Order entity ID (order).", required = true, in = ParameterIn.PATH) @PathVariable("orderId") Long orderId,
-        @Parameter(name = "OrderSchema", description = "") @Valid @RequestBody(required = false) OrderSchema orderSchema
+        @Parameter(name = "OrderSchema", description = "", required = true) @Valid @RequestBody OrderSchema orderSchema
     );
 
 }

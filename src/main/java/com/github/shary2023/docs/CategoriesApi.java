@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "categories", description = "Methods available only to the administrator")
 public interface CategoriesApi {
@@ -44,7 +44,7 @@ public interface CategoriesApi {
      * POST /categories : Create a new item category.
      * Create a new category of items (for example, electronics).
      *
-     * @param categorySchema  (optional)
+     * @param categorySchema  (required)
      * @return Successful response to the creation of a new category. (status code 200)
      *         or User input error (status code 400)
      *         or Unexpected error. (status code 500)
@@ -76,7 +76,7 @@ public interface CategoriesApi {
         consumes = { "application/json" }
     )
     ResponseEntity<CategoryResponseSchema> createCategory(
-        @Parameter(name = "CategorySchema", description = "") @Valid @RequestBody(required = false) CategorySchema categorySchema
+        @Parameter(name = "CategorySchema", description = "", required = true) @Valid @RequestBody CategorySchema categorySchema
     );
 
 
@@ -208,7 +208,7 @@ public interface CategoriesApi {
      * PATCH /categories : Update category.
      * Change category name or category image.
      *
-     * @param categorySchema  (optional)
+     * @param categorySchema  (required)
      * @return Successful response to a category change. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -240,7 +240,7 @@ public interface CategoriesApi {
         consumes = { "application/json" }
     )
     ResponseEntity<CategoryResponseSchema> updateCategory(
-        @Parameter(name = "CategorySchema", description = "") @Valid @RequestBody(required = false) CategorySchema categorySchema
+        @Parameter(name = "CategorySchema", description = "", required = true) @Valid @RequestBody CategorySchema categorySchema
     );
 
 }

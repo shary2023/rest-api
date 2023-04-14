@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -44,7 +44,7 @@ public interface ItemsApi {
      * POST /items : To rent.
      * Create the entity of the rented item.
      *
-     * @param itemSchema  (optional)
+     * @param itemSchema  (required)
      * @return A successful response to the creation of a new item. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -76,7 +76,7 @@ public interface ItemsApi {
         consumes = { "application/json" }
     )
     ResponseEntity<ItemResponseSchema> createItem(
-        @Parameter(name = "ItemSchema", description = "") @Valid @RequestBody(required = false) ItemSchema itemSchema
+        @Parameter(name = "ItemSchema", description = "", required = true) @Valid @RequestBody ItemSchema itemSchema
     );
 
 
@@ -388,7 +388,7 @@ public interface ItemsApi {
      * PATCH /items : Update item.
      * Update data about the item (for example, whether it is rented).
      *
-     * @param itemSchema  (optional)
+     * @param itemSchema  (required)
      * @return Successful response to update items. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -420,7 +420,7 @@ public interface ItemsApi {
         consumes = { "application/json" }
     )
     ResponseEntity<ItemResponseSchema> updateItem(
-        @Parameter(name = "ItemSchema", description = "") @Valid @RequestBody(required = false) ItemSchema itemSchema
+        @Parameter(name = "ItemSchema", description = "", required = true) @Valid @RequestBody ItemSchema itemSchema
     );
 
 }

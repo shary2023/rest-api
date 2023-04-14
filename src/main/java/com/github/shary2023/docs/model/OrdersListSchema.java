@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  * OrdersListSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 public class OrdersListSchema {
 
   @JsonProperty("items")

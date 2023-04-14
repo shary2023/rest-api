@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T20:11:49.711567300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
@@ -47,7 +47,7 @@ public interface UsersApi {
      * Change fields in the user entity by its ID.
      *
      * @param userId User entity ID. (required)
-     * @param body  (optional)
+     * @param body  (required)
      * @return Successful response to user change. (status code 200)
      *         or User input error. (status code 400)
      *         or The user with the specified ID was not found. (status code 404)
@@ -84,7 +84,7 @@ public interface UsersApi {
     )
     ResponseEntity<UserResponseSchema> changeUserById(
         @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId,
-        @Parameter(name = "body", description = "") @Valid @RequestBody(required = false) Object body
+        @Parameter(name = "body", description = "", required = true) @Valid @RequestBody Object body
     );
 
 
@@ -92,7 +92,7 @@ public interface UsersApi {
      * POST /users : Create user
      * Create a user - a guest, without items attached to him.
      *
-     * @param guestSchema  (optional)
+     * @param guestSchema  (required)
      * @return Successful response to create a guest. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -124,7 +124,7 @@ public interface UsersApi {
         consumes = { "application/json" }
     )
     ResponseEntity<UserResponseSchema> createGuest(
-        @Parameter(name = "GuestSchema", description = "") @Valid @RequestBody(required = false) GuestSchema guestSchema
+        @Parameter(name = "GuestSchema", description = "", required = true) @Valid @RequestBody GuestSchema guestSchema
     );
 
 
@@ -132,7 +132,7 @@ public interface UsersApi {
      * POST /users/owner : Create a landlord user.
      * Create a user who has rented out at least one item.
      *
-     * @param ownerSchema  (optional)
+     * @param ownerSchema  (required)
      * @return Successful response to the establishment of the landlord. (status code 200)
      *         or User input error. (status code 400)
      *         or Unecpected error. (status code 500)
@@ -164,7 +164,7 @@ public interface UsersApi {
         consumes = { "application/json" }
     )
     ResponseEntity<UserResponseSchema> createOwner(
-        @Parameter(name = "OwnerSchema", description = "") @Valid @RequestBody(required = false) OwnerSchema ownerSchema
+        @Parameter(name = "OwnerSchema", description = "", required = true) @Valid @RequestBody OwnerSchema ownerSchema
     );
 
 
@@ -172,7 +172,7 @@ public interface UsersApi {
      * POST /users/renter : Create tenant user.
      * Create a user who has rented at least one item.
      *
-     * @param renterSchema  (optional)
+     * @param renterSchema  (required)
      * @return Successful response to tenant creation. (status code 200)
      *         or User input error. (status code 400)
      *         or Unexpected error. (status code 500)
@@ -204,7 +204,7 @@ public interface UsersApi {
         consumes = { "application/json" }
     )
     ResponseEntity<UserResponseSchema> createRenter(
-        @Parameter(name = "RenterSchema", description = "") @Valid @RequestBody(required = false) RenterSchema renterSchema
+        @Parameter(name = "RenterSchema", description = "", required = true) @Valid @RequestBody RenterSchema renterSchema
     );
 
 

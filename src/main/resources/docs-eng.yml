@@ -31,6 +31,7 @@ paths:
       summary: Create a new item category.
       description: Create a new category of items (for example, electronics).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -89,6 +90,7 @@ paths:
       summary: Update category.
       description: Change category name or category image.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -195,6 +197,7 @@ paths:
       summary: Create a new item subcategory.
       description: Create a new subcategory of items (for example, laptops).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -226,6 +229,7 @@ paths:
       summary: Update subcategory.
       description: Change subcategory name or image.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -400,6 +404,7 @@ paths:
       summary: To rent.
       description: Create the entity of the rented item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -463,6 +468,7 @@ paths:
       summary: Update item.
       description: Update data about the item (for example, whether it is rented).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -733,6 +739,7 @@ paths:
       summary: Create user
       description: Create a user - a guest, without items attached to him.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -797,6 +804,7 @@ paths:
       summary: Create tenant user.
       description: Create a user who has rented at least one item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -829,6 +837,7 @@ paths:
       summary: Create a landlord user.
       description: Create a user who has rented out at least one item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -902,6 +911,7 @@ paths:
       summary: Change fields in the user entity.
       description: Change fields in the user entity by its ID.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1041,6 +1051,7 @@ paths:
       summary: Update order.
       description: Update order.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1593,7 +1604,7 @@ components:
         name:
           type: string
         category:
-          $ref: '#/components/schemas/CategorySchema'
+          $ref: '#/components/schemas/SubcategorySchema'
         image:
           type: string
           format: uri
