@@ -77,7 +77,7 @@ task clearGeneratedClasses(group: 'com.github.shary2023') {
 }
 
 private static void clear() {
-    String path = "src/main/java/com"
+    String path = "src/main/java/com/github/shary2023/docs"
     File dir = new File(path)
     recursiveDelete(dir)
 }

@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-14T21:08:52.567072300+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-15T13:00:16.331457600+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "orders", description = "Methods available only to the administrator")
 public interface OrdersApi {
@@ -98,7 +98,7 @@ public interface OrdersApi {
         tags = { "Public API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to get all orders request.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = OrdersListSchema.class))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = OrderSchema.class)))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
@@ -116,7 +116,7 @@ public interface OrdersApi {
         value = "/orders",
         produces = { "application/json" }
     )
-    ResponseEntity<OrdersListSchema> getAllOrders(
+    ResponseEntity<List<OrderSchema>> getAllOrders(
         
     );
 
