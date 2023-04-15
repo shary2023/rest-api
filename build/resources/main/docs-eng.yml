@@ -42,7 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error
           content:
@@ -68,7 +68,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -101,7 +103,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -137,7 +139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -208,7 +210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error
           content:
@@ -240,7 +242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -266,7 +268,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -302,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -376,7 +380,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -415,7 +421,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -441,7 +447,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -479,7 +487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -515,7 +523,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -555,7 +563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -669,7 +677,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -711,7 +721,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -776,7 +788,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponseSchema'
         '400':
           description: User input error.
           content:
@@ -987,7 +1001,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrdersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
@@ -1062,7 +1078,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
@@ -1165,7 +1181,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrdersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
