@@ -23,7 +23,7 @@ security:
   - ApiKeyAuth: [ ]
 
 paths:
-  /api/v1/categories:
+  /categories:
     post:
       tags:
         - System API
@@ -117,7 +117,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/categories/{categoryId}:
+  /categories/{categoryId}:
     parameters:
       - name: categoryId
         in: path
@@ -191,7 +191,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/subcategories:
+  /subcategories:
     post:
       tags:
         - System API
@@ -284,7 +284,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/subcategories/{subcategoryId}:
+  /subcategories/{subcategoryId}:
     parameters:
       - name: subcategoryId
         in: path
@@ -358,7 +358,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/subcategories/categories/{categoryId}:
+  /subcategories/categories/{categoryId}:
     parameters:
       - name: categoryId
         in: path
@@ -402,7 +402,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/items:
+  /items:
     post:
       tags:
         - System API
@@ -501,7 +501,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/items/{itemId}:
+  /items/{itemId}:
     parameters:
       - name: itemId
         in: path
@@ -655,7 +655,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/items/categories/{categoryId}:
+  /items/categories/{categoryId}:
     parameters:
       - name: categoryId
         in: path
@@ -699,7 +699,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/items/subcategories/{subcategoryId}:
+  /items/subcategories/{subcategoryId}:
     parameters:
       - name: subcategoryId
         in: path
@@ -743,7 +743,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/users:
+  /users:
     post:
       tags:
         - Public API
@@ -810,7 +810,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/users/renter:
+  /users/renter:
     post:
       tags:
         - Public API
@@ -843,7 +843,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/users/owner:
+  /users/owner:
     post:
       tags:
         - Public API
@@ -876,7 +876,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/users/{userId}:
+  /users/{userId}:
     parameters:
       - name: userId
         in: path
@@ -988,7 +988,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/orders:
+  /orders:
     get:
       tags:
         - Public API
@@ -1018,7 +1018,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/orders/{orderId}:
+  /orders/{orderId}:
     parameters:
       - name: orderId
         in: path
@@ -1130,7 +1130,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/orders/amount:
+  /orders/amount:
     get:
       tags:
         - Public API
@@ -1159,7 +1159,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/orders/users/{userId}:
+  /orders/users/{userId}:
     parameters:
       - name: userId
         in: path
@@ -1203,7 +1203,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /api/v1/orders/items/{itemId}:
+  /orders/items/{itemId}:
     parameters:
       - name: itemId
         in: path
