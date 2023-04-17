@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * CategorySchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-16T21:15:44.328497100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-17T17:13:00.563043500+06:00[Asia/Almaty]")
 public class CategorySchema {
 
   @JsonProperty("id")

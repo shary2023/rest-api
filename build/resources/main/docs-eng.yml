@@ -929,7 +929,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: '#/components/schemas/UserSchema'
       responses:
         '200':
           description: Successful response to user change.

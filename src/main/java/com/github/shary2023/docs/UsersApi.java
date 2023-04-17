@@ -10,6 +10,7 @@ import com.github.shary2023.docs.model.GuestSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
 import com.github.shary2023.docs.model.UserResponseSchema;
+import com.github.shary2023.docs.model.UserSchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,7 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-16T21:15:44.328497100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-17T17:13:00.563043500+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
@@ -46,7 +47,7 @@ public interface UsersApi {
      * Change fields in the user entity by its ID.
      *
      * @param userId User entity ID. (required)
-     * @param body  (required)
+     * @param userSchema  (required)
      * @return Successful response to user change. (status code 200)
      *         or User input error. (status code 400)
      *         or The user with the specified ID was not found. (status code 404)
@@ -83,7 +84,7 @@ public interface UsersApi {
     )
     ResponseEntity<UserResponseSchema> changeUserById(
         @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId,
-        @Parameter(name = "body", description = "", required = true) @Valid @RequestBody Object body
+        @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
     );
 
 
