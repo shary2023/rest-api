@@ -762,7 +762,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponseSchema'
+                $ref: '#/components/schemas/UserSchema'
         '400':
           description: User input error.
           content:
@@ -1253,68 +1253,6 @@ components:
       bearerFormat: SimpleToken
   schemas:
 
-    # lists:
-
-    CategoriesListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - categories
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryResponseSchema'
-
-    SubcategoriesListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - subcategories
-      properties:
-        subcategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubcategoryResponseSchema'
-
-    UsersListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - users
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponseSchema'
-
-    ItemsListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - items
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemResponseSchema'
-
-    OrdersListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - orders
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSchema'
-
     # models:
 
     UserSchema:
@@ -1373,8 +1311,6 @@ components:
         - givenName
         - isOwner
         - isRenter
-        - telegramId
-        - chatId
       properties:
         id:
           type: integer
