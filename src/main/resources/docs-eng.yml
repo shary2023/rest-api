@@ -19,6 +19,9 @@ tags:
     description: Methods available only to the administrator
   - name: User API
     description: Methods available only to a specific user.
+  - name: Insurance API
+    description: Methods insurance items
+
 security:
   - ApiKeyAuth: [ ]
 
@@ -1245,6 +1248,303 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+
+  # Insurance Controller
+
+
+  /rentals/leases:
+    parameters:
+       - name: limit
+         in: query
+         description: The number of insurance approvals received
+         schema:
+           type: integer
+           format: int32
+      - name: after
+        in: query
+        required: false
+        description: cursor to the next page
+        schema:
+          type: integer
+          format: int32
+      - name: before
+        in: query
+        required: false
+        description: cursor to the previous page
+        schema:
+          type: integer
+          format: int32
+    get:
+      tags:
+        - Insurance API
+      operationId: getLeases
+      summary: Get a list of registered insurances
+      description: Get a list of registered insurances
+      response:
+        '200':
+          description: Successful response to get a list of registered insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceLeasesResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceLeasesResponse'
+
+  /rentals/document/{lease_id}/{polices_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        description: Lease entity ID
+        schema:
+          type: string
+      - name: polices_id
+        in: path
+        description: Police entity ID
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - Insurance API
+      operationId: getPdfPolices
+      summary: Get insurance policy in pdf format
+      description: Get insurance policy in pdf format
+      response:
+        '200':
+          description: Successful response to get a policy insurance in pdf format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: byte
+
+  /rentals/get/{lease_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id.
+        schema:
+          type: integer
+          format: int62
+      - name: completeness
+        in: query
+        description: Get the entity of insurance in basic form or in full
+        schema:
+          type: string
+          default: basic
+    get:
+      tags:
+        - Insurance API
+      operationId: getLease
+      summary: Get Insurance lease by id.
+      description: Get Insurance lease by id.
+      response:
+        '200':
+          description: Successful response to get a insurance  by ID
+            content:
+              application/json:
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/InsuranceItemResponseSchema'     # basic
+                    - $ref: '#/components/schemas/InsuranceCreationResponseSchema'  # full
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+  /rentals/create:
+    post:
+      tags:
+        - Insurance API
+      operationId: createLease
+      summary: Insurance application creation
+      description: Insurance application creation
+
+      requiredBody:
+        description: Insurance application creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      response:
+        '201':
+          description: Successful response to an insurance request created as part of a lease
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /rentals/submit/{lease_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    post:
+      tags:
+        - Insurance API
+      operationId: submitLease
+      summary: Approve the required for insurance
+      description: Approve the required for insurance
+      response:
+        '201':
+          description: Successful response to approve the lease insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /renters/cancel/{lease_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    post:
+      tags:
+        - Insurance API
+      operationId: cancelLease
+      summary: Cancel insurance by lease ID
+      description: Cancel insurance by lease ID
+      response:
+        '201':
+          description: Successful response of cancel insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /rentals/update/{lease_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    put:
+      tags:
+        - Insurance API
+      operationId: updateLease
+      summary: Update insurance by lease ID
+      description: Update insurance by lease ID
+
+      requestBody:
+        description: Updating the insurance application
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      response:
+        '201':
+          description: Successful insurance update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -1700,3 +2000,195 @@ components:
           type: string
         weight:
           type: string
+
+    # Insurance Model:
+
+    InsuranceCostSchema:      # Cost
+      type: object
+      properties:
+        currency:
+          type: string
+        value:
+          type: string
+
+    InsuranceItemSchema:    # Item
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+        brand:
+          type: string
+        model:
+          type: string
+        number:
+          type: string
+        sum_insured:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+
+
+    InsuranceMediaSchema:   # Media
+      type: object
+      properties:
+        collection:
+          type: string
+        key:
+          type: string
+
+    InsuranceMetadataSchema:    # Metadata
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+        agreement_datetime:
+          type: string
+          format: 'data-time'
+        lease_type:
+          type: string
+
+    InsuranceOwnerSchema:   # Owner
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+        first_name:
+          type: string
+        given_name:
+          type: string
+        second_name:
+          type: string
+
+    InsuranceRenterSchema:    # Renter
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+        INN:
+          type: string
+        birthday:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        given_name:
+          type: string
+        passport_number:
+          type: string
+        passport_series:
+          type: string
+        phone_number:
+          type: string
+        registration_address:
+          type: string
+        residence_address:
+          type: string
+        second_name:
+          type: string
+
+
+    InsuranceCreationRequestSchema:   # Creation Request
+      type: object
+      properties:
+        ends_at:
+          type: string
+          format: 'data-time'
+        item:
+          $ref: '#/components/schemas/InsuranceItemSchema'
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        metadata:
+          $ref: '#/components/schemas/InsuranceMetadataSchema'
+        starts_at:
+          type: string
+          format: 'data-time'
+        completed:
+          type: boolean
+        description:
+          type: string
+        lease_key:
+          type: string
+        owner:
+          $ref: '#/components/schemas/InsuranceOwnerSchema'
+        renter:
+          $ref: '#/components/schemas/InsuranceRenterSchema'
+
+    InsuranceCreationResponseSchema:    # Creation Response
+      allOf:
+        - $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      type: object
+      properties:
+        coverage:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        deductible:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        id:
+          type: string
+        policy_id:
+          type: integer
+          format: int64
+        policy_number:
+          type: string
+        premium:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceMediaSchema'
+        missed_media:
+          type: array
+          item:
+            $ref: '#/components/schemas/InsuranceMediaSchema'
+        status:
+          type: string
+
+
+    InsuranceItemResponseSchema:    # Item Response
+      type: object
+      properties:
+        completed:
+          type: boolean
+        coverage:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        deductible:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        ends_at:
+          type: string
+          format: 'data-time'
+        id:
+          type: string
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        lease_key:
+          type: string
+        policy_id:
+          type: string
+          format: int64
+        policy_number:
+          type: string
+        premium:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        starts_at:
+          type: string
+          format: 'data-time'
+        status:
+          type: string
+
+
+    InsuranceLeasesResponse:    # List Item Response
+      type: object
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        leases:
+          type: array
+          item:
+            $ref: '#/components/schemas/InsuranceItemResponseSchema'
+        limit:
+          type: integer
+          format: int32
