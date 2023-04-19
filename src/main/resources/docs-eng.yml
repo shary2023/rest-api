@@ -1326,10 +1326,8 @@ components:
           type: string
         isOwner:
           type: boolean
-          default: false
         isRenter:
           type: boolean
-          default: false
         telegramId:
           type: integer
           format: int64
