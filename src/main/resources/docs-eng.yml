@@ -1502,8 +1502,6 @@ components:
           $ref: '#/components/schemas/RenterSchema'
         owner:
           $ref: '#/components/schemas/OwnerSchema'
-        order:
-          $ref: '#/components/schemas/OrderSchema'
         characteristics:
           $ref: '#/components/schemas/CharacteristicsSchema'
 
@@ -1541,8 +1539,8 @@ components:
           $ref: '#/components/schemas/RenterSchema'
         owner:
           $ref: '#/components/schemas/OwnerSchema'
-        order:
-          $ref: '#/components/schemas/OrderSchema'
+        # order:
+        #   $ref: '#/components/schemas/OrderSchema'
         characteristics:
           $ref: '#/components/schemas/CharacteristicsSchema'
 
