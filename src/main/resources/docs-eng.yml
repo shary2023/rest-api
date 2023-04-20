@@ -1309,8 +1309,8 @@ components:
         - firstName
         - secondName
         - givenName
-        - isOwner
-        - isRenter
+        - owner
+        - renter
       properties:
         id:
           type: integer
@@ -1324,10 +1324,12 @@ components:
           type: string
         givenName:
           type: string
-        isOwner:
+        owner:
           type: boolean
-        isRenter:
+          default: false
+        renter:
           type: boolean
+          default: false
         telegramId:
           type: integer
           format: int64
