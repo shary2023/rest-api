@@ -550,6 +550,47 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+  /items/{itemId}/rent/out:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        description: Item entity ID (item).
+        schema:
+          type: integer
+          format: int64
+    post:
+      tags:
+        - Public API
+      operationId: returnRentedItem
+      summary: Return item.
+      description: Return the thing rented (untie it from the tenant).
+      responses:
+        '200':
+          description: Successful response to the return of the rented item.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item or owner with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /items/{itemId}:
     parameters:
       - name: itemId
@@ -631,39 +672,6 @@ paths:
             application/json:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
-
-    put:
-      tags:
-        - Public API
-      operationId: returnRentedItem
-      summary: Return item.
-      description: Return the thing rented (untie it from the tenant).
-      responses:
-        '200':
-          description: Successful response to the return of the rented item.
-          content:
-            application/json:
-              schema:
-                type: boolean
-        '400':
-          description: User input error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '404':
-          description: The item or owner with the specified ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '500':
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-
     delete:
       tags:
         - System API
