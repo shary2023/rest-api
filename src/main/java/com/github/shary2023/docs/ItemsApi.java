@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-17T17:43:34.663542600+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-21T21:35:01.171239400+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -338,11 +338,55 @@ public interface ItemsApi {
 
 
     /**
-     * PUT /items/{itemId} : Return item.
+     * POST /items/{itemId}/rent : Rent an item.
+     * Rent an item (bind it to the tenant).
+     *
+     * @param itemId Item entity ID (item). (required)
+     * @param renterId ID of the Renter entity that rented the item. (required)
+     * @return Successful response to the return of the rented item. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The item or owner with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "rentAnItem",
+        summary = "Rent an item.",
+        description = "Rent an item (bind it to the tenant).",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to the return of the rented item.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ItemSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The item or owner with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/items/{itemId}/rent",
+        produces = { "application/json" }
+    )
+    ResponseEntity<ItemSchema> rentAnItem(
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId,
+        @NotNull @Parameter(name = "renterId", description = "ID of the Renter entity that rented the item.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "renterId", required = true) Long renterId
+    );
+
+
+    /**
+     * POST /items/{itemId}/rent/out : Return item.
      * Return the thing rented (untie it from the tenant).
      *
      * @param itemId Item entity ID (item). (required)
-     * @param ownerId ID of the Owner entity that rented the item. (required)
      * @return Successful response to the return of the rented item. (status code 200)
      *         or User input error. (status code 400)
      *         or The item or owner with the specified ID was not found. (status code 404)
@@ -372,13 +416,12 @@ public interface ItemsApi {
         }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/items/{itemId}",
+        method = RequestMethod.POST,
+        value = "/items/{itemId}/rent/out",
         produces = { "application/json" }
     )
     ResponseEntity<Boolean> returnRentedItem(
-        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId,
-        @NotNull @Parameter(name = "ownerId", description = "ID of the Owner entity that rented the item.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerId", required = true) Long ownerId
+        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId
     );
 
 

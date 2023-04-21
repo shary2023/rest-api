@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.github.shary2023.docs.model.CharacteristicsSchema;
-import com.github.shary2023.docs.model.OrderSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
 import com.github.shary2023.docs.model.SubcategorySchema;
@@ -23,7 +22,7 @@ import javax.annotation.Generated;
  * ItemResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-17T17:43:34.663542600+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-21T21:35:01.171239400+06:00[Asia/Almaty]")
 public class ItemResponseSchema {
 
   @JsonProperty("id")
@@ -61,9 +60,6 @@ public class ItemResponseSchema {
 
   @JsonProperty("owner")
   private OwnerSchema owner;
-
-  @JsonProperty("order")
-  private OrderSchema order;
 
   @JsonProperty("characteristics")
   private CharacteristicsSchema characteristics;
@@ -296,25 +292,6 @@ public class ItemResponseSchema {
     this.owner = owner;
   }
 
-  public ItemResponseSchema order(OrderSchema order) {
-    this.order = order;
-    return this;
-  }
-
-  /**
-   * Get order
-   * @return order
-  */
-  @Valid 
-  @Schema(name = "order", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public OrderSchema getOrder() {
-    return order;
-  }
-
-  public void setOrder(OrderSchema order) {
-    this.order = order;
-  }
-
   public ItemResponseSchema characteristics(CharacteristicsSchema characteristics) {
     this.characteristics = characteristics;
     return this;
@@ -355,13 +332,12 @@ public class ItemResponseSchema {
         Objects.equals(this.price, itemResponseSchema.price) &&
         Objects.equals(this.renter, itemResponseSchema.renter) &&
         Objects.equals(this.owner, itemResponseSchema.owner) &&
-        Objects.equals(this.order, itemResponseSchema.order) &&
         Objects.equals(this.characteristics, itemResponseSchema.characteristics);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, subcategory, price, renter, owner, order, characteristics);
+    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, subcategory, price, renter, owner, characteristics);
   }
 
   @Override
@@ -380,7 +356,6 @@ public class ItemResponseSchema {
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
-    sb.append("    order: ").append(toIndentedString(order)).append("\n");
     sb.append("    characteristics: ").append(toIndentedString(characteristics)).append("\n");
     sb.append("}");
     return sb.toString();

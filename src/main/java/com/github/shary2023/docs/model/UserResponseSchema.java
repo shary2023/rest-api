@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-17T17:43:34.663542600+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-21T21:35:01.171239400+06:00[Asia/Almaty]")
 public class UserResponseSchema {
 
   @JsonProperty("id")
@@ -35,11 +35,11 @@ public class UserResponseSchema {
   @JsonProperty("givenName")
   private String givenName;
 
-  @JsonProperty("isOwner")
-  private Boolean isOwner = false;
+  @JsonProperty("owner")
+  private Boolean owner = false;
 
-  @JsonProperty("isRenter")
-  private Boolean isRenter = false;
+  @JsonProperty("renter")
+  private Boolean renter = false;
 
   @JsonProperty("telegramId")
   private Long telegramId;
@@ -142,42 +142,42 @@ public class UserResponseSchema {
     this.givenName = givenName;
   }
 
-  public UserResponseSchema isOwner(Boolean isOwner) {
-    this.isOwner = isOwner;
+  public UserResponseSchema owner(Boolean owner) {
+    this.owner = owner;
     return this;
   }
 
   /**
-   * Get isOwner
-   * @return isOwner
+   * Get owner
+   * @return owner
   */
   @NotNull 
-  @Schema(name = "isOwner", requiredMode = Schema.RequiredMode.REQUIRED)
-  public Boolean getIsOwner() {
-    return isOwner;
+  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Boolean getOwner() {
+    return owner;
   }
 
-  public void setIsOwner(Boolean isOwner) {
-    this.isOwner = isOwner;
+  public void setOwner(Boolean owner) {
+    this.owner = owner;
   }
 
-  public UserResponseSchema isRenter(Boolean isRenter) {
-    this.isRenter = isRenter;
+  public UserResponseSchema renter(Boolean renter) {
+    this.renter = renter;
     return this;
   }
 
   /**
-   * Get isRenter
-   * @return isRenter
+   * Get renter
+   * @return renter
   */
   @NotNull 
-  @Schema(name = "isRenter", requiredMode = Schema.RequiredMode.REQUIRED)
-  public Boolean getIsRenter() {
-    return isRenter;
+  @Schema(name = "renter", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Boolean getRenter() {
+    return renter;
   }
 
-  public void setIsRenter(Boolean isRenter) {
-    this.isRenter = isRenter;
+  public void setRenter(Boolean renter) {
+    this.renter = renter;
   }
 
   public UserResponseSchema telegramId(Long telegramId) {
@@ -232,15 +232,15 @@ public class UserResponseSchema {
         Objects.equals(this.firstName, userResponseSchema.firstName) &&
         Objects.equals(this.secondName, userResponseSchema.secondName) &&
         Objects.equals(this.givenName, userResponseSchema.givenName) &&
-        Objects.equals(this.isOwner, userResponseSchema.isOwner) &&
-        Objects.equals(this.isRenter, userResponseSchema.isRenter) &&
+        Objects.equals(this.owner, userResponseSchema.owner) &&
+        Objects.equals(this.renter, userResponseSchema.renter) &&
         Objects.equals(this.telegramId, userResponseSchema.telegramId) &&
         Objects.equals(this.chatId, userResponseSchema.chatId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, firstName, secondName, givenName, isOwner, isRenter, telegramId, chatId);
+    return Objects.hash(id, email, firstName, secondName, givenName, owner, renter, telegramId, chatId);
   }
 
   @Override
@@ -252,8 +252,8 @@ public class UserResponseSchema {
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
     sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
-    sb.append("    isOwner: ").append(toIndentedString(isOwner)).append("\n");
-    sb.append("    isRenter: ").append(toIndentedString(isRenter)).append("\n");
+    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("}");
