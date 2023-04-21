@@ -1375,7 +1375,7 @@ paths:
             application/json:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
-  /renters/lease/create:
+  /renters/lease:
     post:
       tags:
         - System API
