@@ -590,10 +590,10 @@ paths:
       summary: Return item.
       description: Return the thing rented (untie it from the tenant).
       parameters:
-        - name: ownerId
+        - name: renterId
           in: query
           required: true
-          description: ID of the Owner entity that rented the item.
+          description: ID of the Renter entity that rented the item.
           schema:
             type: integer
             format: int64
