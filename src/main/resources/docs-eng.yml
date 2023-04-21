@@ -530,7 +530,7 @@ paths:
           content:
             application/json:
               schema:
-                type: boolean
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
