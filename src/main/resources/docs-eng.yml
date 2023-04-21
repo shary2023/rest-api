@@ -1215,6 +1215,38 @@ paths:
             application/json:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
+  /docx/individual:
+    post:
+      tags:
+        - Documents API
+      operationId: postIndividualDocx
+      summary: Creates an individual contract.
+      description: Creates an individual contract with parameters.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualRequestSchema'
+      responses:
+        '200':
+          description: Successful response to create contract.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uri
+        '400':
+          description: Parameters input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
 
 components:
   securitySchemes:
@@ -1707,3 +1739,58 @@ components:
           type: string
         weight:
           type: string
+
+    IndividualRequestSchema:
+      type: object
+      properties:
+        NOMER_DOGOVORA:
+          type: string
+          example: 5345234523
+        FAMILIYA:
+          type: string
+          example: Сидоров
+        IMYA:
+          type: string
+          example: Игорь
+        OTCHESTVO:
+          type: string
+          example: Петрович
+        FAMILIYA_I_O:
+          type: string
+          example: Сидоров И.П.
+        GRAZHDANSTVO:
+          type: string
+          example: Россия
+        NOMER_PASPORTA:
+          type: string
+          example: 93 27 128433
+        D_V_PASPORTA:
+          type: string
+          example: 20.11.2012
+        OTDEL_PASPORTA:
+          type: string
+          example: ОТДЕЛЕНИЕМ УФМС
+        NAME_PRODUCT:
+          type: string
+          example: Самокат
+        SET:
+          type: string
+          example: Зарядное устройство, Чехол
+        DATE_END:
+          type: string
+          example: 20.11.2023
+        PRICE_1_DAY:
+          type: string
+          example: 9000
+        PRICE_FINAL:
+          type: string
+          example: 90000
+        TELEFON_KLIENTA:
+          type: string
+          example: +79999999999
+        ADRES_KLIENTA:
+          type: string
+          example: г. Москва
+        E_MAIL_KLIENTA:
+          type: string
+          example: example@example.example
