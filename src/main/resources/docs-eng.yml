@@ -501,6 +501,55 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+  /items/{itemId}/rent:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        description: Item entity ID (item).
+        schema:
+          type: integer
+          format: int64
+    post:
+      tags:
+        - Public API
+      operationId: rentAnItem
+      summary: Rent an item.
+      description: Rent an item (bind it to the tenant).
+      parameters:
+        - name: renterId
+          in: query
+          required: true
+          description: ID of the Renter entity that rented the item.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response to the return of the rented item.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item or owner with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /items/{itemId}:
     parameters:
       - name: itemId
@@ -589,14 +638,6 @@ paths:
       operationId: returnRentedItem
       summary: Return item.
       description: Return the thing rented (untie it from the tenant).
-      parameters:
-        - name: renterId
-          in: query
-          required: true
-          description: ID of the Renter entity that rented the item.
-          schema:
-            type: integer
-            format: int64
       responses:
         '200':
           description: Successful response to the return of the rented item.
