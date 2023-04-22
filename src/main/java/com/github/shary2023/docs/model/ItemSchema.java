@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.github.shary2023.docs.model.CategorySchema;
 import com.github.shary2023.docs.model.CharacteristicsSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
@@ -22,7 +23,7 @@ import javax.annotation.Generated;
  * ItemSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T18:25:06.613258600+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T19:40:52.904986600+06:00[Asia/Almaty]")
 public class ItemSchema {
 
   @JsonProperty("id")
@@ -48,6 +49,9 @@ public class ItemSchema {
 
   @JsonProperty("onLease")
   private Boolean onLease = false;
+
+  @JsonProperty("category")
+  private CategorySchema category;
 
   @JsonProperty("subcategory")
   private SubcategorySchema subcategory;
@@ -216,6 +220,25 @@ public class ItemSchema {
     this.onLease = onLease;
   }
 
+  public ItemSchema category(CategorySchema category) {
+    this.category = category;
+    return this;
+  }
+
+  /**
+   * Get category
+   * @return category
+  */
+  @NotNull @Valid 
+  @Schema(name = "category", requiredMode = Schema.RequiredMode.REQUIRED)
+  public CategorySchema getCategory() {
+    return category;
+  }
+
+  public void setCategory(CategorySchema category) {
+    this.category = category;
+  }
+
   public ItemSchema subcategory(SubcategorySchema subcategory) {
     this.subcategory = subcategory;
     return this;
@@ -328,6 +351,7 @@ public class ItemSchema {
         Objects.equals(this.description, itemSchema.description) &&
         Objects.equals(this.verified, itemSchema.verified) &&
         Objects.equals(this.onLease, itemSchema.onLease) &&
+        Objects.equals(this.category, itemSchema.category) &&
         Objects.equals(this.subcategory, itemSchema.subcategory) &&
         Objects.equals(this.price, itemSchema.price) &&
         Objects.equals(this.renter, itemSchema.renter) &&
@@ -337,7 +361,7 @@ public class ItemSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, subcategory, price, renter, owner, characteristics);
+    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, category, subcategory, price, renter, owner, characteristics);
   }
 
   @Override
@@ -352,6 +376,7 @@ public class ItemSchema {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
     sb.append("    onLease: ").append(toIndentedString(onLease)).append("\n");
+    sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    subcategory: ").append(toIndentedString(subcategory)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");

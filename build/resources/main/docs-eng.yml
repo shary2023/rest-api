@@ -1566,6 +1566,7 @@ components:
         - video
         - verified
         - onLease
+        - category
         - subcategory
         - price
         - owner
@@ -1592,6 +1593,8 @@ components:
         onLease:
           type: boolean
           default: false
+        category:
+          $ref: '#/components/schemas/CategorySchema'
         subcategory:
           $ref: '#/components/schemas/SubcategorySchema'
         price:
@@ -1629,6 +1632,8 @@ components:
         onLease:
           type: boolean
           default: false
+        category:
+          $ref: '#/components/schemas/CategorySchema'
         subcategory:
           $ref: '#/components/schemas/SubcategorySchema'
         price:
@@ -1654,7 +1659,7 @@ components:
         name:
           type: string
         category:
-          $ref: '#/components/schemas/SubcategorySchema'
+          $ref: '#/components/schemas/CategorySchema'
         image:
           type: string
           format: uri
