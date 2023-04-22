@@ -1249,11 +1249,11 @@ paths:
 
   # Insurance Controller
 
-
   /renters/items/leases:
     parameters:
       - name: limit
         in: query
+        required: true
         description: The number of insurance approvals received
         schema:
           type: integer
@@ -1272,13 +1272,14 @@ paths:
         schema:
           type: integer
           format: int32
+
     get:
       tags:
         - System API
       operationId: getLeases
       summary: Get a list of registered insurances
       description: Get a list of registered insurances
-      response:
+      responses:
         '200':
           description: Successful response to get a list of registered insurance
           content:
@@ -1301,11 +1302,13 @@ paths:
   /renters/items/leases/{lease_id}/document:
     parameters:
       - name: lease_id
+        required: true
         in: path
         description: Lease entity ID
         schema:
           type: string
       - name: polices_id
+        required: true
         in: query
         description: Police entity ID
         schema:
@@ -1318,7 +1321,7 @@ paths:
       operationId: getPdfPolices
       summary: Get insurance policy in pdf format
       description: Get insurance policy in pdf format
-      response:
+      responses:
         '200':
           description: Successful response to get a policy insurance in pdf format
           content:
@@ -1348,15 +1351,15 @@ paths:
       operationId: getLease
       summary: Get Insurance lease by id.
       description: Get Insurance lease by id.
-      response:
+      responses:
         '200':
           description: Successful response to get a insurance  by ID
-            content:
-              application/json:
-                schema:
-                  oneOf:
-                      - $ref: '#/components/schemas/InsuranceItemResponseSchema'     # basic
-                        - $ref: '#/components/schemas/InsuranceCreationResponseSchema'  # full
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InsuranceItemResponseSchema'     # basic
+                  - $ref: '#/components/schemas/InsuranceCreationResponseSchema'  # full
         '403':
           description: Access forbidden
           content:
@@ -1383,14 +1386,14 @@ paths:
       summary: Create an insurance for the item
       description: Create an insurance for the item
 
-      requiredBody:
+      requestBody:
         description: Create an insurance for the item
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/InsuranceCreationRequestSchema'
-      response:
+      responses:
         '201':
           description: Successful response to an insurance request created as part of a lease
           content:
@@ -1425,7 +1428,8 @@ paths:
       operationId: submitLease
       summary: Approve the required for insurance
       description: Approve the required for insurance
-      response:
+
+      responses:
         '201':
           description: Successful response to approve the lease insurance
           content:
@@ -1466,7 +1470,7 @@ paths:
       operationId: cancelLease
       summary: Cancel insurance by lease ID
       description: Cancel insurance by lease ID
-      response:
+      responses:
         '201':
           description: Successful response of cancel insurance
           content:
@@ -1515,7 +1519,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/InsuranceCreationRequestSchema'
-      response:
+      responses:
         '201':
           description: Successful insurance update
           content:
@@ -2077,7 +2081,7 @@ components:
             $ref: '#/components/schemas/InsuranceMediaSchema'
         missed_media:
           type: array
-          item:
+          items:
             $ref: '#/components/schemas/InsuranceMediaSchema'
         status:
           type: string
@@ -2124,7 +2128,7 @@ components:
           type: string
         leases:
           type: array
-          item:
+          items:
             $ref: '#/components/schemas/InsuranceItemResponseSchema'
         limit:
           type: integer
