@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:28:03.707187500+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T18:25:06.613258600+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -75,51 +75,6 @@ public interface ItemsApi {
     )
     ResponseEntity<ItemSchema> createItem(
         @Parameter(name = "ItemSchema", description = "", required = true) @Valid @RequestBody ItemSchema itemSchema
-    );
-
-
-    /**
-     * POST /items/{itemId} : To rent.
-     * Create a rented item (attach it to a tenant).
-     *
-     * @param itemId Item entity ID (item). (required)
-     * @param ownerId ID of the Owner entity that rented the item. (required)
-     * @return A successful response to the creation of a rented item. (status code 200)
-     *         or User input error. (status code 400)
-     *         or The item or owner with the specified ID was not found. (status code 404)
-     *         or Unexpected error. (status code 500)
-     */
-    @Operation(
-        operationId = "createRentedItem",
-        summary = "To rent.",
-        description = "Create a rented item (attach it to a tenant).",
-        tags = { "Public API" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "A successful response to the creation of a rented item.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ItemSchema.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "User input error.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "The item or owner with the specified ID was not found.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
-            }),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
-            })
-        },
-        security = {
-            @SecurityRequirement(name = "ApiKeyAuth")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/items/{itemId}",
-        produces = { "application/json" }
-    )
-    ResponseEntity<ItemSchema> createRentedItem(
-        @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId,
-        @NotNull @Parameter(name = "ownerId", description = "ID of the Owner entity that rented the item.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerId", required = true) Long ownerId
     );
 
 

@@ -633,45 +633,6 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-    post:
-      tags:
-        - Public API
-      operationId: createRentedItem
-      summary: To rent.
-      description: Create a rented item (attach it to a tenant).
-      parameters:
-        - name: ownerId
-          in: query
-          required: true
-          description: ID of the Owner entity that rented the item.
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: A successful response to the creation of a rented item.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ItemSchema'
-        '400':
-          description: User input error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '404':
-          description: The item or owner with the specified ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '500':
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
     delete:
       tags:
         - System API
