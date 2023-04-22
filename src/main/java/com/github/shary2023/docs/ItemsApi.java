@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:18:45.598128400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:28:03.707187500+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -334,6 +334,92 @@ public interface ItemsApi {
     )
     ResponseEntity<ItemSchema> getItemById(
         @Parameter(name = "itemId", description = "Item entity ID (item).", required = true, in = ParameterIn.PATH) @PathVariable("itemId") Long itemId
+    );
+
+
+    /**
+     * GET /items/users/{ownerId} : Get items rented for user.
+     * Get all items rented for user(owner) by user id in our service.
+     *
+     * @param ownerId Id of the user(owner) for which we get all items. (required)
+     * @return Successful response to a request to get all items for rent for a user. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The user with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getItemsRentedForUserByUserId",
+        summary = "Get items rented for user.",
+        description = "Get all items rented for user(owner) by user id in our service.",
+        tags = { "Public API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a request to get all items for rent for a user.", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ItemSchema.class)))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The user with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/items/users/{ownerId}",
+        produces = { "application/json" }
+    )
+    ResponseEntity<List<ItemSchema>> getItemsRentedForUserByUserId(
+        @Parameter(name = "ownerId", description = "Id of the user(owner) for which we get all items.", required = true, in = ParameterIn.PATH) @PathVariable("ownerId") Long ownerId
+    );
+
+
+    /**
+     * GET /items/users/{renterId}/rent : Get rent items for user.
+     * Get all rented items for user(renter) by user id in our service.
+     *
+     * @param renterId Id of the user(renter) for which we get all items. (required)
+     * @return Successful response to a request to get all rented items for a user. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The user with the specified ID was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getRentedItemsForUserByUserId",
+        summary = "Get rent items for user.",
+        description = "Get all rented items for user(renter) by user id in our service.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to a request to get all rented items for a user.", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ItemSchema.class)))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The user with the specified ID was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/items/users/{renterId}/rent",
+        produces = { "application/json" }
+    )
+    ResponseEntity<List<ItemSchema>> getRentedItemsForUserByUserId(
+        @Parameter(name = "renterId", description = "Id of the user(renter) for which we get all items.", required = true, in = ParameterIn.PATH) @PathVariable("renterId") Long renterId
     );
 
 

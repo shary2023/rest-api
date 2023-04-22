@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * CharacteristicsSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:18:45.598128400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:28:03.707187500+06:00[Asia/Almaty]")
 public class CharacteristicsSchema {
 
   @JsonProperty("brand")

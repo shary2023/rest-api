@@ -792,6 +792,94 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+  /items/users/{ownerId}:
+    parameters:
+      - name: ownerId
+        in: path
+        required: true
+        description: Id of the user(owner) for which we get all items.
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - Public API
+      operationId: getItemsRentedForUserByUserId
+      summary: Get items rented for user.
+      description: Get all items rented for user(owner) by user id in our service.
+      responses:
+        '200':
+          description: Successful response to a request to get all items for rent for a user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items/users/{renterId}/rent:
+    parameters:
+      - name: renterId
+        in: path
+        required: true
+        description: Id of the user(renter) for which we get all items.
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - System API
+      operationId: getRentedItemsForUserByUserId
+      summary: Get rent items for user.
+      description: Get all rented items for user(renter) by user id in our service.
+      responses:
+        '200':
+          description: Successful response to a request to get all rented items for a user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /users:
     post:
       tags:
@@ -1683,3 +1771,5 @@ components:
           type: string
         weight:
           type: string
+
+
