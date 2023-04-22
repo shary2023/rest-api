@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * OwnerSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-21T21:35:01.171239400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-22T14:18:45.598128400+06:00[Asia/Almaty]")
 public class OwnerSchema {
 
   @JsonProperty("id")
