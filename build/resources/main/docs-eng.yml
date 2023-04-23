@@ -1671,6 +1671,8 @@ components:
           type: string
         secondName:
           type: string
+        givenName:
+          type: string
         inn:
           type: string
         birthday:

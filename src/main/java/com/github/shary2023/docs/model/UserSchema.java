@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-23T11:40:09.514783+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-23T11:59:36.641457800+06:00[Asia/Almaty]")
 public class UserSchema {
 
   @JsonProperty("id")
@@ -34,6 +34,9 @@ public class UserSchema {
 
   @JsonProperty("secondName")
   private String secondName;
+
+  @JsonProperty("givenName")
+  private String givenName;
 
   @JsonProperty("inn")
   private String inn;
@@ -164,6 +167,25 @@ public class UserSchema {
 
   public void setSecondName(String secondName) {
     this.secondName = secondName;
+  }
+
+  public UserSchema givenName(String givenName) {
+    this.givenName = givenName;
+    return this;
+  }
+
+  /**
+   * Get givenName
+   * @return givenName
+  */
+  
+  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getGivenName() {
+    return givenName;
+  }
+
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
   }
 
   public UserSchema inn(String inn) {
@@ -408,6 +430,7 @@ public class UserSchema {
         Objects.equals(this.password, userSchema.password) &&
         Objects.equals(this.firstName, userSchema.firstName) &&
         Objects.equals(this.secondName, userSchema.secondName) &&
+        Objects.equals(this.givenName, userSchema.givenName) &&
         Objects.equals(this.inn, userSchema.inn) &&
         Objects.equals(this.birthday, userSchema.birthday) &&
         Objects.equals(this.passportNumber, userSchema.passportNumber) &&
@@ -424,7 +447,7 @@ public class UserSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, password, firstName, secondName, inn, birthday, passportNumber, passportSeries, phoneNumber, registrationAddress, residenceAddress, isValid, owner, renter, telegramId, chatId);
+    return Objects.hash(id, email, password, firstName, secondName, givenName, inn, birthday, passportNumber, passportSeries, phoneNumber, registrationAddress, residenceAddress, isValid, owner, renter, telegramId, chatId);
   }
 
   @Override
@@ -436,6 +459,7 @@ public class UserSchema {
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
+    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
     sb.append("    birthday: ").append(toIndentedString(birthday)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
