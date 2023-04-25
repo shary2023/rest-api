@@ -2209,7 +2209,7 @@ components:
         lease_key:
           type: string
         policy_id:
-          type: string
+          type: integer
           format: int64
         policy_number:
           type: string
