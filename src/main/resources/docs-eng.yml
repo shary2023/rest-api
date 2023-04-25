@@ -2089,7 +2089,8 @@ components:
         lease_type:
           type: string
 
-    InsuranceOwnerSchema:   # Owner
+    InsuranceRenterSchema:   # Renter
+      description:  When sent to the insurance company, this model is named "owner"
       type: object
       properties:
         type:
@@ -2102,7 +2103,8 @@ components:
         second_name:
           type: string
 
-    InsuranceRenterSchema:    # Renter
+    InsuranceOwnerSchema:    # Owner
+      description:  When sent to the insurance company, this model is named "renter"
       type: object
       properties:
         type:
@@ -2154,9 +2156,10 @@ components:
         lease_key:
           type: string
         owner:
-          $ref: '#/components/schemas/InsuranceOwnerSchema'
-        renter:
           $ref: '#/components/schemas/InsuranceRenterSchema'
+        renter:
+          $ref: '#/components/schemas/InsuranceOwnerSchema'
+
 
     InsuranceCreationResponseSchema:    # Creation Response
       allOf:
