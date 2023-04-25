@@ -1434,8 +1434,7 @@ paths:
         required: true
         description: Insurance lease by id.
         schema:
-          type: integer
-          format: int62
+          type: string
       - name: completeness
         in: query
         description: Get the entity of insurance in basic form or in full
