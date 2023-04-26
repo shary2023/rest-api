@@ -1991,7 +1991,7 @@ components:
         - items
         - renter
         - creation
-        - isActive
+        - active
       properties:
         id:
           type: integer
@@ -2009,7 +2009,7 @@ components:
         rentEnd:
           type: string
           format: 'date-time'
-        isActive:
+        active:
           type: boolean
           default: true
         items:
