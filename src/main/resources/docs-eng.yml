@@ -2092,7 +2092,7 @@ components:
           example: "shary2023-02"
         agreement_datetime:
           type: string
-          format: 'data-time'
+          format: 'date-time'
           example: "2023-04-27T09:33:07.294Z"
         lease_type:
           type: string
@@ -2163,7 +2163,7 @@ components:
       properties:
         ends_at:
           type: string
-          format: 'data-time'
+          format: 'date-time'
           example: "2023-04-30T23:59:59.294Z"
         item:
           $ref: '#/components/schemas/InsuranceItemSchema'
@@ -2173,7 +2173,7 @@ components:
           $ref: '#/components/schemas/InsuranceMetadataSchema'
         starts_at:
           type: string
-          format: 'data-time'
+          format: 'date-time'
           example: "2023-04-27T10:00:59.294Z"
         completed:
           type: boolean
@@ -2233,7 +2233,7 @@ components:
           $ref: '#/components/schemas/InsuranceCostSchema'
         ends_at:
           type: string
-          format: 'data-time'
+          format: 'date-time'
           example: "2023-04-30T23:59:59Z"
         id:
           type: string
@@ -2253,7 +2253,7 @@ components:
           $ref: '#/components/schemas/InsuranceCostSchema'
         starts_at:
           type: string
-          format: 'data-time'
+          format: 'date-time'
           example: "2023-04-27T10:00:59Z"
         status:
           type: string
