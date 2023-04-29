@@ -1572,7 +1572,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+                $ref: '#/components/schemas/InsuranceLeaseCancelled'
         '403':
           description: Access forbidden
           content:
@@ -2049,9 +2049,11 @@ components:
       properties:
         currency:
           type: string
+          example: "rub"
         value:
           type: integer
           format: int32
+          example: 500000
 
     InsuranceItemSchema:    # Item
       type: object
@@ -2059,12 +2061,16 @@ components:
         type:
           type: string
           description: the line "shary2023-02" is used here
+          example: "shary2023-02"
         brand:
           type: string
+          example: "sony"
         model:
           type: string
+          example: "ps5"
         number:
           type: string
+          example: "15"
         sum_insured:
           $ref: '#/components/schemas/InsuranceCostSchema'
 
@@ -2083,9 +2089,11 @@ components:
         type:
           type: string
           description: the line "shary2023-02" is used here
+          example: "shary2023-02"
         agreement_datetime:
           type: string
           format: 'data-time'
+          example: "2023-04-27T09:33:07.294Z"
         lease_type:
           type: string
 
@@ -2096,12 +2104,16 @@ components:
         type:
           type: string
           description: the line "shary2023-02" is used here
+          example: "shary2023-02"
         first_name:
           type: string
+          example: "Иван"
         given_name:
           type: string
+          example: "Иванов"
         second_name:
           type: string
+          example: "Иванович"
 
     InsuranceOwnerSchema:    # Owner
       description:  When sent to the insurance company, this model is named "renter"
@@ -2110,28 +2122,40 @@ components:
         type:
           type: string
           description: the line "shary2023-02" is used here
+          example: "shary2023-02"
         INN:
           type: string
+          example: "123453488322"
         birthday:
           type: string
+          example: "2003-01-03"
         email:
           type: string
+          example: "user@example.com"
         first_name:
           type: string
+          example: "Иван"
         given_name:
           type: string
-        passport_number:
-          type: string
-        passport_series:
-          type: string
-        phone_number:
-          type: string
-        registration_address:
-          type: string
-        residence_address:
-          type: string
+          example: "Иванович"
         second_name:
           type: string
+          example: "Иванов"
+        passport_number:
+          type: string
+          example: 454322
+        passport_series:
+          type: string
+          example: 6282
+        phone_number:
+          type: string
+          example: "+79008883322"
+        registration_address:
+          type: string
+          example: "Россия, г. Москва, улица Новый Арбат, дом 5"
+        residence_address:
+          type: string
+
 
 
     InsuranceCreationRequestSchema:   # Creation Request
@@ -2140,6 +2164,7 @@ components:
         ends_at:
           type: string
           format: 'data-time'
+          example: "2023-04-30T23:59:59.294Z"
         item:
           $ref: '#/components/schemas/InsuranceItemSchema'
         lease_cost:
@@ -2149,12 +2174,15 @@ components:
         starts_at:
           type: string
           format: 'data-time'
+          example: "2023-04-27T10:00:59.294Z"
         completed:
           type: boolean
+          example: true
         description:
           type: string
         lease_key:
           type: string
+          example: "1045"
         owner:
           $ref: '#/components/schemas/InsuranceRenterSchema'
         renter:
@@ -2172,9 +2200,11 @@ components:
           $ref: '#/components/schemas/InsuranceCostSchema'
         id:
           type: string
+          example: "5bd6f668-e723-4b81-8f71-7b1549153368"
         policy_id:
           type: integer
           format: int64
+
         policy_number:
           type: string
         premium:
@@ -2189,6 +2219,7 @@ components:
             $ref: '#/components/schemas/InsuranceMediaSchema'
         status:
           type: string
+          example: "assembling"
 
 
     InsuranceItemResponseSchema:    # Item Response
@@ -2203,8 +2234,10 @@ components:
         ends_at:
           type: string
           format: 'data-time'
+          example: "2023-04-30T23:59:59Z"
         id:
           type: string
+          example: "dc2bdc2d-6047-4670-9cac-0025054f1935"
         lease_cost:
           $ref: '#/components/schemas/InsuranceCostSchema'
         lease_key:
@@ -2212,15 +2245,19 @@ components:
         policy_id:
           type: integer
           format: int64
+          example: 403376
         policy_number:
           type: string
+          example: "ЛЦФРИНШРНС-001817"
         premium:
           $ref: '#/components/schemas/InsuranceCostSchema'
         starts_at:
           type: string
           format: 'data-time'
+          example: "2023-04-27T10:00:59Z"
         status:
           type: string
+          example: "issued"
 
 
     InsuranceLeasesResponse:    # List Item Response
@@ -2237,3 +2274,29 @@ components:
         limit:
           type: integer
           format: int32
+
+    InsuranceLeaseCancelled:    # Cancelled Lease
+      type: object
+      properties:
+        completed:
+          type: boolean
+          example: true
+        ends_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-30T23:59:59Z"
+        id:
+          type: string
+          example: "5bd6f668-e723-4b81-8f71-7b1549153368"
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        lease_key:
+          type: string
+          example: "1046"
+        starts_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-27T10:00:59Z"
+        status:
+          type: string
+          example: "cancelled"
