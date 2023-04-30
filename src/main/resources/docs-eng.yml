@@ -2275,7 +2275,7 @@ components:
           type: integer
           format: int32
 
-    InsuranceLeaseCancelled:    # Cancelled Lease
+    InsuranceLeaseCancelledSchema:    # Cancelled Lease
       type: object
       properties:
         completed:
