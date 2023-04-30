@@ -1572,7 +1572,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InsuranceLeaseCancelled'
+                $ref: '#/components/schemas/InsuranceLeaseCancelledSchema'
         '403':
           description: Access forbidden
           content:
