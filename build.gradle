@@ -31,6 +31,10 @@ dependencies {
     compileOnly "javax.servlet:servlet-api:${versions.servletApi}"
     implementation "javax.annotation:javax.annotation-api:${versions.annotationApi}"
     implementation "javax.validation:validation-api:${versions.validationApi}"
+    compileOnly "org.projectlombok:lombok:${versions.lombok}"
+    annotationProcessor "org.projectlombok:lombok:${versions.lombok}"
+    testCompileOnly "org.projectlombok:lombok:${versions.lombok}"
+    testAnnotationProcessor "org.projectlombok:lombok:${versions.lombok}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junit}"
 }
