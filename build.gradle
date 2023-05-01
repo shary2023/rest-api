@@ -26,6 +26,9 @@ publishing {
 }
 
 dependencies {
+    implementation "jakarta.persistence:jakarta.persistence-api:${versions.jakartaPersistence}"
+    implementation "org.hibernate:hibernate-core:${versions.hibernate}"
+    implementation "org.postgresql:postgresql:${versions.postgresql}"
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.springdoc}"
     implementation "io.swagger.codegen.v3:swagger-codegen-generators:${versions.codegen}"
     compileOnly "javax.servlet:servlet-api:${versions.servletApi}"

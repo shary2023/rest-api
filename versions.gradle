@@ -1,5 +1,8 @@
 ext {
     versions = [
+            'postgresql' : '42.6.0',
+            'hibernate' : '6.2.2.Final',
+            'jakartaPersistence' : '3.1.0',
             'springdoc' : '2.0.4',
             'codegen': '1.0.38',
             'servletApi': '2.5',
