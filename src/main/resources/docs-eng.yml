@@ -1653,6 +1653,8 @@ components:
     # models:
 
     UserSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - email
@@ -1660,29 +1662,23 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
         password:
           type: string
           format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
-        inn:
-          type: string
+          maxLength: 50
         birthday:
           type: string
           format: 'data'
-        passportNumber:
-          type: string
-        passportSeries:
-          type: string
-        phoneNumber:
-          type: string
         registrationAddress:
           type: string
         residenceAddress:
@@ -1696,11 +1692,15 @@ components:
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     UserResponseSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - id
@@ -1714,15 +1714,17 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
+          maxLength: 50
         owner:
           type: boolean
           default: false
@@ -1732,11 +1734,15 @@ components:
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     GuestSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - email
@@ -1744,11 +1750,10 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
 
     RenterSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - id
@@ -1761,26 +1766,32 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
         password:
           type: string
           format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
+          maxLength: 50
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     OwnerSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - id
@@ -1799,29 +1810,23 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
         password:
           type: string
           format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
-        inn:
-          type: string
+          maxLength: 50
         birthday:
           type: string
           format: 'date'
-        passportNumber:
-          type: string
-        passportSeries:
-          type: string
-        phoneNumber:
-          type: string
         registrationAddress:
           type: string
         residenceAddress:
@@ -1829,9 +1834,11 @@ components:
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     CategorySchema:
       type: object
@@ -2108,48 +2115,45 @@ components:
         first_name:
           type: string
           example: "Иван"
+          minLength: 2
+          maxLength: 50
         given_name:
           type: string
           example: "Иванов"
+          minLength: 2
+          maxLength: 50
         second_name:
           type: string
           example: "Иванович"
+          maxLength: 50
 
     InsuranceOwnerSchema:    # Owner
       description:  When sent to the insurance company, this model is named "renter"
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       properties:
         type:
           type: string
           description: the line "shary2023-02" is used here
           example: "shary2023-02"
-        INN:
-          type: string
-          example: "123453488322"
         birthday:
           type: string
           example: "2003-01-03"
-        email:
-          type: string
-          example: "user@example.com"
         first_name:
           type: string
           example: "Иван"
+          minLength: 2
+          maxLength: 50
         given_name:
           type: string
           example: "Иванович"
+          maxLength: 50
         second_name:
           type: string
           example: "Иванов"
-        passport_number:
-          type: string
-          example: 454322
-        passport_series:
-          type: string
-          example: 6282
-        phone_number:
-          type: string
-          example: "+79008883322"
+          minLength: 2
+          maxLength: 50
         registration_address:
           type: string
           example: "Россия, г. Москва, улица Новый Арбат, дом 5"

@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: 'SHARY - Regular'
+  description: Регулярные выражения
+  version: 2.0.0
+paths: {}
+
+components:
+  schemas:
+    FullRegularSchema:
+      allOf:
+        - $ref: '#/components/schemas/EmailRegularSchema'
+        - $ref: '#/components/schemas/InnRegularSchema'
+        - $ref: '#/components/schemas/PassportNumberRegularSchema'
+        - $ref: '#/components/schemas/PassportSeriesRegularSchema'
+        - $ref: '#/components/schemas/PhoneNumberRegularSchema'
+
+      type: object
+
+    PassportRegularSchema:
+      allOf:
+        - $ref: '#/components/schemas/PassportNumberRegularSchema'
+        - $ref: '#/components/schemas/PassportSeriesRegularSchema'
+
+      type: object
+
+
+    EmailRegularSchema:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          pattern: '/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i'
+          example: "user@example.com"
+
+    InnRegularSchema:
+      type: object
+      properties:
+        inn:
+          type: string
+          pattern: '^(([0-9]{12})|([0-9]{10}))?$'
+          example: "123453488322"
+
+    PassportNumberRegularSchema:
+      type: object
+      properties:
+        passportNumber:
+          type: string
+          pattern: '^([0-9]{6})?$'
+          example: '454322'
+
+    PassportSeriesRegularSchema:
+      type: object
+      properties:
+        passportSeries:
+          type: string
+          pattern: '^([0-9]{2}\s{1}[0-9]{2})?$'
+          example: '6282'
+
+    PhoneNumberRegularSchema:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          pattern: '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'
+          example: "+79008883322"
