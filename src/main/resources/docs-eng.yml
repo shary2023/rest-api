@@ -1641,10 +1641,13 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+
+  # Document Controller
+
   /docx/individual:
     post:
       tags:
-        - Documents API
+        - System Api
       operationId: postIndividualDocx
       summary: Creates an individual contract.
       description: Creates an individual contract with parameters.
@@ -2336,57 +2339,61 @@ components:
         status:
           type: string
           example: "cancelled"
+
+
+    # Document Model:
+
     IndividualRequestSchema:
       type: object
       properties:
-        NOMER_DOGOVORA:
+        number_contract:
           type: string
           example: 5345234523
-        FAMILIYA:
+        last_name:
           type: string
           example: Сидоров
-        IMYA:
+        first_name:
           type: string
           example: Игорь
-        OTCHESTVO:
+        patronymic:
           type: string
           example: Петрович
-        FAMILIYA_I_O:
+        last_name_initials:
           type: string
           example: Сидоров И.П.
-        GRAZHDANSTVO:
+        citizenship:
           type: string
           example: Россия
-        NOMER_PASPORTA:
+        passport_number:
           type: string
           example: 93 27 128433
-        D_V_PASPORTA:
+        passport_issue_date:
           type: string
           example: 20.11.2012
-        OTDEL_PASPORTA:
+        passport_department:
           type: string
           example: ОТДЕЛЕНИЕМ УФМС
-        NAME_PRODUCT:
+        product_name:
           type: string
           example: Самокат
-        SET:
+        set:
           type: string
           example: Зарядное устройство, Чехол
-        DATE_END:
+        date_end:
           type: string
           example: 20.11.2023
-        PRICE_1_DAY:
+        price_per_day:
           type: string
           example: 9000
-        PRICE_FINAL:
+        final_price:
           type: string
           example: 90000
-        TELEFON_KLIENTA:
+        client_phone:
           type: string
           example: +79999999999
-        ADRES_KLIENTA:
+        client_address:
           type: string
           example: г. Москва
-        E_MAIL_KLIENTA:
+        client_email:
           type: string
           example: example@example.example
