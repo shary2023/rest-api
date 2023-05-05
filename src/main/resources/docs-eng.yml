@@ -31,6 +31,7 @@ paths:
       summary: Create a new item category.
       description: Create a new category of items (for example, electronics).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -41,7 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error
           content:
@@ -67,7 +68,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -89,6 +92,7 @@ paths:
       summary: Update category.
       description: Change category name or category image.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -99,7 +103,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -135,7 +139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/CategorySchema'
         '400':
           description: User input error.
           content:
@@ -195,6 +199,7 @@ paths:
       summary: Create a new item subcategory.
       description: Create a new subcategory of items (for example, laptops).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -205,7 +210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error
           content:
@@ -226,6 +231,7 @@ paths:
       summary: Update subcategory.
       description: Change subcategory name or image.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -236,7 +242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -262,7 +268,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -298,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoryResponseSchema'
+                $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -372,7 +380,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubcategoriesListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubcategorySchema'
         '400':
           description: User input error.
           content:
@@ -400,6 +410,7 @@ paths:
       summary: To rent.
       description: Create the entity of the rented item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -410,7 +421,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -436,7 +447,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -463,6 +476,7 @@ paths:
       summary: Update item.
       description: Update data about the item (for example, whether it is rented).
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -473,9 +487,99 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items/{itemId}/rent:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        description: Item entity ID (item).
+        schema:
+          type: integer
+          format: int64
+    post:
+      tags:
+        - Public API
+      operationId: rentAnItem
+      summary: Rent an item.
+      description: Rent an item (bind it to the tenant).
+      parameters:
+        - name: renterId
+          in: query
+          required: true
+          description: ID of the Renter entity that rented the item.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response to the return of the rented item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item or owner with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items/{itemId}/rent/out:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        description: Item entity ID (item).
+        schema:
+          type: integer
+          format: int64
+    post:
+      tags:
+        - Public API
+      operationId: returnRentedItem
+      summary: Return item.
+      description: Return the thing rented (untie it from the tenant).
+      responses:
+        '200':
+          description: Successful response to the return of the rented item.
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The item or owner with the specified ID was not found.
           content:
             application/json:
               schema:
@@ -509,7 +613,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
+                $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -518,86 +622,6 @@ paths:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
         '404':
           description: The item with the specified ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '500':
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-
-    post:
-      tags:
-        - Public API
-      operationId: createRentedItem
-      summary: To rent.
-      description: Create a rented item (attach it to a tenant).
-      parameters:
-        - name: ownerId
-          in: query
-          required: true
-          description: ID of the Owner entity that rented the item.
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: A successful response to the creation of a rented item.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ItemResponseSchema'
-        '400':
-          description: User input error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '404':
-          description: The item or owner with the specified ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '500':
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-
-    put:
-      tags:
-        - Public API
-      operationId: returnRentedItem
-      summary: Return item.
-      description: Return the thing rented (untie it from the tenant).
-      parameters:
-        - name: ownerId
-          in: query
-          required: true
-          description: ID of the Owner entity that rented the item.
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: Successful response to the return of the rented item.
-          content:
-            application/json:
-              schema:
-                type: boolean
-        '400':
-          description: User input error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '404':
-          description: The item or owner with the specified ID was not found.
           content:
             application/json:
               schema:
@@ -663,7 +687,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -705,7 +731,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ItemsListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
         '400':
           description: User input error.
           content:
@@ -725,6 +753,94 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+  /items/users/{ownerId}:
+    parameters:
+      - name: ownerId
+        in: path
+        required: true
+        description: Id of the user(owner) for which we get all items.
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - Public API
+      operationId: getItemsRentedForUserByUserId
+      summary: Get items rented for user.
+      description: Get all items rented for user(owner) by user id in our service.
+      responses:
+        '200':
+          description: Successful response to a request to get all items for rent for a user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /items/users/{renterId}/rent:
+    parameters:
+      - name: renterId
+        in: path
+        required: true
+        description: Id of the user(renter) for which we get all items.
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - System API
+      operationId: getRentedItemsForUserByUserId
+      summary: Get rent items for user.
+      description: Get all rented items for user(renter) by user id in our service.
+      responses:
+        '200':
+          description: Successful response to a request to get all rented items for a user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /users:
     post:
       tags:
@@ -733,6 +849,7 @@ paths:
       summary: Create user
       description: Create a user - a guest, without items attached to him.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -743,7 +860,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponseSchema'
+                $ref: '#/components/schemas/UserSchema'
         '400':
           description: User input error.
           content:
@@ -769,7 +886,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponseSchema'
         '400':
           description: User input error.
           content:
@@ -797,6 +916,7 @@ paths:
       summary: Create tenant user.
       description: Create a user who has rented at least one item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -829,6 +949,7 @@ paths:
       summary: Create a landlord user.
       description: Create a user who has rented out at least one item.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -902,10 +1023,11 @@ paths:
       summary: Change fields in the user entity.
       description: Change fields in the user entity by its ID.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: object
+              $ref: '#/components/schemas/UserSchema'
       responses:
         '200':
           description: Successful response to user change.
@@ -977,7 +1099,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrdersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
@@ -1041,6 +1165,7 @@ paths:
       summary: Update order.
       description: Update order.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1051,7 +1176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CategoryResponseSchema'
+                $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
@@ -1154,7 +1279,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrdersListSchema'
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderSchema'
         '400':
           description: User input error.
           content:
@@ -1215,6 +1342,305 @@ paths:
             application/json:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  # Insurance Controller
+
+  /renters/items/leases:
+    parameters:
+      - name: limit
+        in: query
+        required: true
+        description: The number of insurance approvals received
+        schema:
+          type: integer
+          format: int32
+      - name: after
+        in: query
+        required: false
+        description: cursor to the next page
+        schema:
+          type: integer
+          format: int32
+      - name: before
+        in: query
+        required: false
+        description: cursor to the previous page
+        schema:
+          type: integer
+          format: int32
+
+    get:
+      tags:
+        - System API
+      operationId: getLeases
+      summary: Get a list of registered insurances
+      description: Get a list of registered insurances
+      responses:
+        '200':
+          description: Successful response to get a list of registered insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceLeasesResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceLeasesResponse'
+
+  /renters/items/leases/{lease_id}/document:
+    parameters:
+      - name: lease_id
+        required: true
+        in: path
+        description: Lease entity ID
+        schema:
+          type: string
+      - name: polices_id
+        required: true
+        in: query
+        description: Police entity ID
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - System API
+      operationId: getPdfPolices
+      summary: Get insurance policy in pdf format
+      description: Get insurance policy in pdf format
+      responses:
+        '200':
+          description: Successful response to get a policy insurance in pdf format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: byte
+
+  /renters/items/leases/{lease_id}:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id.
+        schema:
+          type: string
+      - name: completeness
+        in: query
+        description: Get the entity of insurance in basic form or in full
+        schema:
+          type: string
+          default: basic
+    get:
+      tags:
+        - System API
+      operationId: getLease
+      summary: Get Insurance lease by id.
+      description: Get Insurance lease by id.
+      responses:
+        '200':
+          description: Successful response to get a insurance  by ID
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InsuranceItemResponseSchema'     # basic
+                  - $ref: '#/components/schemas/InsuranceCreationResponseSchema'  # full
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+  /renters/lease:
+    post:
+      tags:
+        - System API
+      operationId: createLease
+      summary: Create an insurance for the item
+      description: Create an insurance for the item
+
+      requestBody:
+        description: Create an insurance for the item
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      responses:
+        '201':
+          description: Successful response to an insurance request created as part of a lease
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /renters/items/leases/{lease_id}/submit:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    post:
+      tags:
+        - System API
+      operationId: submitLease
+      summary: Approve the required for insurance
+      description: Approve the required for insurance
+
+      responses:
+        '201':
+          description: Successful response to approve the lease insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /renters/items/leases/{lease_id}/cancel:
+    parameters:
+      - name: lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    post:
+      tags:
+        - System API
+      operationId: cancelLease
+      summary: Cancel insurance by lease ID
+      description: Cancel insurance by lease ID
+      responses:
+        '201':
+          description: Successful response of cancel insurance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceLeaseCancelledSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+
+  /renters/items/leases/{update_lease_id}:
+    parameters:
+      - name: update_lease_id
+        in: path
+        required: true
+        description: Insurance lease by id
+        schema:
+          type: string
+    put:
+      tags:
+        - System API
+      operationId: updateLease
+      summary: Update insurance by lease ID
+      description: Update insurance by lease ID
+
+      requestBody:
+        description: Updating the insurance
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      responses:
+        '201':
+          description: Successful insurance update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCreationResponseSchema'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /docx/individual:
     post:
       tags:
@@ -1256,71 +1682,11 @@ components:
       bearerFormat: SimpleToken
   schemas:
 
-    # lists:
-
-    CategoriesListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - categories
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryResponseSchema'
-
-    SubcategoriesListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - subcategories
-      properties:
-        subcategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubcategoryResponseSchema'
-
-    UsersListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - users
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponseSchema'
-
-    ItemsListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - items
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemResponseSchema'
-
-    OrdersListSchema:
-      allOf:
-        - $ref: 'base.yml#/components/schemas/BaseResponse'
-      type: object
-      required:
-        - orders
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSchema'
-
     # models:
 
     UserSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - email
@@ -1328,36 +1694,27 @@ components:
         id:
           type: integer
           format: int64
-        email:
+        password:
           type: string
-          format: email
+          format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
-        inn:
+          minLength: 2
+          maxLength: 50
+        givenName:
           type: string
+          maxLength: 50
         birthday:
           type: string
           format: 'data'
-        passportNumber:
-          type: string
-        passportSeries:
-          type: string
-        phoneNumber:
-          type: string
         registrationAddress:
           type: string
         residenceAddress:
           type: string
-        itemsForRent:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemsListSchema'
-        itemsRented:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemsListSchema'
         isValid:
           type: boolean
         owner:
@@ -1367,11 +1724,15 @@ components:
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     UserResponseSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - id
@@ -1379,37 +1740,41 @@ components:
         - firstName
         - secondName
         - givenName
-        - isOwner
-        - isRenter
-        - telegramId
-        - chatId
+        - owner
+        - renter
       properties:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
-        isOwner:
+          maxLength: 50
+        owner:
           type: boolean
           default: false
-        isRenter:
+        renter:
           type: boolean
           default: false
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     GuestSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - email
@@ -1417,15 +1782,15 @@ components:
         id:
           type: integer
           format: int64
-        email:
-          type: string
-          format: email
 
     RenterSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
       type: object
       required:
         - id
         - email
+        - password
         - firstName
         - secondName
         - givenName
@@ -1433,27 +1798,37 @@ components:
         id:
           type: integer
           format: int64
-        email:
+        password:
           type: string
-          format: email
+          format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
+          minLength: 2
+          maxLength: 50
         givenName:
           type: string
+          maxLength: 50
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     OwnerSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - id
         - email
+        - password
         - firstName
         - secondName
         - inn
@@ -1467,24 +1842,23 @@ components:
         id:
           type: integer
           format: int64
-        email:
+        password:
           type: string
-          format: email
+          format: password
         firstName:
           type: string
+          minLength: 2
+          maxLength: 50
         secondName:
           type: string
-        inn:
+          minLength: 2
+          maxLength: 50
+        givenName:
           type: string
+          maxLength: 50
         birthday:
           type: string
           format: 'date'
-        passportNumber:
-          type: string
-        passportSeries:
-          type: string
-        phoneNumber:
-          type: string
         registrationAddress:
           type: string
         residenceAddress:
@@ -1492,9 +1866,11 @@ components:
         telegramId:
           type: integer
           format: int64
+          minimum: 1
         chatId:
           type: integer
           format: int64
+          minimum: 1
 
     CategorySchema:
       type: object
@@ -1527,12 +1903,9 @@ components:
     ItemSchema:
       type: object
       required:
-        - id
         - name
-        - serialNumber
         - photo
         - video
-        - description
         - verified
         - onLease
         - category
@@ -1550,52 +1923,35 @@ components:
           type: string
         photo:
           type: string
-          format: url
+          format: uri
         video:
           type: string
-          format: url
+          format: uri
         description:
           type: string
         verified:
           type: boolean
-          default: true
+          default: false
         onLease:
           type: boolean
           default: false
         category:
-          type: integer
-          format: int
+          $ref: '#/components/schemas/CategorySchema'
         subcategory:
-          type: integer
-          format: int
+          $ref: '#/components/schemas/SubcategorySchema'
         price:
           type: string
         renter:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/RenterSchema'
         owner:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/OwnerSchema'
         characteristics:
-          type: object
-          items:
-            $ref: '#/components/schemas/CharacteristicsSchema'
+          $ref: '#/components/schemas/CharacteristicsSchema'
 
     ItemResponseSchema:
       type: object
       required:
         - id
-        - name
-        - serialNumber
-        - photo
-        - video
-        - description
-        - verified
-        - onLease
-        - category
-        - subcategory
-        - price
-        - owner
       properties:
         id:
           type: integer
@@ -1606,36 +1962,32 @@ components:
           type: string
         photo:
           type: string
-          format: url
+          format: uri
         video:
           type: string
-          format: url
+          format: uri
         description:
           type: string
         verified:
           type: boolean
-          default: true
+          default: false
         onLease:
           type: boolean
           default: false
         category:
-          type: integer
-          format: int
+          $ref: '#/components/schemas/CategorySchema'
         subcategory:
-          type: integer
-          format: int
+          $ref: '#/components/schemas/SubcategorySchema'
         price:
           type: string
         renter:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/RenterSchema'
         owner:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/OwnerSchema'
+        # order:
+        #   $ref: '#/components/schemas/OrderSchema'
         characteristics:
-          type: object
-          items:
-            $ref: '#/components/schemas/CharacteristicsSchema'
+          $ref: '#/components/schemas/CharacteristicsSchema'
 
     SubcategorySchema:
       type: object
@@ -1649,8 +2001,7 @@ components:
         name:
           type: string
         category:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/CategorySchema'
         image:
           type: string
           format: uri
@@ -1667,38 +2018,27 @@ components:
         name:
           type: string
         category:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/CategorySchema'
         image:
           type: string
           format: uri
-
 
     OrderSchema:
       type: object
       required:
         - status
-        - itemId
-        - ownerId
-        - renterId
-        - creation
-        - isActive
         - items
+        - renter
+        - creation
+        - active
       properties:
         id:
           type: integer
           format: int64
         status:
           type: string
-        itemId:
-          type: integer
-          format: int64
-        ownerId:
-          type: integer
-          format: int64
-        renterId:
-          type: integer
-          format: int64
+        renter:
+          $ref: '#/components/schemas/RenterSchema'
         creation:
           type: string
           format: 'date-time'
@@ -1708,13 +2048,13 @@ components:
         rentEnd:
           type: string
           format: 'date-time'
-        isActive:
+        active:
           type: boolean
           default: true
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ItemsListSchema'
+            $ref: '#/components/schemas/ItemSchema'
 
     CharacteristicsSchema:
       type: object
@@ -1740,6 +2080,262 @@ components:
         weight:
           type: string
 
+
+    # Insurance Model:
+
+    InsuranceCostSchema:      # Cost
+      type: object
+      properties:
+        currency:
+          type: string
+          example: "rub"
+        value:
+          type: integer
+          format: int32
+          example: 500000
+
+    InsuranceItemSchema:    # Item
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+          example: "shary2023-02"
+        brand:
+          type: string
+          example: "sony"
+        model:
+          type: string
+          example: "ps5"
+        number:
+          type: string
+          example: "15"
+        sum_insured:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+
+
+    InsuranceMediaSchema:   # Media
+      type: object
+      properties:
+        collection:
+          type: string
+        key:
+          type: string
+
+    InsuranceMetadataSchema:    # Metadata
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+          example: "shary2023-02"
+        agreement_datetime:
+          type: string
+          format: 'date-time'
+          example: "2023-04-27T09:33:07.294Z"
+        lease_type:
+          type: string
+
+    InsuranceRenterSchema:   # Renter
+      description:  When sent to the insurance company, this model is named "owner"
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+          example: "shary2023-02"
+        first_name:
+          type: string
+          example: "Иван"
+          minLength: 2
+          maxLength: 50
+        given_name:
+          type: string
+          example: "Иванов"
+          minLength: 2
+          maxLength: 50
+        second_name:
+          type: string
+          example: "Иванович"
+          maxLength: 50
+
+    InsuranceOwnerSchema:    # Owner
+      description:  When sent to the insurance company, this model is named "renter"
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+      type: object
+      properties:
+        type:
+          type: string
+          description: the line "shary2023-02" is used here
+          example: "shary2023-02"
+        birthday:
+          type: string
+          example: "2003-01-03"
+        first_name:
+          type: string
+          example: "Иван"
+          minLength: 2
+          maxLength: 50
+        given_name:
+          type: string
+          example: "Иванович"
+          maxLength: 50
+        second_name:
+          type: string
+          example: "Иванов"
+          minLength: 2
+          maxLength: 50
+        registration_address:
+          type: string
+          example: "Россия, г. Москва, улица Новый Арбат, дом 5"
+        residence_address:
+          type: string
+
+
+
+    InsuranceCreationRequestSchema:   # Creation Request
+      type: object
+      properties:
+        ends_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-30T23:59:59.294Z"
+        item:
+          $ref: '#/components/schemas/InsuranceItemSchema'
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        metadata:
+          $ref: '#/components/schemas/InsuranceMetadataSchema'
+        starts_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-27T10:00:59.294Z"
+        completed:
+          type: boolean
+          example: true
+        description:
+          type: string
+        lease_key:
+          type: string
+          example: "1045"
+        owner:
+          $ref: '#/components/schemas/InsuranceRenterSchema'
+        renter:
+          $ref: '#/components/schemas/InsuranceOwnerSchema'
+
+
+    InsuranceCreationResponseSchema:    # Creation Response
+      allOf:
+        - $ref: '#/components/schemas/InsuranceCreationRequestSchema'
+      type: object
+      properties:
+        coverage:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        deductible:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        id:
+          type: string
+          example: "5bd6f668-e723-4b81-8f71-7b1549153368"
+        policy_id:
+          type: integer
+          format: int64
+
+        policy_number:
+          type: string
+        premium:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceMediaSchema'
+        missed_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceMediaSchema'
+        status:
+          type: string
+          example: "assembling"
+
+
+    InsuranceItemResponseSchema:    # Item Response
+      type: object
+      properties:
+        completed:
+          type: boolean
+        coverage:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        deductible:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        ends_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-30T23:59:59Z"
+        id:
+          type: string
+          example: "dc2bdc2d-6047-4670-9cac-0025054f1935"
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        lease_key:
+          type: string
+        policy_id:
+          type: integer
+          format: int64
+          example: 403376
+        policy_number:
+          type: string
+          example: "ЛЦФРИНШРНС-001817"
+        premium:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        starts_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-27T10:00:59Z"
+        status:
+          type: string
+          example: "issued"
+
+
+    InsuranceLeasesResponse:    # List Item Response
+      type: object
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        leases:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceItemResponseSchema'
+        limit:
+          type: integer
+          format: int32
+
+    InsuranceLeaseCancelledSchema:    # Cancelled Lease
+      type: object
+      properties:
+        completed:
+          type: boolean
+          example: true
+        ends_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-30T23:59:59Z"
+        id:
+          type: string
+          example: "5bd6f668-e723-4b81-8f71-7b1549153368"
+        lease_cost:
+          $ref: '#/components/schemas/InsuranceCostSchema'
+        lease_key:
+          type: string
+          example: "1046"
+        starts_at:
+          type: string
+          format: 'date-time'
+          example: "2023-04-27T10:00:59Z"
+        status:
+          type: string
+          example: "cancelled"
     IndividualRequestSchema:
       type: object
       properties:
