@@ -148,4 +148,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new FieldsValidationError(errorMessages), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserAllReadyExistsException.class)
+    public ResponseEntity<ApplicationError> catchBadCredentialsException (
+            BadCredentialsException  e
+    ) {
+        log.error(String.valueOf(e));
+        return new ResponseEntity<>(new ApplicationError(HttpStatus.UNAUTHORIZED.value(), e.getMessage()),
+                HttpStatus.UNAUTHORIZED);
+    }
+
 }

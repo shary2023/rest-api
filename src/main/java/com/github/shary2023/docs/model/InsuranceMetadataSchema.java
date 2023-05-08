@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * InsuranceMetadataSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T19:47:32.438426300+06:00[Asia/Almaty]")
 public class InsuranceMetadataSchema {
 
   @JsonProperty("type")

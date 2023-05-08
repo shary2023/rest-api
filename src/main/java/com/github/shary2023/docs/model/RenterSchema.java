@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * RenterSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T19:47:32.438426300+06:00[Asia/Almaty]")
 public class RenterSchema {
 
   @JsonProperty("id")
@@ -151,8 +151,8 @@ public class RenterSchema {
    * Get phoneNumber
    * @return phoneNumber
   */
-  @Size(min = 5, max = 15) 
-  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getPhoneNumber() {
     return phoneNumber;
   }

@@ -17,11 +17,17 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T19:47:32.438426300+06:00[Asia/Almaty]")
 public class UserSchema {
 
   @JsonProperty("id")
   private Long id;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
+
+  @JsonProperty("email")
+  private String email;
 
   @JsonProperty("password")
   private String password;
@@ -59,9 +65,6 @@ public class UserSchema {
   @JsonProperty("chatId")
   private Long chatId;
 
-  @JsonProperty("email")
-  private String email;
-
   @JsonProperty("inn")
   private String inn;
 
@@ -70,9 +73,6 @@ public class UserSchema {
 
   @JsonProperty("passportSeries")
   private String passportSeries;
-
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
 
   public UserSchema id(Long id) {
     this.id = id;
@@ -91,6 +91,44 @@ public class UserSchema {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public UserSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @NotNull @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public UserSchema email(String email) {
+    this.email = email;
+    return this;
+  }
+
+  /**
+   * Get email
+   * @return email
+  */
+  @Email
+  @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public UserSchema password(String password) {
@@ -323,25 +361,6 @@ public class UserSchema {
     this.chatId = chatId;
   }
 
-  public UserSchema email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  */
-  @NotNull @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") @Email
-  @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public UserSchema inn(String inn) {
     this.inn = inn;
     return this;
@@ -399,25 +418,6 @@ public class UserSchema {
     this.passportSeries = passportSeries;
   }
 
-  public UserSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
-  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -428,6 +428,8 @@ public class UserSchema {
     }
     UserSchema userSchema = (UserSchema) o;
     return Objects.equals(this.id, userSchema.id) &&
+        Objects.equals(this.phoneNumber, userSchema.phoneNumber) &&
+        Objects.equals(this.email, userSchema.email) &&
         Objects.equals(this.password, userSchema.password) &&
         Objects.equals(this.firstName, userSchema.firstName) &&
         Objects.equals(this.secondName, userSchema.secondName) &&
@@ -440,16 +442,14 @@ public class UserSchema {
         Objects.equals(this.renter, userSchema.renter) &&
         Objects.equals(this.telegramId, userSchema.telegramId) &&
         Objects.equals(this.chatId, userSchema.chatId) &&
-        Objects.equals(this.email, userSchema.email) &&
         Objects.equals(this.inn, userSchema.inn) &&
         Objects.equals(this.passportNumber, userSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, userSchema.passportSeries) &&
-        Objects.equals(this.phoneNumber, userSchema.phoneNumber);
+        Objects.equals(this.passportSeries, userSchema.passportSeries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, isValid, owner, renter, telegramId, chatId, email, inn, passportNumber, passportSeries, phoneNumber);
+    return Objects.hash(id, phoneNumber, email, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, isValid, owner, renter, telegramId, chatId, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -457,6 +457,8 @@ public class UserSchema {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
@@ -469,11 +471,9 @@ public class UserSchema {
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

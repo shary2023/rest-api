@@ -1692,11 +1692,18 @@ components:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
-        - email
+        - phoneNumber
       properties:
         id:
           type: integer
           format: int64
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
+        email:
+          type: string
+          format: 'email'
         password:
           type: string
           format: password
@@ -1786,11 +1793,14 @@ components:
         - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
       type: object
       required:
-        - email
+        - phoneNumber
       properties:
         id:
           type: integer
           format: int64
+        email:
+          type: string
+          format: 'email'
         phoneNumber:
           type: string
           minLength: 5
@@ -1804,6 +1814,7 @@ components:
       required:
         - id
         - email
+        - phoneNumber
         - password
         - firstName
         - secondName
