@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * RenterSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-05T19:03:21.093931500+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
 public class RenterSchema {
 
   @JsonProperty("id")
@@ -34,6 +34,9 @@ public class RenterSchema {
 
   @JsonProperty("givenName")
   private String givenName;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("telegramId")
   private Long telegramId;
@@ -139,6 +142,25 @@ public class RenterSchema {
     this.givenName = givenName;
   }
 
+  public RenterSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
   public RenterSchema telegramId(Long telegramId) {
     this.telegramId = telegramId;
     return this;
@@ -212,6 +234,7 @@ public class RenterSchema {
         Objects.equals(this.firstName, renterSchema.firstName) &&
         Objects.equals(this.secondName, renterSchema.secondName) &&
         Objects.equals(this.givenName, renterSchema.givenName) &&
+        Objects.equals(this.phoneNumber, renterSchema.phoneNumber) &&
         Objects.equals(this.telegramId, renterSchema.telegramId) &&
         Objects.equals(this.chatId, renterSchema.chatId) &&
         Objects.equals(this.email, renterSchema.email);
@@ -219,7 +242,7 @@ public class RenterSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, password, firstName, secondName, givenName, telegramId, chatId, email);
+    return Objects.hash(id, password, firstName, secondName, givenName, phoneNumber, telegramId, chatId, email);
   }
 
   @Override
@@ -231,6 +254,7 @@ public class RenterSchema {
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
     sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

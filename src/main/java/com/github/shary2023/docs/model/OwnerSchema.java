@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * OwnerSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-05T19:03:21.093931500+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
 public class OwnerSchema {
 
   @JsonProperty("id")
@@ -40,6 +40,9 @@ public class OwnerSchema {
   @JsonProperty("birthday")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate birthday;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("registrationAddress")
   private String registrationAddress;
@@ -64,9 +67,6 @@ public class OwnerSchema {
 
   @JsonProperty("passportSeries")
   private String passportSeries;
-
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
 
   public OwnerSchema id(Long id) {
     this.id = id;
@@ -180,6 +180,25 @@ public class OwnerSchema {
 
   public void setBirthday(LocalDate birthday) {
     this.birthday = birthday;
+  }
+
+  public OwnerSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @NotNull @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public OwnerSchema registrationAddress(String registrationAddress) {
@@ -336,25 +355,6 @@ public class OwnerSchema {
     this.passportSeries = passportSeries;
   }
 
-  public OwnerSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @NotNull @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
-  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -370,6 +370,7 @@ public class OwnerSchema {
         Objects.equals(this.secondName, ownerSchema.secondName) &&
         Objects.equals(this.givenName, ownerSchema.givenName) &&
         Objects.equals(this.birthday, ownerSchema.birthday) &&
+        Objects.equals(this.phoneNumber, ownerSchema.phoneNumber) &&
         Objects.equals(this.registrationAddress, ownerSchema.registrationAddress) &&
         Objects.equals(this.residenceAddress, ownerSchema.residenceAddress) &&
         Objects.equals(this.telegramId, ownerSchema.telegramId) &&
@@ -377,13 +378,12 @@ public class OwnerSchema {
         Objects.equals(this.email, ownerSchema.email) &&
         Objects.equals(this.inn, ownerSchema.inn) &&
         Objects.equals(this.passportNumber, ownerSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, ownerSchema.passportSeries) &&
-        Objects.equals(this.phoneNumber, ownerSchema.phoneNumber);
+        Objects.equals(this.passportSeries, ownerSchema.passportSeries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, telegramId, chatId, email, inn, passportNumber, passportSeries, phoneNumber);
+    return Objects.hash(id, password, firstName, secondName, givenName, birthday, phoneNumber, registrationAddress, residenceAddress, telegramId, chatId, email, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -396,6 +396,7 @@ public class OwnerSchema {
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
     sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("    birthday: ").append(toIndentedString(birthday)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    registrationAddress: ").append(toIndentedString(registrationAddress)).append("\n");
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
@@ -404,7 +405,6 @@ public class OwnerSchema {
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

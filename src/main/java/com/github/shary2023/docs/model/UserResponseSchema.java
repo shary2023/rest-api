@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-05T19:03:21.093931500+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
 public class UserResponseSchema {
 
   @JsonProperty("id")
@@ -37,6 +37,9 @@ public class UserResponseSchema {
 
   @JsonProperty("renter")
   private Boolean renter = false;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("telegramId")
   private Long telegramId;
@@ -161,6 +164,25 @@ public class UserResponseSchema {
     this.renter = renter;
   }
 
+  public UserResponseSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
   public UserResponseSchema telegramId(Long telegramId) {
     this.telegramId = telegramId;
     return this;
@@ -235,6 +257,7 @@ public class UserResponseSchema {
         Objects.equals(this.givenName, userResponseSchema.givenName) &&
         Objects.equals(this.owner, userResponseSchema.owner) &&
         Objects.equals(this.renter, userResponseSchema.renter) &&
+        Objects.equals(this.phoneNumber, userResponseSchema.phoneNumber) &&
         Objects.equals(this.telegramId, userResponseSchema.telegramId) &&
         Objects.equals(this.chatId, userResponseSchema.chatId) &&
         Objects.equals(this.email, userResponseSchema.email);
@@ -242,7 +265,7 @@ public class UserResponseSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, secondName, givenName, owner, renter, telegramId, chatId, email);
+    return Objects.hash(id, firstName, secondName, givenName, owner, renter, phoneNumber, telegramId, chatId, email);
   }
 
   @Override
@@ -255,6 +278,7 @@ public class UserResponseSchema {
     sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

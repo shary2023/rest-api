@@ -17,11 +17,14 @@ import javax.annotation.Generated;
  * GuestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-05T19:03:21.093931500+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T14:31:20.630617700+06:00[Asia/Almaty]")
 public class GuestSchema {
 
   @JsonProperty("id")
   private Long id;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("email")
   private String email;
@@ -43,6 +46,25 @@ public class GuestSchema {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public GuestSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public GuestSchema email(String email) {
@@ -74,12 +96,13 @@ public class GuestSchema {
     }
     GuestSchema guestSchema = (GuestSchema) o;
     return Objects.equals(this.id, guestSchema.id) &&
+        Objects.equals(this.phoneNumber, guestSchema.phoneNumber) &&
         Objects.equals(this.email, guestSchema.email);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email);
+    return Objects.hash(id, phoneNumber, email);
   }
 
   @Override
@@ -87,6 +110,7 @@ public class GuestSchema {
     StringBuilder sb = new StringBuilder();
     sb.append("class GuestSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("}");
     return sb.toString();

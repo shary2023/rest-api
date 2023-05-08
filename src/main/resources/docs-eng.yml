@@ -1736,6 +1736,7 @@ components:
     UserResponseSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
       type: object
       required:
         - id
@@ -1766,6 +1767,10 @@ components:
         renter:
           type: boolean
           default: false
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
         telegramId:
           type: integer
           format: int64
@@ -1778,6 +1783,7 @@ components:
     GuestSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
       type: object
       required:
         - email
@@ -1785,10 +1791,15 @@ components:
         id:
           type: integer
           format: int64
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
 
     RenterSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
       type: object
       required:
         - id
@@ -1815,6 +1826,10 @@ components:
         givenName:
           type: string
           maxLength: 50
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
         telegramId:
           type: integer
           format: int64
@@ -1862,6 +1877,10 @@ components:
         birthday:
           type: string
           format: 'date'
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
         registrationAddress:
           type: string
         residenceAddress:
@@ -2194,8 +2213,6 @@ components:
           example: "Россия, г. Москва, улица Новый Арбат, дом 5"
         residence_address:
           type: string
-
-
 
     InsuranceCreationRequestSchema:   # Creation Request
       type: object
