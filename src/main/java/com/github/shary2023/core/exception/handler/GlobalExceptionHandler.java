@@ -148,7 +148,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new FieldsValidationError(errorMessages), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UserAllReadyExistsException.class)
+    @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApplicationError> catchBadCredentialsException (
             BadCredentialsException  e
     ) {
