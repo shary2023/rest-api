@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:52:19.048356500+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T18:39:19.097834700+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
