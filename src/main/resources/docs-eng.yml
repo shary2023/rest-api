@@ -923,19 +923,27 @@ paths:
       operationId: changeUserProfile
       summary: Change fields in the user entity.
       description: Change fields in the user entity by its profile.
+      parameters:
+        - name: phone
+          in: query
+          required: true
+          description: User phone.
+          schema:
+            type: string
+            format: 'phone'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserProfileSchema'
+              $ref: '#/components/schemas/UserSchema'
       responses:
         '200':
           description: Successful response to user change.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponseSchema'
+                $ref: '#/components/schemas/UserSchema'
         '400':
           description: User input error.
           content:

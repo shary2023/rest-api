@@ -9,7 +9,6 @@ import com.github.shary2023.docs.model.BaseResponse;
 import com.github.shary2023.docs.model.GuestSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
-import com.github.shary2023.docs.model.UserProfileSchema;
 import com.github.shary2023.docs.model.UserResponseSchema;
 import com.github.shary2023.docs.model.UserSchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -38,7 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T18:39:19.097834700+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T19:27:35.791635500+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
@@ -93,7 +92,8 @@ public interface UsersApi {
      * PATCH /users/profile : Change fields in the user entity.
      * Change fields in the user entity by its profile.
      *
-     * @param userProfileSchema  (required)
+     * @param phone User phone. (required)
+     * @param userSchema  (required)
      * @return Successful response to user change. (status code 200)
      *         or User input error. (status code 400)
      *         or The user with the specified phone number was not found. (status code 404)
@@ -106,7 +106,7 @@ public interface UsersApi {
         tags = { "System API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to user change.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
@@ -128,8 +128,9 @@ public interface UsersApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<UserResponseSchema> changeUserProfile(
-        @Parameter(name = "UserProfileSchema", description = "", required = true) @Valid @RequestBody UserProfileSchema userProfileSchema
+    ResponseEntity<UserSchema> changeUserProfile(
+        @NotNull @Parameter(name = "phone", description = "User phone.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "phone", required = true) String phone,
+        @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
     );
 
 
