@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:49:00.801131400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:52:19.048356500+06:00[Asia/Almaty]")
 public class UserSchema {
 
   @JsonProperty("id")
