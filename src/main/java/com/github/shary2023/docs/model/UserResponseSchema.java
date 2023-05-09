@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T20:12:42.845236800+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:44:42.102217+06:00[Asia/Almaty]")
 public class UserResponseSchema {
 
   @JsonProperty("id")
@@ -41,6 +41,12 @@ public class UserResponseSchema {
   @JsonProperty("phoneNumber")
   private String phoneNumber;
 
+  @JsonProperty("isAgreeWithFullDeposit")
+  private Boolean isAgreeWithFullDeposit = false;
+
+  @JsonProperty("isDishonestClient")
+  private Boolean isDishonestClient = false;
+
   @JsonProperty("telegramId")
   private Long telegramId;
 
@@ -49,6 +55,15 @@ public class UserResponseSchema {
 
   @JsonProperty("email")
   private String email;
+
+  @JsonProperty("inn")
+  private String inn;
+
+  @JsonProperty("passportNumber")
+  private String passportNumber;
+
+  @JsonProperty("passportSeries")
+  private String passportSeries;
 
   public UserResponseSchema id(Long id) {
     this.id = id;
@@ -183,6 +198,44 @@ public class UserResponseSchema {
     this.phoneNumber = phoneNumber;
   }
 
+  public UserResponseSchema isAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+    return this;
+  }
+
+  /**
+   * Get isAgreeWithFullDeposit
+   * @return isAgreeWithFullDeposit
+  */
+  
+  @Schema(name = "isAgreeWithFullDeposit", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsAgreeWithFullDeposit() {
+    return isAgreeWithFullDeposit;
+  }
+
+  public void setIsAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+  }
+
+  public UserResponseSchema isDishonestClient(Boolean isDishonestClient) {
+    this.isDishonestClient = isDishonestClient;
+    return this;
+  }
+
+  /**
+   * Get isDishonestClient
+   * @return isDishonestClient
+  */
+  
+  @Schema(name = "isDishonestClient", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsDishonestClient() {
+    return isDishonestClient;
+  }
+
+  public void setIsDishonestClient(Boolean isDishonestClient) {
+    this.isDishonestClient = isDishonestClient;
+  }
+
   public UserResponseSchema telegramId(Long telegramId) {
     this.telegramId = telegramId;
     return this;
@@ -242,6 +295,63 @@ public class UserResponseSchema {
     this.email = email;
   }
 
+  public UserResponseSchema inn(String inn) {
+    this.inn = inn;
+    return this;
+  }
+
+  /**
+   * Get inn
+   * @return inn
+  */
+  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$") 
+  @Schema(name = "inn", example = "123453488322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getInn() {
+    return inn;
+  }
+
+  public void setInn(String inn) {
+    this.inn = inn;
+  }
+
+  public UserResponseSchema passportNumber(String passportNumber) {
+    this.passportNumber = passportNumber;
+    return this;
+  }
+
+  /**
+   * Get passportNumber
+   * @return passportNumber
+  */
+  @Pattern(regexp = "^([0-9]{6})?$") 
+  @Schema(name = "passportNumber", example = "454322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPassportNumber() {
+    return passportNumber;
+  }
+
+  public void setPassportNumber(String passportNumber) {
+    this.passportNumber = passportNumber;
+  }
+
+  public UserResponseSchema passportSeries(String passportSeries) {
+    this.passportSeries = passportSeries;
+    return this;
+  }
+
+  /**
+   * Get passportSeries
+   * @return passportSeries
+  */
+  @Pattern(regexp = "^([0-9]{2}\\s{1}[0-9]{2})?$") 
+  @Schema(name = "passportSeries", example = "6282", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPassportSeries() {
+    return passportSeries;
+  }
+
+  public void setPassportSeries(String passportSeries) {
+    this.passportSeries = passportSeries;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -258,14 +368,19 @@ public class UserResponseSchema {
         Objects.equals(this.owner, userResponseSchema.owner) &&
         Objects.equals(this.renter, userResponseSchema.renter) &&
         Objects.equals(this.phoneNumber, userResponseSchema.phoneNumber) &&
+        Objects.equals(this.isAgreeWithFullDeposit, userResponseSchema.isAgreeWithFullDeposit) &&
+        Objects.equals(this.isDishonestClient, userResponseSchema.isDishonestClient) &&
         Objects.equals(this.telegramId, userResponseSchema.telegramId) &&
         Objects.equals(this.chatId, userResponseSchema.chatId) &&
-        Objects.equals(this.email, userResponseSchema.email);
+        Objects.equals(this.email, userResponseSchema.email) &&
+        Objects.equals(this.inn, userResponseSchema.inn) &&
+        Objects.equals(this.passportNumber, userResponseSchema.passportNumber) &&
+        Objects.equals(this.passportSeries, userResponseSchema.passportSeries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, secondName, givenName, owner, renter, phoneNumber, telegramId, chatId, email);
+    return Objects.hash(id, firstName, secondName, givenName, owner, renter, phoneNumber, isAgreeWithFullDeposit, isDishonestClient, telegramId, chatId, email, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -279,9 +394,14 @@ public class UserResponseSchema {
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
+    sb.append("    isAgreeWithFullDeposit: ").append(toIndentedString(isAgreeWithFullDeposit)).append("\n");
+    sb.append("    isDishonestClient: ").append(toIndentedString(isDishonestClient)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
+    sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
+    sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

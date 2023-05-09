@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T20:12:42.845236800+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:44:42.102217+06:00[Asia/Almaty]")
 public class UserSchema {
 
   @JsonProperty("id")
@@ -49,6 +49,18 @@ public class UserSchema {
 
   @JsonProperty("residenceAddress")
   private String residenceAddress;
+
+  @JsonProperty("isAddressesMatch")
+  private Boolean isAddressesMatch = true;
+
+  @JsonProperty("isAgreeWithPublicOffer")
+  private Boolean isAgreeWithPublicOffer = false;
+
+  @JsonProperty("isAgreeWithFullDeposit")
+  private Boolean isAgreeWithFullDeposit = false;
+
+  @JsonProperty("isDishonestClient")
+  private Boolean isDishonestClient = false;
 
   @JsonProperty("isValid")
   private Boolean isValid;
@@ -264,6 +276,82 @@ public class UserSchema {
     this.residenceAddress = residenceAddress;
   }
 
+  public UserSchema isAddressesMatch(Boolean isAddressesMatch) {
+    this.isAddressesMatch = isAddressesMatch;
+    return this;
+  }
+
+  /**
+   * Get isAddressesMatch
+   * @return isAddressesMatch
+  */
+  
+  @Schema(name = "isAddressesMatch", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsAddressesMatch() {
+    return isAddressesMatch;
+  }
+
+  public void setIsAddressesMatch(Boolean isAddressesMatch) {
+    this.isAddressesMatch = isAddressesMatch;
+  }
+
+  public UserSchema isAgreeWithPublicOffer(Boolean isAgreeWithPublicOffer) {
+    this.isAgreeWithPublicOffer = isAgreeWithPublicOffer;
+    return this;
+  }
+
+  /**
+   * Get isAgreeWithPublicOffer
+   * @return isAgreeWithPublicOffer
+  */
+  
+  @Schema(name = "isAgreeWithPublicOffer", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsAgreeWithPublicOffer() {
+    return isAgreeWithPublicOffer;
+  }
+
+  public void setIsAgreeWithPublicOffer(Boolean isAgreeWithPublicOffer) {
+    this.isAgreeWithPublicOffer = isAgreeWithPublicOffer;
+  }
+
+  public UserSchema isAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+    return this;
+  }
+
+  /**
+   * Get isAgreeWithFullDeposit
+   * @return isAgreeWithFullDeposit
+  */
+  
+  @Schema(name = "isAgreeWithFullDeposit", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsAgreeWithFullDeposit() {
+    return isAgreeWithFullDeposit;
+  }
+
+  public void setIsAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+  }
+
+  public UserSchema isDishonestClient(Boolean isDishonestClient) {
+    this.isDishonestClient = isDishonestClient;
+    return this;
+  }
+
+  /**
+   * Get isDishonestClient
+   * @return isDishonestClient
+  */
+  @NotNull 
+  @Schema(name = "isDishonestClient", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Boolean getIsDishonestClient() {
+    return isDishonestClient;
+  }
+
+  public void setIsDishonestClient(Boolean isDishonestClient) {
+    this.isDishonestClient = isDishonestClient;
+  }
+
   public UserSchema isValid(Boolean isValid) {
     this.isValid = isValid;
     return this;
@@ -437,6 +525,10 @@ public class UserSchema {
         Objects.equals(this.birthday, userSchema.birthday) &&
         Objects.equals(this.registrationAddress, userSchema.registrationAddress) &&
         Objects.equals(this.residenceAddress, userSchema.residenceAddress) &&
+        Objects.equals(this.isAddressesMatch, userSchema.isAddressesMatch) &&
+        Objects.equals(this.isAgreeWithPublicOffer, userSchema.isAgreeWithPublicOffer) &&
+        Objects.equals(this.isAgreeWithFullDeposit, userSchema.isAgreeWithFullDeposit) &&
+        Objects.equals(this.isDishonestClient, userSchema.isDishonestClient) &&
         Objects.equals(this.isValid, userSchema.isValid) &&
         Objects.equals(this.owner, userSchema.owner) &&
         Objects.equals(this.renter, userSchema.renter) &&
@@ -449,7 +541,7 @@ public class UserSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, phoneNumber, email, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, isValid, owner, renter, telegramId, chatId, inn, passportNumber, passportSeries);
+    return Objects.hash(id, phoneNumber, email, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, isAddressesMatch, isAgreeWithPublicOffer, isAgreeWithFullDeposit, isDishonestClient, isValid, owner, renter, telegramId, chatId, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -466,6 +558,10 @@ public class UserSchema {
     sb.append("    birthday: ").append(toIndentedString(birthday)).append("\n");
     sb.append("    registrationAddress: ").append(toIndentedString(registrationAddress)).append("\n");
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
+    sb.append("    isAddressesMatch: ").append(toIndentedString(isAddressesMatch)).append("\n");
+    sb.append("    isAgreeWithPublicOffer: ").append(toIndentedString(isAgreeWithPublicOffer)).append("\n");
+    sb.append("    isAgreeWithFullDeposit: ").append(toIndentedString(isAgreeWithFullDeposit)).append("\n");
+    sb.append("    isDishonestClient: ").append(toIndentedString(isDishonestClient)).append("\n");
     sb.append("    isValid: ").append(toIndentedString(isValid)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");

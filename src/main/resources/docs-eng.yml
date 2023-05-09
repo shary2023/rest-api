@@ -842,38 +842,6 @@ paths:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
   /users:
-    post:
-      tags:
-        - Public API
-      operationId: createGuest
-      summary: Create user
-      description: Create a user - a guest, without items attached to him.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GuestSchema'
-      responses:
-        '200':
-          description: Successful response to create a guest.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserSchema'
-        '400':
-          description: User input error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-        '500':
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: 'base.yml#/components/schemas/BaseResponse'
-
     get:
       tags:
         - System API
@@ -897,6 +865,118 @@ paths:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
         '404':
           description: User with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/profile:
+    get:
+      tags:
+        - System API
+      operationId: getUserProfile
+      summary: View the description of the user entity.
+      description: View the description of the user entity by its phone number.
+      parameters:
+        - name: phone
+          in: query
+          required: true
+          description: User phone.
+          schema:
+            type: string
+            format: 'phone'
+      responses:
+        '200':
+          description: Successful response to user search.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified phone number was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    patch:
+      tags:
+        - System API
+      operationId: changeUserProfile
+      summary: Change fields in the user entity.
+      description: Change fields in the user entity by its profile.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileSchema'
+      responses:
+        '200':
+          description: Successful response to user change.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The user with the specified phone number was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/guest:
+    post:
+      tags:
+        - Public API
+      operationId: createGuest
+      summary: Create user
+      description: Create a user - a guest, without items attached to him.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestSchema'
+      responses:
+        '200':
+          description: Successful response to create a guest.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSchema'
+        '400':
+          description: User input error.
           content:
             application/json:
               schema:
@@ -969,6 +1049,72 @@ paths:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
         '500':
           description: Unecpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/admin/admins:
+    post:
+      tags:
+        - System API
+      operationId: createAdmin
+      summary: Create admin
+      description: Create a user - an admin.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSchema'
+      responses:
+        '200':
+          description: Successful response to create an admin.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /users/admin/moderators:
+    post:
+      tags:
+        - System API
+      operationId: createModerator
+      summary: Create a moderator
+      description: Create a user - moderator.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSchema'
+      responses:
+        '200':
+          description: Successful response to create a moderator.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
           content:
             application/json:
               schema:
@@ -1686,6 +1832,17 @@ components:
   schemas:
 
     # models:
+    UserProfileSchema:
+      allOf:
+        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+      type: object
+      required:
+        - phoneNumber
+      properties:
+        phoneNumber:
+          type: string
+          minLength: 5
+          maxLength: 15
 
     UserSchema:
       allOf:
@@ -1693,6 +1850,7 @@ components:
       type: object
       required:
         - phoneNumber
+        - isDishonestClient
       properties:
         id:
           type: integer
@@ -1725,6 +1883,18 @@ components:
           type: string
         residenceAddress:
           type: string
+        isAddressesMatch:
+          type: boolean
+          default: true
+        isAgreeWithPublicOffer:
+          type: boolean
+          default: false
+        isAgreeWithFullDeposit:
+          type: boolean
+          default: false
+        isDishonestClient:
+          type: boolean
+          default: false
         isValid:
           type: boolean
         owner:
@@ -1742,8 +1912,7 @@ components:
 
     UserResponseSchema:
       allOf:
-        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
-        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - id
@@ -1778,6 +1947,12 @@ components:
           type: string
           minLength: 5
           maxLength: 15
+        isAgreeWithFullDeposit:
+          type: boolean
+          default: false
+        isDishonestClient:
+          type: boolean
+          default: false
         telegramId:
           type: integer
           format: int64
@@ -1789,8 +1964,7 @@ components:
 
     GuestSchema:
       allOf:
-        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
-        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - phoneNumber
@@ -1798,6 +1972,8 @@ components:
         id:
           type: integer
           format: int64
+        name:
+          type: string
         email:
           type: string
           format: 'email'
@@ -1808,8 +1984,7 @@ components:
 
     RenterSchema:
       allOf:
-        - $ref: 'regular.yml#/components/schemas/EmailRegularSchema'
-        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
       required:
         - id
@@ -1819,6 +1994,8 @@ components:
         - firstName
         - secondName
         - givenName
+        - isAgreeWithPublicOffer
+        - isDishonestClient
       properties:
         id:
           type: integer
@@ -1841,6 +2018,15 @@ components:
           type: string
           minLength: 5
           maxLength: 15
+        isAgreeWithPublicOffer:
+          type: boolean
+          default: false
+        isAgreeWithFullDeposit:
+          type: boolean
+          default: false
+        isDishonestClient:
+          type: boolean
+          default: false
         telegramId:
           type: integer
           format: int64
@@ -1867,6 +2053,7 @@ components:
         - phoneNumber
         - registrationAddress
         - residenceAddress
+        - isAgreeWithPublicOffer
       properties:
         id:
           type: integer
@@ -1896,6 +2083,12 @@ components:
           type: string
         residenceAddress:
           type: string
+        isAddressesMatch:
+          type: boolean
+          default: true
+        isAgreeWithPublicOffer:
+          type: boolean
+          default: false
         telegramId:
           type: integer
           format: int64
@@ -1919,19 +2112,19 @@ components:
           type: string
           format: uri
 
-#    CategoryResponseSchema:
-#      type: object
-#      required:
-#        - name
-#      properties:
-#        id:
-#          type: integer
-#          format: int64
-#        name:
-#          type: string
-#        image:
-#          type: string
-#          format: uri
+    #    CategoryResponseSchema:
+    #      type: object
+    #      required:
+    #        - name
+    #      properties:
+    #        id:
+    #          type: integer
+    #          format: int64
+    #        name:
+    #          type: string
+    #        image:
+    #          type: string
+    #          format: uri
 
     ItemSchema:
       type: object
@@ -1981,46 +2174,46 @@ components:
         characteristics:
           $ref: '#/components/schemas/CharacteristicsSchema'
 
-#    ItemResponseSchema:
-#      type: object
-#      required:
-#        - id
-#      properties:
-#        id:
-#          type: integer
-#          format: int64
-#        name:
-#          type: string
-#        serialNumber:
-#          type: string
-#        photo:
-#          type: string
-#          format: uri
-#        video:
-#          type: string
-#          format: uri
-#        description:
-#          type: string
-#        verified:
-#          type: boolean
-#          default: false
-#        onLease:
-#          type: boolean
-#          default: false
-#        category:
-#          $ref: '#/components/schemas/CategorySchema'
-#        subcategory:
-#          $ref: '#/components/schemas/SubcategorySchema'
-#        price:
-#          type: string
-#        renter:
-#          $ref: '#/components/schemas/RenterSchema'
-#        owner:
-#          $ref: '#/components/schemas/OwnerSchema'
-#        # order:
-#        #   $ref: '#/components/schemas/OrderSchema'
-#        characteristics:
-#          $ref: '#/components/schemas/CharacteristicsSchema'
+    #    ItemResponseSchema:
+    #      type: object
+    #      required:
+    #        - id
+    #      properties:
+    #        id:
+    #          type: integer
+    #          format: int64
+    #        name:
+    #          type: string
+    #        serialNumber:
+    #          type: string
+    #        photo:
+    #          type: string
+    #          format: uri
+    #        video:
+    #          type: string
+    #          format: uri
+    #        description:
+    #          type: string
+    #        verified:
+    #          type: boolean
+    #          default: false
+    #        onLease:
+    #          type: boolean
+    #          default: false
+    #        category:
+    #          $ref: '#/components/schemas/CategorySchema'
+    #        subcategory:
+    #          $ref: '#/components/schemas/SubcategorySchema'
+    #        price:
+    #          type: string
+    #        renter:
+    #          $ref: '#/components/schemas/RenterSchema'
+    #        owner:
+    #          $ref: '#/components/schemas/OwnerSchema'
+    #        # order:
+    #        #   $ref: '#/components/schemas/OrderSchema'
+    #        characteristics:
+    #          $ref: '#/components/schemas/CharacteristicsSchema'
 
     SubcategorySchema:
       type: object
@@ -2039,22 +2232,22 @@ components:
           type: string
           format: uri
 
-#    SubcategoryResponseSchema:
-#      type: object
-#      required:
-#        - name
-#        - category
-#      properties:
-#        id:
-#          type: integer
-#          format: int64
-#        name:
-#          type: string
-#        category:
-#          $ref: '#/components/schemas/CategorySchema'
-#        image:
-#          type: string
-#          format: uri
+    #    SubcategoryResponseSchema:
+    #      type: object
+    #      required:
+    #        - name
+    #        - category
+    #      properties:
+    #        id:
+    #          type: integer
+    #          format: int64
+    #        name:
+    #          type: string
+    #        category:
+    #          $ref: '#/components/schemas/CategorySchema'
+    #        image:
+    #          type: string
+    #          format: uri
 
     OrderSchema:
       type: object
@@ -2116,7 +2309,7 @@ components:
 
     # Insurance Model:
 
-    InsuranceCostSchema:      # Cost
+    InsuranceCostSchema: # Cost
       type: object
       properties:
         currency:
@@ -2127,7 +2320,7 @@ components:
           format: int32
           example: 500000
 
-    InsuranceItemSchema:    # Item
+    InsuranceItemSchema: # Item
       type: object
       properties:
         type:
@@ -2147,7 +2340,7 @@ components:
           $ref: '#/components/schemas/InsuranceCostSchema'
 
 
-    InsuranceMediaSchema:   # Media
+    InsuranceMediaSchema: # Media
       type: object
       properties:
         collection:
@@ -2155,7 +2348,7 @@ components:
         key:
           type: string
 
-    InsuranceMetadataSchema:    # Metadata
+    InsuranceMetadataSchema: # Metadata
       type: object
       properties:
         type:
@@ -2169,8 +2362,8 @@ components:
         lease_type:
           type: string
 
-    InsuranceRenterSchema:   # Renter
-      description:  When sent to the insurance company, this model is named "owner"
+    InsuranceRenterSchema: # Renter
+      description: When sent to the insurance company, this model is named "owner"
       type: object
       properties:
         type:
@@ -2192,8 +2385,8 @@ components:
           example: "Иванович"
           maxLength: 50
 
-    InsuranceOwnerSchema:    # Owner
-      description:  When sent to the insurance company, this model is named "renter"
+    InsuranceOwnerSchema: # Owner
+      description: When sent to the insurance company, this model is named "renter"
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
       type: object
@@ -2225,7 +2418,7 @@ components:
         residence_address:
           type: string
 
-    InsuranceCreationRequestSchema:   # Creation Request
+    InsuranceCreationRequestSchema: # Creation Request
       type: object
       properties:
         ends_at:
@@ -2256,7 +2449,7 @@ components:
           $ref: '#/components/schemas/InsuranceOwnerSchema'
 
 
-    InsuranceCreationResponseSchema:    # Creation Response
+    InsuranceCreationResponseSchema: # Creation Response
       allOf:
         - $ref: '#/components/schemas/InsuranceCreationRequestSchema'
       type: object
@@ -2289,7 +2482,7 @@ components:
           example: "assembling"
 
 
-    InsuranceItemResponseSchema:    # Item Response
+    InsuranceItemResponseSchema: # Item Response
       type: object
       properties:
         completed:
@@ -2327,7 +2520,7 @@ components:
           example: "issued"
 
 
-    InsuranceLeasesResponse:    # List Item Response
+    InsuranceLeasesResponse: # List Item Response
       type: object
       properties:
         after:
@@ -2342,7 +2535,7 @@ components:
           type: integer
           format: int32
 
-    InsuranceLeaseCancelledSchema:    # Cancelled Lease
+    InsuranceLeaseCancelledSchema: # Cancelled Lease
       type: object
       properties:
         completed:

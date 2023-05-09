@@ -9,6 +9,7 @@ import com.github.shary2023.docs.model.BaseResponse;
 import com.github.shary2023.docs.model.GuestSchema;
 import com.github.shary2023.docs.model.OwnerSchema;
 import com.github.shary2023.docs.model.RenterSchema;
+import com.github.shary2023.docs.model.UserProfileSchema;
 import com.github.shary2023.docs.model.UserResponseSchema;
 import com.github.shary2023.docs.model.UserSchema;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -37,7 +38,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T20:12:42.845236800+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:44:42.102217+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
@@ -89,7 +90,91 @@ public interface UsersApi {
 
 
     /**
-     * POST /users : Create user
+     * PATCH /users/profile : Change fields in the user entity.
+     * Change fields in the user entity by its profile.
+     *
+     * @param userProfileSchema  (required)
+     * @return Successful response to user change. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The user with the specified phone number was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "changeUserProfile",
+        summary = "Change fields in the user entity.",
+        description = "Change fields in the user entity by its profile.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to user change.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The user with the specified phone number was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PATCH,
+        value = "/users/profile",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<UserResponseSchema> changeUserProfile(
+        @Parameter(name = "UserProfileSchema", description = "", required = true) @Valid @RequestBody UserProfileSchema userProfileSchema
+    );
+
+
+    /**
+     * POST /users/admin/admins : Create admin
+     * Create a user - an admin.
+     *
+     * @param userSchema  (required)
+     * @return Successful response to create an admin. (status code 200)
+     *         or User input error. (status code 400)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "createAdmin",
+        summary = "Create admin",
+        description = "Create a user - an admin.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to create an admin.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/users/admin/admins",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<UserSchema> createAdmin(
+        @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
+    );
+
+
+    /**
+     * POST /users/guest : Create user
      * Create a user - a guest, without items attached to him.
      *
      * @param guestSchema  (required)
@@ -119,12 +204,52 @@ public interface UsersApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/users",
+        value = "/users/guest",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
     ResponseEntity<UserSchema> createGuest(
         @Parameter(name = "GuestSchema", description = "", required = true) @Valid @RequestBody GuestSchema guestSchema
+    );
+
+
+    /**
+     * POST /users/admin/moderators : Create a moderator
+     * Create a user - moderator.
+     *
+     * @param userSchema  (required)
+     * @return Successful response to create a moderator. (status code 200)
+     *         or User input error. (status code 400)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "createModerator",
+        summary = "Create a moderator",
+        description = "Create a user - moderator.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to create a moderator.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/users/admin/moderators",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<UserSchema> createModerator(
+        @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
     );
 
 
@@ -333,6 +458,49 @@ public interface UsersApi {
     )
     ResponseEntity<UserResponseSchema> getUserById(
         @Parameter(name = "userId", description = "User entity ID.", required = true, in = ParameterIn.PATH) @PathVariable("userId") Long userId
+    );
+
+
+    /**
+     * GET /users/profile : View the description of the user entity.
+     * View the description of the user entity by its phone number.
+     *
+     * @param phone User phone. (required)
+     * @return Successful response to user search. (status code 200)
+     *         or User input error. (status code 400)
+     *         or The user with the specified phone number was not found. (status code 404)
+     *         or Unexpected error. (status code 500)
+     */
+    @Operation(
+        operationId = "getUserProfile",
+        summary = "View the description of the user entity.",
+        description = "View the description of the user entity by its phone number.",
+        tags = { "System API" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response to user search.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "User input error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "The user with the specified phone number was not found.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "ApiKeyAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/users/profile",
+        produces = { "application/json" }
+    )
+    ResponseEntity<UserSchema> getUserProfile(
+        @NotNull @Parameter(name = "phone", description = "User phone.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "phone", required = true) String phone
     );
 
 }

@@ -14,16 +14,16 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * PhoneNumberRegularSchema
+ * UserProfileSchema
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:44:42.102217+06:00[Asia/Almaty]")
-public class PhoneNumberRegularSchema {
+public class UserProfileSchema {
 
   @JsonProperty("phoneNumber")
   private String phoneNumber;
 
-  public PhoneNumberRegularSchema phoneNumber(String phoneNumber) {
+  public UserProfileSchema phoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
   }
@@ -32,8 +32,8 @@ public class PhoneNumberRegularSchema {
    * Get phoneNumber
    * @return phoneNumber
   */
-  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
-  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Size(min = 5, max = 15) 
+  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getPhoneNumber() {
     return phoneNumber;
   }
@@ -50,8 +50,8 @@ public class PhoneNumberRegularSchema {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PhoneNumberRegularSchema phoneNumberRegularSchema = (PhoneNumberRegularSchema) o;
-    return Objects.equals(this.phoneNumber, phoneNumberRegularSchema.phoneNumber);
+    UserProfileSchema userProfileSchema = (UserProfileSchema) o;
+    return Objects.equals(this.phoneNumber, userProfileSchema.phoneNumber);
   }
 
   @Override
@@ -62,7 +62,7 @@ public class PhoneNumberRegularSchema {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PhoneNumberRegularSchema {\n");
+    sb.append("class UserProfileSchema {\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("}");
     return sb.toString();

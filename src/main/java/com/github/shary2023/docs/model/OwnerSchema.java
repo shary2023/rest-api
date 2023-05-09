@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * OwnerSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-08T20:12:42.845236800+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-09T17:44:42.102217+06:00[Asia/Almaty]")
 public class OwnerSchema {
 
   @JsonProperty("id")
@@ -49,6 +49,12 @@ public class OwnerSchema {
 
   @JsonProperty("residenceAddress")
   private String residenceAddress;
+
+  @JsonProperty("isAddressesMatch")
+  private Boolean isAddressesMatch = true;
+
+  @JsonProperty("isAgreeWithPublicOffer")
+  private Boolean isAgreeWithPublicOffer = false;
 
   @JsonProperty("telegramId")
   private Long telegramId;
@@ -239,6 +245,44 @@ public class OwnerSchema {
     this.residenceAddress = residenceAddress;
   }
 
+  public OwnerSchema isAddressesMatch(Boolean isAddressesMatch) {
+    this.isAddressesMatch = isAddressesMatch;
+    return this;
+  }
+
+  /**
+   * Get isAddressesMatch
+   * @return isAddressesMatch
+  */
+  
+  @Schema(name = "isAddressesMatch", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsAddressesMatch() {
+    return isAddressesMatch;
+  }
+
+  public void setIsAddressesMatch(Boolean isAddressesMatch) {
+    this.isAddressesMatch = isAddressesMatch;
+  }
+
+  public OwnerSchema isAgreeWithPublicOffer(Boolean isAgreeWithPublicOffer) {
+    this.isAgreeWithPublicOffer = isAgreeWithPublicOffer;
+    return this;
+  }
+
+  /**
+   * Get isAgreeWithPublicOffer
+   * @return isAgreeWithPublicOffer
+  */
+  @NotNull 
+  @Schema(name = "isAgreeWithPublicOffer", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Boolean getIsAgreeWithPublicOffer() {
+    return isAgreeWithPublicOffer;
+  }
+
+  public void setIsAgreeWithPublicOffer(Boolean isAgreeWithPublicOffer) {
+    this.isAgreeWithPublicOffer = isAgreeWithPublicOffer;
+  }
+
   public OwnerSchema telegramId(Long telegramId) {
     this.telegramId = telegramId;
     return this;
@@ -373,6 +417,8 @@ public class OwnerSchema {
         Objects.equals(this.phoneNumber, ownerSchema.phoneNumber) &&
         Objects.equals(this.registrationAddress, ownerSchema.registrationAddress) &&
         Objects.equals(this.residenceAddress, ownerSchema.residenceAddress) &&
+        Objects.equals(this.isAddressesMatch, ownerSchema.isAddressesMatch) &&
+        Objects.equals(this.isAgreeWithPublicOffer, ownerSchema.isAgreeWithPublicOffer) &&
         Objects.equals(this.telegramId, ownerSchema.telegramId) &&
         Objects.equals(this.chatId, ownerSchema.chatId) &&
         Objects.equals(this.email, ownerSchema.email) &&
@@ -383,7 +429,7 @@ public class OwnerSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, password, firstName, secondName, givenName, birthday, phoneNumber, registrationAddress, residenceAddress, telegramId, chatId, email, inn, passportNumber, passportSeries);
+    return Objects.hash(id, password, firstName, secondName, givenName, birthday, phoneNumber, registrationAddress, residenceAddress, isAddressesMatch, isAgreeWithPublicOffer, telegramId, chatId, email, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -399,6 +445,8 @@ public class OwnerSchema {
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    registrationAddress: ").append(toIndentedString(registrationAddress)).append("\n");
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
+    sb.append("    isAddressesMatch: ").append(toIndentedString(isAddressesMatch)).append("\n");
+    sb.append("    isAgreeWithPublicOffer: ").append(toIndentedString(isAgreeWithPublicOffer)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
