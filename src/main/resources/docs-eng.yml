@@ -982,7 +982,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSchema'
+                $ref: '#/components/schemas/UserResponseSchema'
         '400':
           description: User input error.
           content:
@@ -1081,7 +1081,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSchema'
+                $ref: '#/components/schemas/UserResponseSchema'
         '400':
           description: User input error.
           content:
@@ -1114,7 +1114,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSchema'
+                $ref: '#/components/schemas/UserResponseSchema'
         '400':
           description: User input error.
           content:
@@ -2104,7 +2104,7 @@ components:
         id:
           type: integer
           format: int64
-        name:
+        firstName:
           type: string
         email:
           type: string

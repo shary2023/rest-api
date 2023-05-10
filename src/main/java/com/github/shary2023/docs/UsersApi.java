@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T20:27:03.046386100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T21:17:16.102639400+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "users", description = "Methods available only to the administrator")
 public interface UsersApi {
@@ -150,7 +150,7 @@ public interface UsersApi {
         tags = { "System API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to create an admin.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
@@ -169,7 +169,7 @@ public interface UsersApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<UserSchema> createAdmin(
+    ResponseEntity<UserResponseSchema> createAdmin(
         @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
     );
 
@@ -190,7 +190,7 @@ public interface UsersApi {
         tags = { "Public API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to create a guest.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
@@ -209,7 +209,7 @@ public interface UsersApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<UserSchema> createGuest(
+    ResponseEntity<UserResponseSchema> createGuest(
         @Parameter(name = "GuestSchema", description = "", required = true) @Valid @RequestBody GuestSchema guestSchema
     );
 
@@ -230,7 +230,7 @@ public interface UsersApi {
         tags = { "System API" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to create a moderator.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserSchema.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseSchema.class))
             }),
             @ApiResponse(responseCode = "400", description = "User input error.", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = BaseResponse.class))
@@ -249,7 +249,7 @@ public interface UsersApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<UserSchema> createModerator(
+    ResponseEntity<UserResponseSchema> createModerator(
         @Parameter(name = "UserSchema", description = "", required = true) @Valid @RequestBody UserSchema userSchema
     );
 

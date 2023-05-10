@@ -17,14 +17,14 @@ import javax.annotation.Generated;
  * GuestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T20:27:03.046386100+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T21:17:16.102639400+06:00[Asia/Almaty]")
 public class GuestSchema {
 
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("name")
-  private String name;
+  @JsonProperty("firstName")
+  private String firstName;
 
   @JsonProperty("email")
   private String email;
@@ -63,23 +63,23 @@ public class GuestSchema {
     this.id = id;
   }
 
-  public GuestSchema name(String name) {
-    this.name = name;
+  public GuestSchema firstName(String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get firstName
+   * @return firstName
   */
   
-  @Schema(name = "name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getName() {
-    return name;
+  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
   public GuestSchema email(String email) {
@@ -206,7 +206,7 @@ public class GuestSchema {
     }
     GuestSchema guestSchema = (GuestSchema) o;
     return Objects.equals(this.id, guestSchema.id) &&
-        Objects.equals(this.name, guestSchema.name) &&
+        Objects.equals(this.firstName, guestSchema.firstName) &&
         Objects.equals(this.email, guestSchema.email) &&
         Objects.equals(this.phoneNumber, guestSchema.phoneNumber) &&
         Objects.equals(this.password, guestSchema.password) &&
@@ -217,7 +217,7 @@ public class GuestSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, email, phoneNumber, password, inn, passportNumber, passportSeries);
+    return Objects.hash(id, firstName, email, phoneNumber, password, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -225,7 +225,7 @@ public class GuestSchema {
     StringBuilder sb = new StringBuilder();
     sb.append("class GuestSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
