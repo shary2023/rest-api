@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * GuestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T19:04:42.873905700+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T20:27:03.046386100+06:00[Asia/Almaty]")
 public class GuestSchema {
 
   @JsonProperty("id")
@@ -31,6 +31,9 @@ public class GuestSchema {
 
   @JsonProperty("phoneNumber")
   private String phoneNumber;
+
+  @JsonProperty("password")
+  private String password;
 
   @JsonProperty("inn")
   private String inn;
@@ -117,6 +120,25 @@ public class GuestSchema {
     this.phoneNumber = phoneNumber;
   }
 
+  public GuestSchema password(String password) {
+    this.password = password;
+    return this;
+  }
+
+  /**
+   * Get password
+   * @return password
+  */
+  @NotNull 
+  @Schema(name = "password", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   public GuestSchema inn(String inn) {
     this.inn = inn;
     return this;
@@ -187,6 +209,7 @@ public class GuestSchema {
         Objects.equals(this.name, guestSchema.name) &&
         Objects.equals(this.email, guestSchema.email) &&
         Objects.equals(this.phoneNumber, guestSchema.phoneNumber) &&
+        Objects.equals(this.password, guestSchema.password) &&
         Objects.equals(this.inn, guestSchema.inn) &&
         Objects.equals(this.passportNumber, guestSchema.passportNumber) &&
         Objects.equals(this.passportSeries, guestSchema.passportSeries);
@@ -194,7 +217,7 @@ public class GuestSchema {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, email, phoneNumber, inn, passportNumber, passportSeries);
+    return Objects.hash(id, name, email, phoneNumber, password, inn, passportNumber, passportSeries);
   }
 
   @Override
@@ -205,6 +228,7 @@ public class GuestSchema {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");

@@ -2099,6 +2099,7 @@ components:
       type: object
       required:
         - phoneNumber
+        - password
       properties:
         id:
           type: integer
@@ -2112,6 +2113,9 @@ components:
           type: string
           minLength: 5
           maxLength: 15
+        password:
+          type: string
+          format: password
 
     RenterSchema:
       allOf:
