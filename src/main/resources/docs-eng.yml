@@ -1240,6 +1240,115 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
+  /roles:
+    get:
+      tags:
+        - System API
+      operationId: getAllRoles
+      summary: Get all roles.
+      description: Get all roles in db.
+      responses:
+        '200':
+          description: Successful response to a request to get all roles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: Role with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+    post:
+      tags:
+        - System API
+      operationId: createRole
+      summary: Create role.
+      description: Create role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleSchema'
+      responses:
+        '200':
+          description: Successful response to create a role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
+  /roles/{roleId}:
+    parameters:
+      - name: roleId
+        in: path
+        required: true
+        description: Role entity ID (role).
+        schema:
+          type: integer
+          format: int64
+
+    get:
+      tags:
+        - System API
+      operationId: getRoleById
+      summary: Get role.
+      description: Get role by id.
+      responses:
+        '200':
+          description: Successful response to get role by id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleSchema'
+        '400':
+          description: User input error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '404':
+          description: The role with the specified ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+        '500':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: 'base.yml#/components/schemas/BaseResponse'
+
   /orders:
     get:
       tags:
@@ -1496,6 +1605,7 @@ paths:
             application/json:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
+
 
 
   # Insurance Controller
@@ -1840,16 +1950,29 @@ components:
   schemas:
 
     # models:
-    UserProfileSchema:
-      allOf:
-        - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+    # UserProfileSchema:
+    #   allOf:
+    #     - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
+    #   type: object
+    #   required:
+    #     - phoneNumber
+    #   properties:
+    #     phoneNumber:
+    #       type: string
+    #       minLength: 5
+    #       maxLength: 15
+
+    RoleSchema:
       type: object
       required:
-        - phoneNumber
+        - name
       properties:
-        phoneNumber:
+        id:
+          type: integer
+          format: int64
+        name:
           type: string
-          minLength: 5
+          minLength: 2
           maxLength: 15
 
     UserSchema:
