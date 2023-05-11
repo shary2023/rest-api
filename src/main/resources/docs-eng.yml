@@ -1986,13 +1986,6 @@ components:
         id:
           type: integer
           format: int64
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
-        email:
-          type: string
-          format: 'email'
         password:
           type: string
           format: password
@@ -2074,10 +2067,6 @@ components:
         renter:
           type: boolean
           default: false
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         isAgreeWithFullDeposit:
           type: boolean
           default: false
@@ -2106,13 +2095,6 @@ components:
           format: int64
         firstName:
           type: string
-        email:
-          type: string
-          format: 'email'
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         password:
           type: string
           format: password
@@ -2149,10 +2131,6 @@ components:
         givenName:
           type: string
           maxLength: 50
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         isAgreeWithPublicOffer:
           type: boolean
           default: false
@@ -2210,10 +2188,6 @@ components:
         birthday:
           type: string
           format: 'date'
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         registrationAddress:
           type: string
         residenceAddress:

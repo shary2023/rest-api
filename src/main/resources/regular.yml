@@ -7,25 +7,24 @@ paths: {}
 
 components:
   schemas:
-    FullRegularSchema:
+    FullRegularSchema:                                                      # - All Regular
       allOf:
-        - $ref: '#/components/schemas/EmailRegularSchema'
-        - $ref: '#/components/schemas/InnRegularSchema'
-        - $ref: '#/components/schemas/PassportNumberRegularSchema'
-        - $ref: '#/components/schemas/PassportSeriesRegularSchema'
-        - $ref: '#/components/schemas/PhoneNumberRegularSchema'
+        - $ref: '#/components/schemas/EmailRegularSchema'                   # Email
+        - $ref: '#/components/schemas/InnRegularSchema'                     # INN
+        - $ref: '#/components/schemas/PhoneNumberRegularSchema'             # Phone number
+        - $ref: '#/components/schemas/PassportRegularSchema'                # Passport
 
       type: object
 
-    PassportRegularSchema:
+    PassportRegularSchema:                                                  # - Passport
       allOf:
-        - $ref: '#/components/schemas/PassportNumberRegularSchema'
-        - $ref: '#/components/schemas/PassportSeriesRegularSchema'
+        - $ref: '#/components/schemas/PassportNumberRegularSchema'          # Passport number
+        - $ref: '#/components/schemas/PassportSeriesRegularSchema'          # Passport series
 
       type: object
 
 
-    EmailRegularSchema:
+    EmailRegularSchema:                                                     # Email
       type: object
       properties:
         email:
@@ -34,7 +33,7 @@ components:
           pattern: '/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i'
           example: "user@example.com"
 
-    InnRegularSchema:
+    InnRegularSchema:                                                       # INN
       type: object
       properties:
         inn:
@@ -42,7 +41,7 @@ components:
           pattern: '^(([0-9]{12})|([0-9]{10}))?$'
           example: "123453488322"
 
-    PassportNumberRegularSchema:
+    PassportNumberRegularSchema:                                            # Passport number
       type: object
       properties:
         passportNumber:
@@ -50,7 +49,7 @@ components:
           pattern: '^([0-9]{6})?$'
           example: '454322'
 
-    PassportSeriesRegularSchema:
+    PassportSeriesRegularSchema:                                            # Passport series
       type: object
       properties:
         passportSeries:
@@ -58,10 +57,12 @@ components:
           pattern: '^([0-9]{2}\s{1}[0-9]{2})?$'
           example: '6282'
 
-    PhoneNumberRegularSchema:
+    PhoneNumberRegularSchema:                                               # Phone number
       type: object
       properties:
         phoneNumber:
           type: string
+          minLength: 5
+          maxLength: 15
           pattern: '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'
           example: "+79008883322"
