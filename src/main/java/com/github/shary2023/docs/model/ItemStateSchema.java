@@ -14,32 +14,32 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * EmailRegularSchema
+ * ItemStateSchema
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
-public class EmailRegularSchema {
+public class ItemStateSchema {
 
-  @JsonProperty("email")
-  private String email;
+  @JsonProperty("description")
+  private String description = "NEW";
 
-  public EmailRegularSchema email(String email) {
-    this.email = email;
+  public ItemStateSchema description(String description) {
+    this.description = description;
     return this;
   }
 
   /**
-   * Get email
-   * @return email
+   * Get description
+   * @return description
   */
-  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") @Email
-  @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getEmail() {
-    return email;
+  @NotNull 
+  @Schema(name = "description", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getDescription() {
+    return description;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   @Override
@@ -50,20 +50,20 @@ public class EmailRegularSchema {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmailRegularSchema emailRegularSchema = (EmailRegularSchema) o;
-    return Objects.equals(this.email, emailRegularSchema.email);
+    ItemStateSchema itemStateSchema = (ItemStateSchema) o;
+    return Objects.equals(this.description, itemStateSchema.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email);
+    return Objects.hash(description);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmailRegularSchema {\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("class ItemStateSchema {\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

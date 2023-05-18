@@ -753,22 +753,22 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /items/users/{ownerId}:
+  /items/users:
     parameters:
-      - name: ownerId
-        in: path
+      - name: ownerPhone
+        in: query
         required: true
-        description: Id of the user(owner) for which we get all items.
+        description: Phone of the user(owner) for which we get all items.
         schema:
           type: integer
           format: int64
 
     get:
       tags:
-        - Public API
-      operationId: getItemsRentedForUserByUserId
+        - System API
+      operationId: getItemsRentedForUserByUserPhone
       summary: Get items rented for user.
-      description: Get all items rented for user(owner) by user id in our service.
+      description: Get all items rented for user(owner) by user phone in our service.
       responses:
         '200':
           description: Successful response to a request to get all items for rent for a user.
@@ -785,7 +785,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
         '404':
-          description: The user with the specified ID was not found.
+          description: The user with the specified phone was not found.
           content:
             application/json:
               schema:
@@ -797,12 +797,12 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
 
-  /items/users/{renterId}/rent:
+  /items/users/rent:
     parameters:
-      - name: renterId
-        in: path
+      - name: renterPhone
+        in: query
         required: true
-        description: Id of the user(renter) for which we get all items.
+        description: Phone of the user(renter) for which we get all items.
         schema:
           type: integer
           format: int64
@@ -810,9 +810,9 @@ paths:
     get:
       tags:
         - System API
-      operationId: getRentedItemsForUserByUserId
+      operationId: getRentedItemsForUserByUserPhone
       summary: Get rent items for user.
-      description: Get all rented items for user(renter) by user id in our service.
+      description: Get all rented items for user(renter) by user phone in our service.
       responses:
         '200':
           description: Successful response to a request to get all rented items for a user.
@@ -829,7 +829,7 @@ paths:
               schema:
                 $ref: 'base.yml#/components/schemas/BaseResponse'
         '404':
-          description: The user with the specified ID was not found.
+          description: The user with the specified phone was not found.
           content:
             application/json:
               schema:
@@ -2272,7 +2272,7 @@ components:
         - category
         - subcategory
         - price
-        - owner
+        - ownerPhone
 
       properties:
         id:
@@ -2293,7 +2293,7 @@ components:
         verified:
           type: boolean
           default: false
-        onLease:
+        isExtendLease:
           type: boolean
           default: false
         category:
@@ -2302,12 +2302,14 @@ components:
           $ref: '#/components/schemas/SubcategorySchema'
         price:
           type: string
-        renter:
-          $ref: '#/components/schemas/RenterSchema'
-        owner:
-          $ref: '#/components/schemas/OwnerSchema'
+        renterPhone:
+          type: string
+        ownerPhone:
+          type: string
         characteristics:
           $ref: '#/components/schemas/CharacteristicsSchema'
+        data:
+          $ref: '#/components/schemas/ItemDataForRentSchema'
 
     #    ItemResponseSchema:
     #      type: object
@@ -2389,17 +2391,34 @@ components:
       required:
         - status
         - items
-        - renter
+        - renterPhone
         - creation
         - active
+        - isAgreeWithFullDeposit
       properties:
         id:
           type: integer
           format: int64
         status:
           type: string
-        renter:
-          $ref: '#/components/schemas/RenterSchema'
+        fullPrice:
+          type: string
+        rentStart:
+          type: string
+          format: 'date-time'
+        isRenterNew:
+          type: boolean
+          default: false
+        isPrepaymentGet:
+          type: boolean
+          default: false
+        isNeedCourier:
+          type: boolean
+          default: false
+        renterPhone:
+          type: string
+          minLength: 5
+          maxLength: 15
         creation:
           type: string
           format: 'date-time'
@@ -2412,6 +2431,11 @@ components:
         active:
           type: boolean
           default: true
+        isAgreeWithFullDeposit:
+          type: boolean
+          default: false
+        delivery:
+          $ref: '#/components/schemas/DeliverySchema'
         items:
           type: array
           items:
@@ -2441,6 +2465,69 @@ components:
         weight:
           type: string
 
+    DeliverySchema:
+      type: object
+      properties:
+        address:
+          type: string
+        deliveryData:
+          $ref: '#/components/schemas/DeliveryDataSchema'
+        dataTime:
+          type: string
+          format: 'date-time'
+        isPickUp:
+          type: boolean
+          default: false
+
+    DeliveryDataSchema:
+      type: object
+      properties:
+        addressFrom:
+          type: string
+        addressTo:
+          type: string
+        openingHours:
+          type: string
+        phone:
+          type: string
+
+    ItemCompleteSchema:
+      type: object
+      properties:
+        complication:
+          type: string
+
+    ItemDataForRentSchema:
+      type: object
+      properties:
+        onLease:
+          type: boolean
+          default: false
+        isBooked:
+          type: boolean
+          default: false
+        isNeedInsurance:
+          type: boolean
+          default: false
+        onLeaseDate:
+          type: string
+          format: 'date-time'
+        isBookedDate:
+          type: string
+          format: 'date-time'
+        complete:
+          $ref: '#/components/schemas/ItemCompleteSchema'
+        state:
+          $ref: '#/components/schemas/ItemStateSchema'
+
+    ItemStateSchema:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          default: "NEW"
 
     # Insurance Model:
 

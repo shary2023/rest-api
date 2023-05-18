@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.github.shary2023.docs.model.CategorySchema;
 import com.github.shary2023.docs.model.CharacteristicsSchema;
-import com.github.shary2023.docs.model.OwnerSchema;
-import com.github.shary2023.docs.model.RenterSchema;
+import com.github.shary2023.docs.model.ItemDataForRentSchema;
 import com.github.shary2023.docs.model.SubcategorySchema;
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -23,7 +22,7 @@ import javax.annotation.Generated;
  * ItemSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T21:17:16.102639400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
 public class ItemSchema {
 
   @JsonProperty("id")
@@ -47,8 +46,8 @@ public class ItemSchema {
   @JsonProperty("verified")
   private Boolean verified = false;
 
-  @JsonProperty("onLease")
-  private Boolean onLease = false;
+  @JsonProperty("isExtendLease")
+  private Boolean isExtendLease = false;
 
   @JsonProperty("category")
   private CategorySchema category;
@@ -59,14 +58,17 @@ public class ItemSchema {
   @JsonProperty("price")
   private String price;
 
-  @JsonProperty("renter")
-  private RenterSchema renter;
+  @JsonProperty("renterPhone")
+  private String renterPhone;
 
-  @JsonProperty("owner")
-  private OwnerSchema owner;
+  @JsonProperty("ownerPhone")
+  private String ownerPhone;
 
   @JsonProperty("characteristics")
   private CharacteristicsSchema characteristics;
+
+  @JsonProperty("data")
+  private ItemDataForRentSchema data;
 
   public ItemSchema id(Long id) {
     this.id = id;
@@ -201,23 +203,23 @@ public class ItemSchema {
     this.verified = verified;
   }
 
-  public ItemSchema onLease(Boolean onLease) {
-    this.onLease = onLease;
+  public ItemSchema isExtendLease(Boolean isExtendLease) {
+    this.isExtendLease = isExtendLease;
     return this;
   }
 
   /**
-   * Get onLease
-   * @return onLease
+   * Get isExtendLease
+   * @return isExtendLease
   */
-  @NotNull 
-  @Schema(name = "onLease", requiredMode = Schema.RequiredMode.REQUIRED)
-  public Boolean getOnLease() {
-    return onLease;
+  
+  @Schema(name = "isExtendLease", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsExtendLease() {
+    return isExtendLease;
   }
 
-  public void setOnLease(Boolean onLease) {
-    this.onLease = onLease;
+  public void setIsExtendLease(Boolean isExtendLease) {
+    this.isExtendLease = isExtendLease;
   }
 
   public ItemSchema category(CategorySchema category) {
@@ -277,42 +279,42 @@ public class ItemSchema {
     this.price = price;
   }
 
-  public ItemSchema renter(RenterSchema renter) {
-    this.renter = renter;
+  public ItemSchema renterPhone(String renterPhone) {
+    this.renterPhone = renterPhone;
     return this;
   }
 
   /**
-   * Get renter
-   * @return renter
+   * Get renterPhone
+   * @return renterPhone
   */
-  @Valid 
-  @Schema(name = "renter", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public RenterSchema getRenter() {
-    return renter;
+  
+  @Schema(name = "renterPhone", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getRenterPhone() {
+    return renterPhone;
   }
 
-  public void setRenter(RenterSchema renter) {
-    this.renter = renter;
+  public void setRenterPhone(String renterPhone) {
+    this.renterPhone = renterPhone;
   }
 
-  public ItemSchema owner(OwnerSchema owner) {
-    this.owner = owner;
+  public ItemSchema ownerPhone(String ownerPhone) {
+    this.ownerPhone = ownerPhone;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get ownerPhone
+   * @return ownerPhone
   */
-  @NotNull @Valid 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  public OwnerSchema getOwner() {
-    return owner;
+  @NotNull 
+  @Schema(name = "ownerPhone", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getOwnerPhone() {
+    return ownerPhone;
   }
 
-  public void setOwner(OwnerSchema owner) {
-    this.owner = owner;
+  public void setOwnerPhone(String ownerPhone) {
+    this.ownerPhone = ownerPhone;
   }
 
   public ItemSchema characteristics(CharacteristicsSchema characteristics) {
@@ -334,6 +336,25 @@ public class ItemSchema {
     this.characteristics = characteristics;
   }
 
+  public ItemSchema data(ItemDataForRentSchema data) {
+    this.data = data;
+    return this;
+  }
+
+  /**
+   * Get data
+   * @return data
+  */
+  @Valid 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public ItemDataForRentSchema getData() {
+    return data;
+  }
+
+  public void setData(ItemDataForRentSchema data) {
+    this.data = data;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -350,18 +371,19 @@ public class ItemSchema {
         Objects.equals(this.video, itemSchema.video) &&
         Objects.equals(this.description, itemSchema.description) &&
         Objects.equals(this.verified, itemSchema.verified) &&
-        Objects.equals(this.onLease, itemSchema.onLease) &&
+        Objects.equals(this.isExtendLease, itemSchema.isExtendLease) &&
         Objects.equals(this.category, itemSchema.category) &&
         Objects.equals(this.subcategory, itemSchema.subcategory) &&
         Objects.equals(this.price, itemSchema.price) &&
-        Objects.equals(this.renter, itemSchema.renter) &&
-        Objects.equals(this.owner, itemSchema.owner) &&
-        Objects.equals(this.characteristics, itemSchema.characteristics);
+        Objects.equals(this.renterPhone, itemSchema.renterPhone) &&
+        Objects.equals(this.ownerPhone, itemSchema.ownerPhone) &&
+        Objects.equals(this.characteristics, itemSchema.characteristics) &&
+        Objects.equals(this.data, itemSchema.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, serialNumber, photo, video, description, verified, onLease, category, subcategory, price, renter, owner, characteristics);
+    return Objects.hash(id, name, serialNumber, photo, video, description, verified, isExtendLease, category, subcategory, price, renterPhone, ownerPhone, characteristics, data);
   }
 
   @Override
@@ -375,13 +397,14 @@ public class ItemSchema {
     sb.append("    video: ").append(toIndentedString(video)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
-    sb.append("    onLease: ").append(toIndentedString(onLease)).append("\n");
+    sb.append("    isExtendLease: ").append(toIndentedString(isExtendLease)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    subcategory: ").append(toIndentedString(subcategory)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    renterPhone: ").append(toIndentedString(renterPhone)).append("\n");
+    sb.append("    ownerPhone: ").append(toIndentedString(ownerPhone)).append("\n");
     sb.append("    characteristics: ").append(toIndentedString(characteristics)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

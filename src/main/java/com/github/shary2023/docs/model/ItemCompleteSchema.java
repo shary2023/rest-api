@@ -14,32 +14,32 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * EmailRegularSchema
+ * ItemCompleteSchema
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
-public class EmailRegularSchema {
+public class ItemCompleteSchema {
 
-  @JsonProperty("email")
-  private String email;
+  @JsonProperty("complication")
+  private String complication;
 
-  public EmailRegularSchema email(String email) {
-    this.email = email;
+  public ItemCompleteSchema complication(String complication) {
+    this.complication = complication;
     return this;
   }
 
   /**
-   * Get email
-   * @return email
+   * Get complication
+   * @return complication
   */
-  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") @Email
-  @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getEmail() {
-    return email;
+  
+  @Schema(name = "complication", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getComplication() {
+    return complication;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setComplication(String complication) {
+    this.complication = complication;
   }
 
   @Override
@@ -50,20 +50,20 @@ public class EmailRegularSchema {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmailRegularSchema emailRegularSchema = (EmailRegularSchema) o;
-    return Objects.equals(this.email, emailRegularSchema.email);
+    ItemCompleteSchema itemCompleteSchema = (ItemCompleteSchema) o;
+    return Objects.equals(this.complication, itemCompleteSchema.complication);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email);
+    return Objects.hash(complication);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmailRegularSchema {\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("class ItemCompleteSchema {\n");
+    sb.append("    complication: ").append(toIndentedString(complication)).append("\n");
     sb.append("}");
     return sb.toString();
   }

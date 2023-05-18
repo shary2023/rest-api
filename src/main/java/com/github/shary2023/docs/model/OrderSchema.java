@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.github.shary2023.docs.model.DeliverySchema;
 import com.github.shary2023.docs.model.ItemSchema;
-import com.github.shary2023.docs.model.RenterSchema;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  * OrderSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-10T21:17:16.102639400+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
 public class OrderSchema {
 
   @JsonProperty("id")
@@ -32,8 +32,24 @@ public class OrderSchema {
   @JsonProperty("status")
   private String status;
 
-  @JsonProperty("renter")
-  private RenterSchema renter;
+  @JsonProperty("fullPrice")
+  private String fullPrice;
+
+  @JsonProperty("rentStart")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime rentStart;
+
+  @JsonProperty("isRenterNew")
+  private Boolean isRenterNew = false;
+
+  @JsonProperty("isPrepaymentGet")
+  private Boolean isPrepaymentGet = false;
+
+  @JsonProperty("isNeedCourier")
+  private Boolean isNeedCourier = false;
+
+  @JsonProperty("renterPhone")
+  private String renterPhone;
 
   @JsonProperty("creation")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -49,6 +65,12 @@ public class OrderSchema {
 
   @JsonProperty("active")
   private Boolean active = true;
+
+  @JsonProperty("isAgreeWithFullDeposit")
+  private Boolean isAgreeWithFullDeposit = false;
+
+  @JsonProperty("delivery")
+  private DeliverySchema delivery;
 
   @JsonProperty("items")
   @Valid
@@ -92,23 +114,118 @@ public class OrderSchema {
     this.status = status;
   }
 
-  public OrderSchema renter(RenterSchema renter) {
-    this.renter = renter;
+  public OrderSchema fullPrice(String fullPrice) {
+    this.fullPrice = fullPrice;
     return this;
   }
 
   /**
-   * Get renter
-   * @return renter
+   * Get fullPrice
+   * @return fullPrice
   */
-  @NotNull @Valid 
-  @Schema(name = "renter", requiredMode = Schema.RequiredMode.REQUIRED)
-  public RenterSchema getRenter() {
-    return renter;
+  
+  @Schema(name = "fullPrice", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFullPrice() {
+    return fullPrice;
   }
 
-  public void setRenter(RenterSchema renter) {
-    this.renter = renter;
+  public void setFullPrice(String fullPrice) {
+    this.fullPrice = fullPrice;
+  }
+
+  public OrderSchema rentStart(OffsetDateTime rentStart) {
+    this.rentStart = rentStart;
+    return this;
+  }
+
+  /**
+   * Get rentStart
+   * @return rentStart
+  */
+  @Valid 
+  @Schema(name = "rentStart", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public OffsetDateTime getRentStart() {
+    return rentStart;
+  }
+
+  public void setRentStart(OffsetDateTime rentStart) {
+    this.rentStart = rentStart;
+  }
+
+  public OrderSchema isRenterNew(Boolean isRenterNew) {
+    this.isRenterNew = isRenterNew;
+    return this;
+  }
+
+  /**
+   * Get isRenterNew
+   * @return isRenterNew
+  */
+  
+  @Schema(name = "isRenterNew", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsRenterNew() {
+    return isRenterNew;
+  }
+
+  public void setIsRenterNew(Boolean isRenterNew) {
+    this.isRenterNew = isRenterNew;
+  }
+
+  public OrderSchema isPrepaymentGet(Boolean isPrepaymentGet) {
+    this.isPrepaymentGet = isPrepaymentGet;
+    return this;
+  }
+
+  /**
+   * Get isPrepaymentGet
+   * @return isPrepaymentGet
+  */
+  
+  @Schema(name = "isPrepaymentGet", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsPrepaymentGet() {
+    return isPrepaymentGet;
+  }
+
+  public void setIsPrepaymentGet(Boolean isPrepaymentGet) {
+    this.isPrepaymentGet = isPrepaymentGet;
+  }
+
+  public OrderSchema isNeedCourier(Boolean isNeedCourier) {
+    this.isNeedCourier = isNeedCourier;
+    return this;
+  }
+
+  /**
+   * Get isNeedCourier
+   * @return isNeedCourier
+  */
+  
+  @Schema(name = "isNeedCourier", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public Boolean getIsNeedCourier() {
+    return isNeedCourier;
+  }
+
+  public void setIsNeedCourier(Boolean isNeedCourier) {
+    this.isNeedCourier = isNeedCourier;
+  }
+
+  public OrderSchema renterPhone(String renterPhone) {
+    this.renterPhone = renterPhone;
+    return this;
+  }
+
+  /**
+   * Get renterPhone
+   * @return renterPhone
+  */
+  @NotNull @Size(min = 5, max = 15) 
+  @Schema(name = "renterPhone", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getRenterPhone() {
+    return renterPhone;
+  }
+
+  public void setRenterPhone(String renterPhone) {
+    this.renterPhone = renterPhone;
   }
 
   public OrderSchema creation(OffsetDateTime creation) {
@@ -187,6 +304,44 @@ public class OrderSchema {
     this.active = active;
   }
 
+  public OrderSchema isAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+    return this;
+  }
+
+  /**
+   * Get isAgreeWithFullDeposit
+   * @return isAgreeWithFullDeposit
+  */
+  @NotNull 
+  @Schema(name = "isAgreeWithFullDeposit", requiredMode = Schema.RequiredMode.REQUIRED)
+  public Boolean getIsAgreeWithFullDeposit() {
+    return isAgreeWithFullDeposit;
+  }
+
+  public void setIsAgreeWithFullDeposit(Boolean isAgreeWithFullDeposit) {
+    this.isAgreeWithFullDeposit = isAgreeWithFullDeposit;
+  }
+
+  public OrderSchema delivery(DeliverySchema delivery) {
+    this.delivery = delivery;
+    return this;
+  }
+
+  /**
+   * Get delivery
+   * @return delivery
+  */
+  @Valid 
+  @Schema(name = "delivery", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public DeliverySchema getDelivery() {
+    return delivery;
+  }
+
+  public void setDelivery(DeliverySchema delivery) {
+    this.delivery = delivery;
+  }
+
   public OrderSchema items(List<ItemSchema> items) {
     this.items = items;
     return this;
@@ -225,17 +380,24 @@ public class OrderSchema {
     OrderSchema orderSchema = (OrderSchema) o;
     return Objects.equals(this.id, orderSchema.id) &&
         Objects.equals(this.status, orderSchema.status) &&
-        Objects.equals(this.renter, orderSchema.renter) &&
+        Objects.equals(this.fullPrice, orderSchema.fullPrice) &&
+        Objects.equals(this.rentStart, orderSchema.rentStart) &&
+        Objects.equals(this.isRenterNew, orderSchema.isRenterNew) &&
+        Objects.equals(this.isPrepaymentGet, orderSchema.isPrepaymentGet) &&
+        Objects.equals(this.isNeedCourier, orderSchema.isNeedCourier) &&
+        Objects.equals(this.renterPhone, orderSchema.renterPhone) &&
         Objects.equals(this.creation, orderSchema.creation) &&
         Objects.equals(this.updated, orderSchema.updated) &&
         Objects.equals(this.rentEnd, orderSchema.rentEnd) &&
         Objects.equals(this.active, orderSchema.active) &&
+        Objects.equals(this.isAgreeWithFullDeposit, orderSchema.isAgreeWithFullDeposit) &&
+        Objects.equals(this.delivery, orderSchema.delivery) &&
         Objects.equals(this.items, orderSchema.items);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, status, renter, creation, updated, rentEnd, active, items);
+    return Objects.hash(id, status, fullPrice, rentStart, isRenterNew, isPrepaymentGet, isNeedCourier, renterPhone, creation, updated, rentEnd, active, isAgreeWithFullDeposit, delivery, items);
   }
 
   @Override
@@ -244,11 +406,18 @@ public class OrderSchema {
     sb.append("class OrderSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
+    sb.append("    fullPrice: ").append(toIndentedString(fullPrice)).append("\n");
+    sb.append("    rentStart: ").append(toIndentedString(rentStart)).append("\n");
+    sb.append("    isRenterNew: ").append(toIndentedString(isRenterNew)).append("\n");
+    sb.append("    isPrepaymentGet: ").append(toIndentedString(isPrepaymentGet)).append("\n");
+    sb.append("    isNeedCourier: ").append(toIndentedString(isNeedCourier)).append("\n");
+    sb.append("    renterPhone: ").append(toIndentedString(renterPhone)).append("\n");
     sb.append("    creation: ").append(toIndentedString(creation)).append("\n");
     sb.append("    updated: ").append(toIndentedString(updated)).append("\n");
     sb.append("    rentEnd: ").append(toIndentedString(rentEnd)).append("\n");
     sb.append("    active: ").append(toIndentedString(active)).append("\n");
+    sb.append("    isAgreeWithFullDeposit: ").append(toIndentedString(isAgreeWithFullDeposit)).append("\n");
+    sb.append("    delivery: ").append(toIndentedString(delivery)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("}");
     return sb.toString();
