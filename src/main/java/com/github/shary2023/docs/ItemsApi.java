@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T19:02:55.410103200+06:00[Asia/Almaty]")
 @Validated
 @Tag(name = "items", description = "Methods available only to the administrator")
 public interface ItemsApi {
@@ -331,7 +331,7 @@ public interface ItemsApi {
         produces = { "application/json" }
     )
     ResponseEntity<List<ItemSchema>> getItemsRentedForUserByUserPhone(
-        @NotNull @Parameter(name = "ownerPhone", description = "Phone of the user(owner) for which we get all items.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerPhone", required = true) Long ownerPhone
+        @NotNull @Parameter(name = "ownerPhone", description = "Phone of the user(owner) for which we get all items.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "ownerPhone", required = true) String ownerPhone
     );
 
 
@@ -374,7 +374,7 @@ public interface ItemsApi {
         produces = { "application/json" }
     )
     ResponseEntity<List<ItemSchema>> getRentedItemsForUserByUserPhone(
-        @NotNull @Parameter(name = "renterPhone", description = "Phone of the user(renter) for which we get all items.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "renterPhone", required = true) Long renterPhone
+        @NotNull @Parameter(name = "renterPhone", description = "Phone of the user(renter) for which we get all items.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "renterPhone", required = true) String renterPhone
     );
 
 

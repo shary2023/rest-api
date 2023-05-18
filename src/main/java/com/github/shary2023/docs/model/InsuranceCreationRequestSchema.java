@@ -24,7 +24,7 @@ import javax.annotation.Generated;
  * InsuranceCreationRequestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T18:28:26.671559500+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T19:02:55.410103200+06:00[Asia/Almaty]")
 public class InsuranceCreationRequestSchema {
 
   @JsonProperty("ends_at")

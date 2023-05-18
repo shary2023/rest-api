@@ -760,8 +760,7 @@ paths:
         required: true
         description: Phone of the user(owner) for which we get all items.
         schema:
-          type: integer
-          format: int64
+          type: string
 
     get:
       tags:
@@ -804,8 +803,7 @@ paths:
         required: true
         description: Phone of the user(renter) for which we get all items.
         schema:
-          type: integer
-          format: int64
+          type: string
 
     get:
       tags:
