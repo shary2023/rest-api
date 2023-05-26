@@ -28,7 +28,7 @@ import javax.annotation.Generated;
  * InsuranceCreationResponseSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T22:35:15.904712900+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
 public class InsuranceCreationResponseSchema implements GetLease200Response {
 
   @JsonProperty("coverage")
