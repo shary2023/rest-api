@@ -17,29 +17,31 @@ import javax.annotation.Generated;
  * GivenNameRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class GivenNameRegularSchema {
 
-  @JsonProperty("secondName")
-  private String secondName;
+  @JsonProperty("givenName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(max = 50)
+  private String givenName;
 
-  public GivenNameRegularSchema secondName(String secondName) {
-    this.secondName = secondName;
+  public GivenNameRegularSchema givenName(String givenName) {
+    this.givenName = givenName;
     return this;
   }
 
   /**
-   * Get secondName
-   * @return secondName
+   * Get givenName
+   * @return givenName
   */
-  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{0,50}$") 
-  @Schema(name = "secondName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getSecondName() {
-    return secondName;
+  
+  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getGivenName() {
+    return givenName;
   }
 
-  public void setSecondName(String secondName) {
-    this.secondName = secondName;
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
   }
 
   @Override
@@ -51,19 +53,19 @@ public class GivenNameRegularSchema {
       return false;
     }
     GivenNameRegularSchema givenNameRegularSchema = (GivenNameRegularSchema) o;
-    return Objects.equals(this.secondName, givenNameRegularSchema.secondName);
+    return Objects.equals(this.givenName, givenNameRegularSchema.givenName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(secondName);
+    return Objects.hash(givenName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class GivenNameRegularSchema {\n");
-    sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
+    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

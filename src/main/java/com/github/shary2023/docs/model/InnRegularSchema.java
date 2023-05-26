@@ -17,10 +17,12 @@ import javax.annotation.Generated;
  * InnRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class InnRegularSchema {
 
   @JsonProperty("inn")
+  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$")
+  @NotBlank(message = "INN should not be empty")
   private String inn;
 
   public InnRegularSchema inn(String inn) {
@@ -32,7 +34,7 @@ public class InnRegularSchema {
    * Get inn
    * @return inn
   */
-  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$") 
+  
   @Schema(name = "inn", example = "123453488322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getInn() {
     return inn;

@@ -17,10 +17,13 @@ import javax.annotation.Generated;
  * EmailRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class EmailRegularSchema {
 
   @JsonProperty("email")
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i")
+  @Email
+  @NotBlank(message = "Email should not be empty")
   private String email;
 
   public EmailRegularSchema email(String email) {
@@ -32,7 +35,7 @@ public class EmailRegularSchema {
    * Get email
    * @return email
   */
-  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
+  
   @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getEmail() {
     return email;

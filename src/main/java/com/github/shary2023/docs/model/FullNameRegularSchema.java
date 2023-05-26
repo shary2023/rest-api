@@ -17,14 +17,25 @@ import javax.annotation.Generated;
  * FullNameRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class FullNameRegularSchema {
 
   @JsonProperty("firstName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(min = 2, max = 50)
+  @NotBlank(message = "Name should not be empty")
   private String firstName;
 
   @JsonProperty("secondName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(min = 2, max = 50)
+  @NotBlank(message = "Surname should not be empty")
   private String secondName;
+
+  @JsonProperty("givenName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(max = 50)
+  private String givenName;
 
   public FullNameRegularSchema firstName(String firstName) {
     this.firstName = firstName;
@@ -35,7 +46,7 @@ public class FullNameRegularSchema {
    * Get firstName
    * @return firstName
   */
-  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{2,50}$") 
+  
   @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getFirstName() {
     return firstName;
@@ -54,7 +65,7 @@ public class FullNameRegularSchema {
    * Get secondName
    * @return secondName
   */
-  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{0,50}$") 
+  
   @Schema(name = "secondName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getSecondName() {
     return secondName;
@@ -62,6 +73,25 @@ public class FullNameRegularSchema {
 
   public void setSecondName(String secondName) {
     this.secondName = secondName;
+  }
+
+  public FullNameRegularSchema givenName(String givenName) {
+    this.givenName = givenName;
+    return this;
+  }
+
+  /**
+   * Get givenName
+   * @return givenName
+  */
+  
+  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getGivenName() {
+    return givenName;
+  }
+
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
   }
 
   @Override
@@ -74,12 +104,13 @@ public class FullNameRegularSchema {
     }
     FullNameRegularSchema fullNameRegularSchema = (FullNameRegularSchema) o;
     return Objects.equals(this.firstName, fullNameRegularSchema.firstName) &&
-        Objects.equals(this.secondName, fullNameRegularSchema.secondName);
+        Objects.equals(this.secondName, fullNameRegularSchema.secondName) &&
+        Objects.equals(this.givenName, fullNameRegularSchema.givenName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, secondName);
+    return Objects.hash(firstName, secondName, givenName);
   }
 
   @Override
@@ -88,6 +119,7 @@ public class FullNameRegularSchema {
     sb.append("class FullNameRegularSchema {\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
+    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

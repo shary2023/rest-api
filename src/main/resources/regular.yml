@@ -35,58 +35,79 @@ components:
       properties:
         firstName:
           type: string
-          pattern: "^[a-zA-ZА-Яа-я]{2,50}$"
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+              @Size(min = 2, max = 50)
+              @NotBlank(message = "Name should not be empty")
 
     SecondNameRegularSchema:                                                # Second Name
       type: object
       properties:
         secondName:
           type: string
-          pattern: "^[a-zA-ZА-Яа-я]{2,50}$"
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+              @Size(min = 2, max = 50)
+              @NotBlank(message = "Surname should not be empty")
 
     GivenNameRegularSchema:                                                 # Given Name
       type: object
       properties:
-        secondName:
+        givenName:
           type: string
-          pattern: "^[a-zA-ZА-Яа-я]{0,50}$"
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+              @Size(max = 50)
 
     EmailRegularSchema:                                                     # Email
       type: object
       properties:
         email:
           type: string
-          pattern: '/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i'
           example: "user@example.com"
+          x-field-extra-annotation: |- 
+            @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i")
+              @Email
+              @NotBlank(message = "Email should not be empty")
+
 
     InnRegularSchema:                                                       # INN
       type: object
       properties:
         inn:
           type: string
-          pattern: '^(([0-9]{12})|([0-9]{10}))?$'
           example: "123453488322"
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$")
+              @NotBlank(message = "INN should not be empty")
 
     PassportNumberRegularSchema:                                            # Passport number
       type: object
       properties:
         passportNumber:
           type: string
-          pattern: '^([0-9]{6})?$'
           example: '454322'
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^([0-9]{6})?$")
+              @NotBlank(message = "Passport number should not be empty")
 
     PassportSeriesRegularSchema:                                            # Passport series
       type: object
       properties:
         passportSeries:
           type: string
-          pattern: '^([0-9]{2}\s{0,1}[0-9]{2})?$'
           example: '6282 or 62 82'
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$")
+              @NotBlank(message = "Passport series should not be empty")
 
     PhoneNumberRegularSchema:                                               # Phone number
       type: object
       properties:
         phoneNumber:
           type: string
-          pattern: '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'
           example: "+79008883322"
+          x-field-extra-annotation: |-
+            @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
+              @Size(min = 5, max = 15)
+              @NotBlank(message = "Phone number should not be empty")

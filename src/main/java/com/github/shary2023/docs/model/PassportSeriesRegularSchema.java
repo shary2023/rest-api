@@ -17,10 +17,12 @@ import javax.annotation.Generated;
  * PassportSeriesRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class PassportSeriesRegularSchema {
 
   @JsonProperty("passportSeries")
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$")
+  @NotBlank(message = "Passport series should not be empty")
   private String passportSeries;
 
   public PassportSeriesRegularSchema passportSeries(String passportSeries) {
@@ -32,7 +34,7 @@ public class PassportSeriesRegularSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  
   @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;

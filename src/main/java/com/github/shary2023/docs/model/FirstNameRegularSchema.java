@@ -17,10 +17,13 @@ import javax.annotation.Generated;
  * FirstNameRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class FirstNameRegularSchema {
 
   @JsonProperty("firstName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(min = 2, max = 50)
+  @NotBlank(message = "Name should not be empty")
   private String firstName;
 
   public FirstNameRegularSchema firstName(String firstName) {
@@ -32,7 +35,7 @@ public class FirstNameRegularSchema {
    * Get firstName
    * @return firstName
   */
-  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{2,50}$") 
+  
   @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getFirstName() {
     return firstName;

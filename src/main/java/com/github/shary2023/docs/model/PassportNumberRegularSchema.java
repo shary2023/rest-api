@@ -17,10 +17,12 @@ import javax.annotation.Generated;
  * PassportNumberRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class PassportNumberRegularSchema {
 
   @JsonProperty("passportNumber")
+  @Pattern(regexp = "^([0-9]{6})?$")
+  @NotBlank(message = "Passport number should not be empty")
   private String passportNumber;
 
   public PassportNumberRegularSchema passportNumber(String passportNumber) {
@@ -32,7 +34,7 @@ public class PassportNumberRegularSchema {
    * Get passportNumber
    * @return passportNumber
   */
-  @Pattern(regexp = "^([0-9]{6})?$") 
+  
   @Schema(name = "passportNumber", example = "454322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportNumber() {
     return passportNumber;

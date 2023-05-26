@@ -17,22 +17,34 @@ import javax.annotation.Generated;
  * FullRegularSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class FullRegularSchema {
 
   @JsonProperty("email")
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i")
+  @Email
+  @NotBlank(message = "Email should not be empty")
   private String email;
 
   @JsonProperty("inn")
+  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$")
+  @NotBlank(message = "INN should not be empty")
   private String inn;
 
   @JsonProperty("phoneNumber")
+  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
+  @Size(min = 5, max = 15)
+  @NotBlank(message = "Phone number should not be empty")
   private String phoneNumber;
 
   @JsonProperty("passportNumber")
+  @Pattern(regexp = "^([0-9]{6})?$")
+  @NotBlank(message = "Passport number should not be empty")
   private String passportNumber;
 
   @JsonProperty("passportSeries")
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$")
+  @NotBlank(message = "Passport series should not be empty")
   private String passportSeries;
 
   public FullRegularSchema email(String email) {
@@ -44,7 +56,7 @@ public class FullRegularSchema {
    * Get email
    * @return email
   */
-  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
+  
   @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getEmail() {
     return email;
@@ -63,7 +75,7 @@ public class FullRegularSchema {
    * Get inn
    * @return inn
   */
-  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$") 
+  
   @Schema(name = "inn", example = "123453488322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getInn() {
     return inn;
@@ -82,7 +94,7 @@ public class FullRegularSchema {
    * Get phoneNumber
    * @return phoneNumber
   */
-  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
+  
   @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPhoneNumber() {
     return phoneNumber;
@@ -101,7 +113,7 @@ public class FullRegularSchema {
    * Get passportNumber
    * @return passportNumber
   */
-  @Pattern(regexp = "^([0-9]{6})?$") 
+  
   @Schema(name = "passportNumber", example = "454322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportNumber() {
     return passportNumber;
@@ -120,7 +132,7 @@ public class FullRegularSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  
   @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;

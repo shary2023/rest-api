@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  * RenterSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T23:02:44.459311200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-27T01:07:11.565983700+03:00[Europe/Moscow]")
 public class RenterSchema {
 
   @JsonProperty("id")
@@ -42,25 +42,48 @@ public class RenterSchema {
   private Long chatId;
 
   @JsonProperty("email")
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i")
+  @Email
+  @NotBlank(message = "Email should not be empty")
   private String email;
 
   @JsonProperty("inn")
+  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$")
+  @NotBlank(message = "INN should not be empty")
   private String inn;
 
   @JsonProperty("phoneNumber")
+  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
+  @Size(min = 5, max = 15)
+  @NotBlank(message = "Phone number should not be empty")
   private String phoneNumber;
 
   @JsonProperty("passportNumber")
+  @Pattern(regexp = "^([0-9]{6})?$")
+  @NotBlank(message = "Passport number should not be empty")
   private String passportNumber;
 
   @JsonProperty("passportSeries")
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$")
+  @NotBlank(message = "Passport series should not be empty")
   private String passportSeries;
 
   @JsonProperty("firstName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(min = 2, max = 50)
+  @NotBlank(message = "Name should not be empty")
   private String firstName;
 
   @JsonProperty("secondName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(min = 2, max = 50)
+  @NotBlank(message = "Surname should not be empty")
   private String secondName;
+
+  @JsonProperty("givenName")
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]$")
+  @Size(max = 50)
+  private String givenName;
 
   public RenterSchema id(Long id) {
     this.id = id;
@@ -206,7 +229,7 @@ public class RenterSchema {
    * Get email
    * @return email
   */
-  @NotNull @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
+  @NotNull 
   @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getEmail() {
     return email;
@@ -225,7 +248,7 @@ public class RenterSchema {
    * Get inn
    * @return inn
   */
-  @Pattern(regexp = "^(([0-9]{12})|([0-9]{10}))?$") 
+  
   @Schema(name = "inn", example = "123453488322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getInn() {
     return inn;
@@ -244,7 +267,7 @@ public class RenterSchema {
    * Get phoneNumber
    * @return phoneNumber
   */
-  @NotNull @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
+  @NotNull 
   @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getPhoneNumber() {
     return phoneNumber;
@@ -263,7 +286,7 @@ public class RenterSchema {
    * Get passportNumber
    * @return passportNumber
   */
-  @Pattern(regexp = "^([0-9]{6})?$") 
+  
   @Schema(name = "passportNumber", example = "454322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportNumber() {
     return passportNumber;
@@ -282,7 +305,7 @@ public class RenterSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  
   @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;
@@ -301,7 +324,7 @@ public class RenterSchema {
    * Get firstName
    * @return firstName
   */
-  @NotNull @Pattern(regexp = "^[a-zA-ZА-Яа-я]{2,50}$") 
+  @NotNull 
   @Schema(name = "firstName", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getFirstName() {
     return firstName;
@@ -320,7 +343,7 @@ public class RenterSchema {
    * Get secondName
    * @return secondName
   */
-  @NotNull @Pattern(regexp = "^[a-zA-ZА-Яа-я]{0,50}$") 
+  @NotNull 
   @Schema(name = "secondName", requiredMode = Schema.RequiredMode.REQUIRED)
   public String getSecondName() {
     return secondName;
@@ -328,6 +351,25 @@ public class RenterSchema {
 
   public void setSecondName(String secondName) {
     this.secondName = secondName;
+  }
+
+  public RenterSchema givenName(String givenName) {
+    this.givenName = givenName;
+    return this;
+  }
+
+  /**
+   * Get givenName
+   * @return givenName
+  */
+  @NotNull 
+  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getGivenName() {
+    return givenName;
+  }
+
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
   }
 
   @Override
@@ -352,12 +394,13 @@ public class RenterSchema {
         Objects.equals(this.passportNumber, renterSchema.passportNumber) &&
         Objects.equals(this.passportSeries, renterSchema.passportSeries) &&
         Objects.equals(this.firstName, renterSchema.firstName) &&
-        Objects.equals(this.secondName, renterSchema.secondName);
+        Objects.equals(this.secondName, renterSchema.secondName) &&
+        Objects.equals(this.givenName, renterSchema.givenName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, password, isAgreeWithPublicOffer, isAgreeWithFullDeposit, isDishonestClient, telegramId, chatId, email, inn, phoneNumber, passportNumber, passportSeries, firstName, secondName);
+    return Objects.hash(id, password, isAgreeWithPublicOffer, isAgreeWithFullDeposit, isDishonestClient, telegramId, chatId, email, inn, phoneNumber, passportNumber, passportSeries, firstName, secondName, givenName);
   }
 
   @Override
@@ -378,6 +421,7 @@ public class RenterSchema {
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
+    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
