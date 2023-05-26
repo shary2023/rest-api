@@ -1946,19 +1946,6 @@ components:
       bearerFormat: SimpleToken
   schemas:
 
-    # models:
-    # UserProfileSchema:
-    #   allOf:
-    #     - $ref: 'regular.yml#/components/schemas/PhoneNumberRegularSchema'
-    #   type: object
-    #   required:
-    #     - phoneNumber
-    #   properties:
-    #     phoneNumber:
-    #       type: string
-    #       minLength: 5
-    #       maxLength: 15
-
     RoleSchema:
       type: object
       required:
@@ -1975,6 +1962,7 @@ components:
     UserSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullNameRegularSchema'
       type: object
       required:
         - phoneNumber
@@ -1983,27 +1971,9 @@ components:
         id:
           type: integer
           format: int64
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
-        email:
-          type: string
-          format: 'email'
         password:
           type: string
           format: password
-        firstName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        secondName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        givenName:
-          type: string
-          maxLength: 50
         birthday:
           type: string
           format: 'data'
@@ -2041,6 +2011,7 @@ components:
     UserResponseSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullNameRegularSchema'
       type: object
       required:
         - id
@@ -2054,27 +2025,12 @@ components:
         id:
           type: integer
           format: int64
-        firstName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        secondName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        givenName:
-          type: string
-          maxLength: 50
         owner:
           type: boolean
           default: false
         renter:
           type: boolean
           default: false
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         isAgreeWithFullDeposit:
           type: boolean
           default: false
@@ -2093,6 +2049,7 @@ components:
     GuestSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FirstNameRegularSchema'
       type: object
       required:
         - phoneNumber
@@ -2101,15 +2058,6 @@ components:
         id:
           type: integer
           format: int64
-        firstName:
-          type: string
-        email:
-          type: string
-          format: 'email'
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         password:
           type: string
           format: password
@@ -2117,6 +2065,7 @@ components:
     RenterSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullNameRegularSchema'
       type: object
       required:
         - id
@@ -2135,21 +2084,6 @@ components:
         password:
           type: string
           format: password
-        firstName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        secondName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        givenName:
-          type: string
-          maxLength: 50
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         isAgreeWithPublicOffer:
           type: boolean
           default: false
@@ -2171,6 +2105,7 @@ components:
     OwnerSchema:
       allOf:
         - $ref: 'regular.yml#/components/schemas/FullRegularSchema'
+        - $ref: 'regular.yml#/components/schemas/FullNameRegularSchema'
       type: object
       required:
         - id
@@ -2193,24 +2128,9 @@ components:
         password:
           type: string
           format: password
-        firstName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        secondName:
-          type: string
-          minLength: 2
-          maxLength: 50
-        givenName:
-          type: string
-          maxLength: 50
         birthday:
           type: string
           format: 'date'
-        phoneNumber:
-          type: string
-          minLength: 5
-          maxLength: 15
         registrationAddress:
           type: string
         residenceAddress:
