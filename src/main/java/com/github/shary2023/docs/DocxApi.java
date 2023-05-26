@@ -7,7 +7,6 @@ package com.github.shary2023.docs;
 
 import com.github.shary2023.docs.model.BaseResponse;
 import com.github.shary2023.docs.model.IndividualRequestSchema;
-import java.net.URI;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-18T19:02:55.410103200+06:00[Asia/Almaty]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T09:29:49.617880400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "docx", description = "the docx API")
 public interface DocxApi {
@@ -55,8 +54,8 @@ public interface DocxApi {
         tags = { "System Api" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response to create contract.", content = {
-                @Content(mediaType = "text/plain", schema = @Schema(implementation = URI.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = URI.class))
+                @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
             }),
             @ApiResponse(responseCode = "400", description = "Parameters input error.", content = {
                 @Content(mediaType = "text/plain", schema = @Schema(implementation = BaseResponse.class)),
@@ -77,7 +76,7 @@ public interface DocxApi {
         produces = { "text/plain", "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<URI> postIndividualDocx(
+    ResponseEntity<String> postIndividualDocx(
         @Parameter(name = "IndividualRequestSchema", description = "") @Valid @RequestBody(required = false) IndividualRequestSchema individualRequestSchema
     );
 
