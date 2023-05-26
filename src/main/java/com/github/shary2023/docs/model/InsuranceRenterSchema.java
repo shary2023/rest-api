@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "InsuranceRenterSchema", description = "When sent to the insurance company, this model is named \"owner\"")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T09:29:49.617880400+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T22:35:15.904712900+03:00[Europe/Moscow]")
 public class InsuranceRenterSchema {
 
   @JsonProperty("type")

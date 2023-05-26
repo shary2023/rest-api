@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "InsuranceOwnerSchema", description = "When sent to the insurance company, this model is named \"renter\"")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T09:29:49.617880400+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T22:35:15.904712900+03:00[Europe/Moscow]")
 public class InsuranceOwnerSchema {
 
   @JsonProperty("type")
@@ -48,14 +48,14 @@ public class InsuranceOwnerSchema {
   @JsonProperty("inn")
   private String inn;
 
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
+
   @JsonProperty("passportNumber")
   private String passportNumber;
 
   @JsonProperty("passportSeries")
   private String passportSeries;
-
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
 
   public InsuranceOwnerSchema type(String type) {
     this.type = type;
@@ -199,7 +199,7 @@ public class InsuranceOwnerSchema {
    * Get email
    * @return email
   */
-  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") @Email
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
   @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getEmail() {
     return email;
@@ -226,6 +226,25 @@ public class InsuranceOwnerSchema {
 
   public void setInn(String inn) {
     this.inn = inn;
+  }
+
+  public InsuranceOwnerSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
+  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public InsuranceOwnerSchema passportNumber(String passportNumber) {
@@ -256,33 +275,14 @@ public class InsuranceOwnerSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{1}[0-9]{2})?$") 
-  @Schema(name = "passportSeries", example = "6282", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;
   }
 
   public void setPassportSeries(String passportSeries) {
     this.passportSeries = passportSeries;
-  }
-
-  public InsuranceOwnerSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
-  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
   }
 
   @Override
@@ -303,14 +303,14 @@ public class InsuranceOwnerSchema {
         Objects.equals(this.residenceAddress, insuranceOwnerSchema.residenceAddress) &&
         Objects.equals(this.email, insuranceOwnerSchema.email) &&
         Objects.equals(this.inn, insuranceOwnerSchema.inn) &&
+        Objects.equals(this.phoneNumber, insuranceOwnerSchema.phoneNumber) &&
         Objects.equals(this.passportNumber, insuranceOwnerSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, insuranceOwnerSchema.passportSeries) &&
-        Objects.equals(this.phoneNumber, insuranceOwnerSchema.phoneNumber);
+        Objects.equals(this.passportSeries, insuranceOwnerSchema.passportSeries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, birthday, firstName, givenName, secondName, registrationAddress, residenceAddress, email, inn, passportNumber, passportSeries, phoneNumber);
+    return Objects.hash(type, birthday, firstName, givenName, secondName, registrationAddress, residenceAddress, email, inn, phoneNumber, passportNumber, passportSeries);
   }
 
   @Override
@@ -326,9 +326,9 @@ public class InsuranceOwnerSchema {
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

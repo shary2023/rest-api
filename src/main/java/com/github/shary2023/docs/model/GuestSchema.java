@@ -17,32 +17,32 @@ import javax.annotation.Generated;
  * GuestSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T09:29:49.617880400+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T22:35:15.904712900+03:00[Europe/Moscow]")
 public class GuestSchema {
 
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("firstName")
-  private String firstName;
+  @JsonProperty("password")
+  private String password;
 
   @JsonProperty("email")
   private String email;
 
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
-
-  @JsonProperty("password")
-  private String password;
-
   @JsonProperty("inn")
   private String inn;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("passportNumber")
   private String passportNumber;
 
   @JsonProperty("passportSeries")
   private String passportSeries;
+
+  @JsonProperty("firstName")
+  private String firstName;
 
   public GuestSchema id(Long id) {
     this.id = id;
@@ -61,63 +61,6 @@ public class GuestSchema {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public GuestSchema firstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
-
-  /**
-   * Get firstName
-   * @return firstName
-  */
-  
-  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public GuestSchema email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  */
-  @Email
-  @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public GuestSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @NotNull @Size(min = 5, max = 15) 
-  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
   }
 
   public GuestSchema password(String password) {
@@ -139,6 +82,25 @@ public class GuestSchema {
     this.password = password;
   }
 
+  public GuestSchema email(String email) {
+    this.email = email;
+    return this;
+  }
+
+  /**
+   * Get email
+   * @return email
+  */
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
+  @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
   public GuestSchema inn(String inn) {
     this.inn = inn;
     return this;
@@ -156,6 +118,25 @@ public class GuestSchema {
 
   public void setInn(String inn) {
     this.inn = inn;
+  }
+
+  public GuestSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @NotNull @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
+  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public GuestSchema passportNumber(String passportNumber) {
@@ -186,14 +167,33 @@ public class GuestSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{1}[0-9]{2})?$") 
-  @Schema(name = "passportSeries", example = "6282", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;
   }
 
   public void setPassportSeries(String passportSeries) {
     this.passportSeries = passportSeries;
+  }
+
+  public GuestSchema firstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  /**
+   * Get firstName
+   * @return firstName
+  */
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{2,50}$") 
+  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
   @Override
@@ -206,18 +206,18 @@ public class GuestSchema {
     }
     GuestSchema guestSchema = (GuestSchema) o;
     return Objects.equals(this.id, guestSchema.id) &&
-        Objects.equals(this.firstName, guestSchema.firstName) &&
-        Objects.equals(this.email, guestSchema.email) &&
-        Objects.equals(this.phoneNumber, guestSchema.phoneNumber) &&
         Objects.equals(this.password, guestSchema.password) &&
+        Objects.equals(this.email, guestSchema.email) &&
         Objects.equals(this.inn, guestSchema.inn) &&
+        Objects.equals(this.phoneNumber, guestSchema.phoneNumber) &&
         Objects.equals(this.passportNumber, guestSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, guestSchema.passportSeries);
+        Objects.equals(this.passportSeries, guestSchema.passportSeries) &&
+        Objects.equals(this.firstName, guestSchema.firstName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, email, phoneNumber, password, inn, passportNumber, passportSeries);
+    return Objects.hash(id, password, email, inn, phoneNumber, passportNumber, passportSeries, firstName);
   }
 
   @Override
@@ -225,13 +225,13 @@ public class GuestSchema {
     StringBuilder sb = new StringBuilder();
     sb.append("class GuestSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -17,29 +17,14 @@ import javax.annotation.Generated;
  * UserSchema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T09:29:49.617880400+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-05-26T22:35:15.904712900+03:00[Europe/Moscow]")
 public class UserSchema {
 
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("phoneNumber")
-  private String phoneNumber;
-
-  @JsonProperty("email")
-  private String email;
-
   @JsonProperty("password")
   private String password;
-
-  @JsonProperty("firstName")
-  private String firstName;
-
-  @JsonProperty("secondName")
-  private String secondName;
-
-  @JsonProperty("givenName")
-  private String givenName;
 
   @JsonProperty("birthday")
   private String birthday;
@@ -77,14 +62,26 @@ public class UserSchema {
   @JsonProperty("chatId")
   private Long chatId;
 
+  @JsonProperty("email")
+  private String email;
+
   @JsonProperty("inn")
   private String inn;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber;
 
   @JsonProperty("passportNumber")
   private String passportNumber;
 
   @JsonProperty("passportSeries")
   private String passportSeries;
+
+  @JsonProperty("firstName")
+  private String firstName;
+
+  @JsonProperty("secondName")
+  private String secondName;
 
   public UserSchema id(Long id) {
     this.id = id;
@@ -105,44 +102,6 @@ public class UserSchema {
     this.id = id;
   }
 
-  public UserSchema phoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-    return this;
-  }
-
-  /**
-   * Get phoneNumber
-   * @return phoneNumber
-  */
-  @NotNull @Size(min = 5, max = 15) 
-  @Schema(name = "phoneNumber", requiredMode = Schema.RequiredMode.REQUIRED)
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public UserSchema email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  */
-  @Email
-  @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public UserSchema password(String password) {
     this.password = password;
     return this;
@@ -160,63 +119,6 @@ public class UserSchema {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public UserSchema firstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
-
-  /**
-   * Get firstName
-   * @return firstName
-  */
-  @Size(min = 2, max = 50) 
-  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public UserSchema secondName(String secondName) {
-    this.secondName = secondName;
-    return this;
-  }
-
-  /**
-   * Get secondName
-   * @return secondName
-  */
-  @Size(min = 2, max = 50) 
-  @Schema(name = "secondName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getSecondName() {
-    return secondName;
-  }
-
-  public void setSecondName(String secondName) {
-    this.secondName = secondName;
-  }
-
-  public UserSchema givenName(String givenName) {
-    this.givenName = givenName;
-    return this;
-  }
-
-  /**
-   * Get givenName
-   * @return givenName
-  */
-  @Size(max = 50) 
-  @Schema(name = "givenName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public String getGivenName() {
-    return givenName;
-  }
-
-  public void setGivenName(String givenName) {
-    this.givenName = givenName;
   }
 
   public UserSchema birthday(String birthday) {
@@ -449,6 +351,25 @@ public class UserSchema {
     this.chatId = chatId;
   }
 
+  public UserSchema email(String email) {
+    this.email = email;
+    return this;
+  }
+
+  /**
+   * Get email
+   * @return email
+  */
+  @Pattern(regexp = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i") 
+  @Schema(name = "email", example = "user@example.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
   public UserSchema inn(String inn) {
     this.inn = inn;
     return this;
@@ -466,6 +387,25 @@ public class UserSchema {
 
   public void setInn(String inn) {
     this.inn = inn;
+  }
+
+  public UserSchema phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  */
+  @NotNull @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$") 
+  @Schema(name = "phoneNumber", example = "+79008883322", requiredMode = Schema.RequiredMode.REQUIRED)
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public UserSchema passportNumber(String passportNumber) {
@@ -496,14 +436,52 @@ public class UserSchema {
    * Get passportSeries
    * @return passportSeries
   */
-  @Pattern(regexp = "^([0-9]{2}\\s{1}[0-9]{2})?$") 
-  @Schema(name = "passportSeries", example = "6282", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Pattern(regexp = "^([0-9]{2}\\s{0,1}[0-9]{2})?$") 
+  @Schema(name = "passportSeries", example = "6282 or 62 82", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getPassportSeries() {
     return passportSeries;
   }
 
   public void setPassportSeries(String passportSeries) {
     this.passportSeries = passportSeries;
+  }
+
+  public UserSchema firstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  /**
+   * Get firstName
+   * @return firstName
+  */
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{2,50}$") 
+  @Schema(name = "firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public UserSchema secondName(String secondName) {
+    this.secondName = secondName;
+    return this;
+  }
+
+  /**
+   * Get secondName
+   * @return secondName
+  */
+  @Pattern(regexp = "^[a-zA-ZА-Яа-я]{0,50}$") 
+  @Schema(name = "secondName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getSecondName() {
+    return secondName;
+  }
+
+  public void setSecondName(String secondName) {
+    this.secondName = secondName;
   }
 
   @Override
@@ -516,12 +494,7 @@ public class UserSchema {
     }
     UserSchema userSchema = (UserSchema) o;
     return Objects.equals(this.id, userSchema.id) &&
-        Objects.equals(this.phoneNumber, userSchema.phoneNumber) &&
-        Objects.equals(this.email, userSchema.email) &&
         Objects.equals(this.password, userSchema.password) &&
-        Objects.equals(this.firstName, userSchema.firstName) &&
-        Objects.equals(this.secondName, userSchema.secondName) &&
-        Objects.equals(this.givenName, userSchema.givenName) &&
         Objects.equals(this.birthday, userSchema.birthday) &&
         Objects.equals(this.registrationAddress, userSchema.registrationAddress) &&
         Objects.equals(this.residenceAddress, userSchema.residenceAddress) &&
@@ -534,14 +507,18 @@ public class UserSchema {
         Objects.equals(this.renter, userSchema.renter) &&
         Objects.equals(this.telegramId, userSchema.telegramId) &&
         Objects.equals(this.chatId, userSchema.chatId) &&
+        Objects.equals(this.email, userSchema.email) &&
         Objects.equals(this.inn, userSchema.inn) &&
+        Objects.equals(this.phoneNumber, userSchema.phoneNumber) &&
         Objects.equals(this.passportNumber, userSchema.passportNumber) &&
-        Objects.equals(this.passportSeries, userSchema.passportSeries);
+        Objects.equals(this.passportSeries, userSchema.passportSeries) &&
+        Objects.equals(this.firstName, userSchema.firstName) &&
+        Objects.equals(this.secondName, userSchema.secondName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, phoneNumber, email, password, firstName, secondName, givenName, birthday, registrationAddress, residenceAddress, isAddressesMatch, isAgreeWithPublicOffer, isAgreeWithFullDeposit, isDishonestClient, isValid, owner, renter, telegramId, chatId, inn, passportNumber, passportSeries);
+    return Objects.hash(id, password, birthday, registrationAddress, residenceAddress, isAddressesMatch, isAgreeWithPublicOffer, isAgreeWithFullDeposit, isDishonestClient, isValid, owner, renter, telegramId, chatId, email, inn, phoneNumber, passportNumber, passportSeries, firstName, secondName);
   }
 
   @Override
@@ -549,12 +526,7 @@ public class UserSchema {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserSchema {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-    sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
-    sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
     sb.append("    birthday: ").append(toIndentedString(birthday)).append("\n");
     sb.append("    registrationAddress: ").append(toIndentedString(registrationAddress)).append("\n");
     sb.append("    residenceAddress: ").append(toIndentedString(residenceAddress)).append("\n");
@@ -567,9 +539,13 @@ public class UserSchema {
     sb.append("    renter: ").append(toIndentedString(renter)).append("\n");
     sb.append("    telegramId: ").append(toIndentedString(telegramId)).append("\n");
     sb.append("    chatId: ").append(toIndentedString(chatId)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    inn: ").append(toIndentedString(inn)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    passportNumber: ").append(toIndentedString(passportNumber)).append("\n");
     sb.append("    passportSeries: ").append(toIndentedString(passportSeries)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    secondName: ").append(toIndentedString(secondName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
